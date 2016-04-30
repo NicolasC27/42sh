@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue Jan  5 15:30:29 2016 Nicolas Chevalier
-** Last update Sat Apr 30 19:01:41 2016 Nicolas Chevalier
+** Last update Sat Apr 30 19:08:21 2016 Nicolas Chevalier
 */
 
 #include <unistd.h>
@@ -87,7 +87,6 @@ int		main(int argc, char **argv, char **envp)
     envp[0] = NULL;
   env = init_listenv(envp);
   my_prompt(env, 1);
-  init_term()
   while ((buff = get_next_line(0)))
     {
       minishell(buff, env);
