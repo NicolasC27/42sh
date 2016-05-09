@@ -5,11 +5,14 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue Jan  5 15:30:29 2016 Nicolas Chevalier
-** Last update Sat Apr 30 19:08:21 2016 Nicolas Chevalier
+** Last update Sun May  1 22:09:57 2016 Nicolas Chevalier
 */
 
 #include <unistd.h>
 #include <sys/wait.h>
+#include <termios.h>
+#include <sys/ioctl.h>
+#include <sys/stat.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <signal.h>
@@ -76,6 +79,53 @@ void		my_signal()
     my_puterror("error: problem wit signal SIGInt.\n");
 }
 
+int			mode(int i, int option)
+{
+  static struct termios	oldT;
+  static struct termios	newT;
+
+  if (i == 0)
+    {
+      ioctl(0, TCGETS, &oldT);
+      ioctl(0, TCGETS, &newT);
+
+      newT.c_lflag &= ~(ICANON);
+      newT.c_lflag &= ~(ECHO);
+      if (option == 1)
+	{
+	  newT.c_cc[VMIN] = 1;
+	  newT.c_cc[VTIME] = 0;
+	}
+      ioctl(0, TCSETS, &newT);
+    }
+  if (i == 1)
+    ioctl(0, TCSETS, &oldT);
+  return (0);
+}
+
+char		*get_line()
+{
+  char		*str;
+  char		buff[8];
+  int		len;
+
+  mode(0, 1);
+  /* buff = get_next_line(0); */
+  len = 1;
+  while (len > 0)
+    {
+      if ((len = read(0, buff, 7)) == -1)
+	return (NULL);
+      buff[len] = '\0';
+      my_putstr("OK");
+      my_putstr(buff);
+    }
+  mode(0, 1);
+  str = my_strdup(buff);
+  /* exit (0); */
+  return (str);
+}
+
 int		main(int argc, char **argv, char **envp)
 {
   t_env		*env;
@@ -83,13 +133,15 @@ int		main(int argc, char **argv, char **envp)
 
   UNUSED(argc);
   UNUSED(**argv);
+  buff = NULL;
   if (envp[0] == NULL)
     envp[0] = NULL;
   env = init_listenv(envp);
   my_prompt(env, 1);
-  while ((buff = get_next_line(0)))
+  while ((buff = get_line()))
     {
-      minishell(buff, env);
+      if (buff != NULL)
+	minishell(buff, env);
       my_prompt(env, 2);
       my_signal();
       free(buff);

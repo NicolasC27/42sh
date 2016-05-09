@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue Jan  5 16:32:16 2016 Nicolas Chevalier
-// Last update Thu Apr 14 02:44:09 2016 Chevalier Nicolas
+// Last update Sat Apr 30 19:11:41 2016 Nicolas Chevalier
 */
 
 #ifndef MY_H_
@@ -15,6 +15,8 @@
 ** Includes
 */
 #include "lib.h"
+#include <ncurses.h>
+#include <curses.h>
 
 /*
 ** Defines
