@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue Jan  5 15:30:29 2016 Nicolas Chevalier
-** Last update Wed May 11 15:12:55 2016 Nicolas Chevalier
+** Last update Thu May 12 16:25:52 2016 Nicolas Chevalier
 */
 
 #include <unistd.h>
@@ -130,7 +130,7 @@ char		*my_autocomplete(char *str)
 char		*get_line()
 {
   char		*str;
-  char		buff[8];
+  char		buff[9];
   int		len;
   int		i;
 
@@ -141,7 +141,7 @@ char		*get_line()
   str = NULL;
   while (len > 0)
     {
-      if ((len = read(0, buff, 7)) == -1)
+      if ((len = read(0, buff, 9)) == -1)
 	return (NULL);
       buff[len] = '\0';
       my_putstr(buff);
@@ -149,7 +149,7 @@ char		*get_line()
 	return (str);
       if (buff[0] == '\t')
       	return (my_autocomplete(str));
-      str = realloc(str, 1);
+      str = realloc(str, i + 2);
       str[i] = buff[0];
       str[i + 1] = '\0';
       i += 1;
