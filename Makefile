@@ -5,7 +5,7 @@
 ## Login   <cheval_8@epitech.net>
 ##
 ## Started on  Wed Feb 24 16:02:04 2016 Chevalier Nicolas
-## Last update Thu Apr 14 02:57:08 2016 Chevalier Nicolas
+## Last update Tue May 10 02:29:04 2016 Nicolas Chevalier
 ##
 
 
@@ -39,7 +39,7 @@ LIB		+=	-Ilib/include -Llib/ -lmyutils
 LIBMYUTILS_MAKE	=	make -C lib/
 LIBMYUTILS	=	lib/libmyutils.a
 
-CFLAGS		=	-W -Wall -Werror -Wextra
+# CFLAGS		=	-W -Wall -Werror -Wextra
 CFLAGS		+=	-Wno-overlength-strings
 CFLAGS		+=	-g
 CFLAGS		+=	-Iinclude/

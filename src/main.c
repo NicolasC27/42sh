@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue Jan  5 15:30:29 2016 Nicolas Chevalier
-** Last update Sun May  1 22:09:57 2016 Nicolas Chevalier
+** Last update Wed May 11 15:12:55 2016 Nicolas Chevalier
 */
 
 #include <unistd.h>
@@ -14,8 +14,10 @@
 #include <sys/ioctl.h>
 #include <sys/stat.h>
 #include <stdlib.h>
+#include <dirent.h>
 #include <stdio.h>
 #include <signal.h>
+#include <string.h>
 #include "gnl.h"
 #include "my.h"
 
@@ -103,24 +105,57 @@ int			mode(int i, int option)
   return (0);
 }
 
+char		*my_autocomplete(char *str)
+{
+  char		*buff;
+  int		len;
+  /* struct dirent	*dirent; */
+  /* DIR		*dir; */
+
+  /* if ((dir = opendir("./")) == NULL) */
+  /*   { */
+  /*     my_putstr("ERROR"); */
+  /*     exit(0); */
+  /*   } */
+  /* my_putstr("\n"); */
+  /* while ((dirent = readdir(dir))) */
+  /*   { */
+      /* if (dirent->d_name[0] != '.') */
+      /* 	my_putstr(dirent->d_name); */
+      /* my_putstr(" "); */
+    /* } */
+  return (str);
+}
+
 char		*get_line()
 {
   char		*str;
   char		buff[8];
   int		len;
+  int		i;
 
   mode(0, 1);
   /* buff = get_next_line(0); */
   len = 1;
+  i = 0;
+  str = NULL;
   while (len > 0)
     {
       if ((len = read(0, buff, 7)) == -1)
 	return (NULL);
       buff[len] = '\0';
-      my_putstr("OK");
       my_putstr(buff);
+      if (buff[0] == '\n' && buff[1] == '\0')
+	return (str);
+      if (buff[0] == '\t')
+      	return (my_autocomplete(str));
+      str = realloc(str, 1);
+      str[i] = buff[0];
+      str[i + 1] = '\0';
+      i += 1;
+
     }
-  mode(0, 1);
+  mode(1, 0);
   str = my_strdup(buff);
   /* exit (0); */
   return (str);
