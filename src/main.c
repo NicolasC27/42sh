@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue Jan  5 15:30:29 2016 Nicolas Chevalier
-** Last update Thu May 12 16:25:52 2016 Nicolas Chevalier
+** Last update Thu May 19 09:49:32 2016 Nicolas Chevalier
 */
 
 #include <unistd.h>
@@ -181,6 +181,7 @@ int		main(int argc, char **argv, char **envp)
       my_signal();
       free(buff);
     }
+  endwin();
   my_putstr(STOP_SHELL);
   return (0);
 }

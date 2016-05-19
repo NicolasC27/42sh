@@ -5,11 +5,11 @@
 ## Login   <cheval_8@epitech.net>
 ##
 ## Started on  Wed Feb 24 16:02:04 2016 Chevalier Nicolas
-## Last update Tue May 10 02:29:04 2016 Nicolas Chevalier
+## Last update Thu May 19 09:50:07 2016 Nicolas Chevalier
 ##
 
 
-NAME		=	mysh
+NAME		=	42sh
 
 SRC		= 	main.c \
 			utils.c \

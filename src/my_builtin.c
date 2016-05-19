@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Sat Jan 23 20:02:07 2016 Nicolas Chevalier
-** Last update Sat Apr  2 20:00:18 2016 Chevalier Nicolas
+** Last update Thu May 19 09:49:49 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -61,6 +61,7 @@ char		my_builtin_exit(char **command, t_env *env)
     }
   my_free(command);
   my_putstr("\033[1;32mMinishell has stopped. \033[1;0m\n");
+  endwin();
   exit(status);
   return (0);
 }
