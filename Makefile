@@ -1,69 +1,62 @@
 ##
-## Makefile for tetris in /home/cheval_8/rendu/PSU_2015_tetris
+## Makefile for makefile in /home/wery_p/rendu/PSU_2015_minishell2
 ##
-## Made by Chevalier Nicolas
-## Login   <cheval_8@epitech.net>
+## Made by Paul Wery
+## Login   <wery_p@epitech.net>
 ##
-## Started on  Wed Feb 24 16:02:04 2016 Chevalier Nicolas
-## Last update Thu May 19 09:50:07 2016 Nicolas Chevalier
+## Started on  Sat Apr  2 00:37:51 2016 Paul Wery
+## Last update Fri May 27 00:36:25 2016 Paul Wery
 ##
 
+NAME    =	mysh
 
-NAME		=	42sh
+RM      =	rm -f
 
-SRC		= 	main.c \
-			utils.c \
-			parser.c \
-			env/init_listenv.c \
-			separe.c \
-			check_command.c \
-			env/utils_env.c \
-			my_exec.c \
-			my_str.c \
-			my_builtin.c \
-			my_builtin_cd.c \
-			my_getnbr.c \
-			my_free.c \
-			init.c \
-			my_puterror.c \
-			redirection.c \
-			my_exec_canals.c \
-			wait.c \
-			list/list.c 
+CC	=	gcc -g
 
-MOD		=	$(addprefix src/, $(SRC:.c=.o))
+CFLAGS	=	-W -Wall -Werror -Iinclude
 
-LIB		=	-Llib/
-LIB		+=	-Ilib/include -Llib/ -lmyutils
+OBJS    =	$(SRCS:.c=.o)
 
-LIBMYUTILS_MAKE	=	make -C lib/
-LIBMYUTILS	=	lib/libmyutils.a
+SRCS    =	srcs/main.c \
+		srcs/my_list.c \
+		srcs/pars_elems.c \
+		srcs/full_list.c \
+		srcs/strings_files.c \
+		srcs/command_exec.c \
+		srcs/change_std.c \
+		srcs/red_left.c \
+		srcs/exec/get_next_line.c \
+		srcs/exec/exec_line.c \
+		srcs/exec/make_path.c \
+		srcs/exec/my_put_error.c \
+		srcs/exec/only_exec.c \
+		srcs/exec/my_exit.c \
+		srcs/exec/valid_line.c \
+		srcs/exec/alloc_buffer.c \
+		srcs/builtins/my_builtins.c \
+		srcs/builtins/create_my_env.c \
+		srcs/builtins/unset_env.c \
+		srcs/builtins/set_env.c \
+		srcs/builtins/set_env2.c \
+		srcs/builtins/cd_return.c \
+		srcs/builtins/swap_env.c \
+		srcs/builtins/fonc_cd.c \
+		srcs/builtins/if_empty_path.c \
+		srcs/builtins/final_env.c \
+		srcs/builtins/conv_fonc.c
 
-# CFLAGS		=	-W -Wall -Werror -Wextra
-CFLAGS		+=	-Wno-overlength-strings
-CFLAGS		+=	-g
-CFLAGS		+=	-Iinclude/
-CFLAGS		+=	-D_BSD_SOURCE -D_POSIX_SOURCE
-CFLAGS		+=	$(LIB)
+$(NAME) :	$(OBJS)
+	$(CC) $(OBJS) -o $(NAME)
 
-LDFLAGS		=	$(LIB)
+all     :	$(NAME)
 
-all:		$(LIBMYUTILS) $(NAME)
+clean   :
+	$(RM) $(OBJS)
 
-$(NAME):	$(MOD)
-		@cc $(MOD) -o $(NAME) $(LDFLAGS) -lncurses
+fclean  :	clean
+	$(RM) $(NAME)
 
-$(LIBMYUTILS):
-	 	$(LIBMYUTILS_MAKE)
+re      :	fclean all
 
-clean		:
-		 rm -rf $(MOD)
-		 $(LIBMYUTILS_MAKE) clean
-
-fclean		: clean
-		  rm -rf $(NAME)
-		  $(LIBMYUTILS_MAKE) fclean
-
-re:		fclean all
-
-.PHONY:		all clean fclean re
+.PHONY: all clean fclean re
