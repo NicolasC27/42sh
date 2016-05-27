@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed May 25 22:32:13 2016 Paul Wery
-** Last update Fri May 27 02:07:40 2016 Paul Wery
+** Last update Fri May 27 02:27:16 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -55,7 +55,8 @@ int		wait_lef(t_exec *list, t_exec *it, int num)
       if (num == 1)
         {
           if (elem->next == list
-              || elem_redirection(elem->next->tab[0], "<<,>>,||,&&,<,>,|,&,;") != 0)
+              || elem_redirection(elem->next->tab[0],
+				  "<<,>>,||,&&,<,>,|,&,;") != 0)
             {
               my_put_error("Missing name for redirect.\n");
               return (0);
