@@ -5,10 +5,10 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sat Apr  2 00:37:51 2016 Paul Wery
-## Last update Fri May 27 00:36:25 2016 Paul Wery
+## Last update Fri May 27 02:35:42 2016 Paul Wery
 ##
 
-NAME    =	mysh
+NAME    =	42sh
 
 RM      =	rm -f
 
