@@ -5,12 +5,31 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed May 25 22:32:13 2016 Paul Wery
-** Last update Fri May 27 02:27:16 2016 Paul Wery
+** Last update Sat May 28 18:39:25 2016 Paul Wery
 */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include "mins.h"
+
+int	equal_w_space(char *one, char *two)
+{
+  int	n;
+  int	i;
+
+  n = 0;
+  i = 0;
+  while (two[n] != '\0' && (two[n] == ' ' || two[n] == '\t'))
+    n += 1;
+  while (one[i] == two[n] && one[i] != '\0' && two[n] != '\0')
+    {
+      n += 1;
+      i += 1;
+    }
+  if (one[i] == '\0' && (two[n] == '\0' || two[n] == ' ' || two[n] == '\t'))
+    return (n);
+  return (0);
+}
 
 static int	equal(char *one, char *two)
 {

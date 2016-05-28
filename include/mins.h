@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan  5 01:26:12 2016 paul wery
-** Last update Fri May 27 02:08:19 2016 Paul Wery
+** Last update Fri May 27 15:55:46 2016 Paul Wery
 */
 
 #ifndef MINS
@@ -18,6 +18,7 @@
 
 #    define UNUSED __attribute__((unused))
 
+# include <unistd.h>
 # include <sys/stat.h>
 
 typedef struct	stat t_stat;
@@ -110,5 +111,7 @@ int	wait_lef(t_exec *list, t_exec *it, int num);
 int	update_std(t_env *ev, int state);
 int	valid_command(t_exec *list);
 t_exec	*jump(t_exec *list, t_exec *it);
+int	equal_w_space(char *one, char *two);
+int	echo_built(char *buffer, int n);
 
 #endif /* !MINS */

@@ -5,7 +5,7 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sat Apr  2 00:37:51 2016 Paul Wery
-## Last update Fri May 27 02:35:42 2016 Paul Wery
+## Last update Fri May 27 15:52:40 2016 Paul Wery
 ##
 
 NAME    =	42sh
@@ -26,6 +26,7 @@ SRCS    =	srcs/main.c \
 		srcs/command_exec.c \
 		srcs/change_std.c \
 		srcs/red_left.c \
+		srcs/echo.c \
 		srcs/exec/get_next_line.c \
 		srcs/exec/exec_line.c \
 		srcs/exec/make_path.c \
