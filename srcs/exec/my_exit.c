@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Jan 21 18:44:21 2016 Paul Wery
-** Last update Wed May 25 19:07:47 2016 Paul Wery
+** Last update Sat May 28 23:37:48 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -62,7 +62,7 @@ int	get_val_return(char *word1, int i)
   return (status);
 }
 
-void	free_all(t_env *ev, char *buffer, int status)
+void	free_all(t_env *ev, char *buffer, int status UNUSED)
 {
   if (buffer != NULL)
     free(buffer);
