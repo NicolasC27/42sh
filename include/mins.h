@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan  5 01:26:12 2016 paul wery
-** Last update Fri May 27 15:55:46 2016 Paul Wery
+** Last update Sun May 29 00:17:55 2016 Paul Wery
 */
 
 #ifndef MINS
@@ -49,11 +49,12 @@ typedef struct	s_env
   int		result;
   int		stdin;
   int		stdout;
+  int		val_exit;
 }		t_env;
 
 char	*get_exec(char *str);
 char	**exec_line(char *exec, char **opts, t_env *ev, pid_t my_pid);
-int	find_exec(char *exec, char **opts, char **env, int ret);
+int	find_exec(char *exec, char **opts, t_env *ev, int ret);
 char	*get_exec(char *str);
 int	find_path(char **env);
 char	*get_path(int n, int nb_t, char **env, int i);
@@ -92,6 +93,7 @@ char	*build_path(char *path, char *exec);
 char	*conv_str(char *str);
 char	*conv_strs(char *one, char *two, char *three);
 char	**final_env(char **str, char **env);
+void	aff_error(char *exec);
 
 t_exec	*create_list(void);
 int	add_elem_prev(t_exec *elem, char **tab);

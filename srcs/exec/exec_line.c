@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan 19 00:28:24 2016 Paul Wery
-** Last update Sat May 28 23:40:25 2016 Paul Wery
+** Last update Sun May 29 00:17:38 2016 Paul Wery
 */
 
 #include <signal.h>
@@ -55,17 +55,17 @@ int	find_path(char **env)
   return (n);
 }
 
-int	find_exec(char *exec, char **opts, char **env, int ret)
+int	find_exec(char *exec, char **opts, t_env *ev, int ret)
 {
   char	*path;
   int	n;
   int	i;
 
   i = 1;
-  n = find_path(env);
-  while (i <= nb_path(n, env) && ret == -1)
+  n = find_path(ev->env);
+  while (i <= nb_path(n, ev->env) && ret == -1)
     {
-      if ((path = get_path(n, i, env, 0)) == NULL
+      if ((path = get_path(n, i, ev->env, 0)) == NULL
 	  || (path = final_path(path, exec)) == NULL)
 	return (-1);
       ret = access(path, F_OK);
@@ -73,14 +73,14 @@ int	find_exec(char *exec, char **opts, char **env, int ret)
 	free(path);
       i += 1;
     }
-  if (nb_path(n, env) == 0 && (path = build_path("./", exec)) == NULL)
+  if (nb_path(n, ev->env) == 0 && (path = build_path("./", exec)) == NULL)
     return (-1);
-  if (ret == -1 && nb_path(n, env) == 0)
+  if (ret == -1 && nb_path(n, ev->env) == 0)
     ret = access(path, F_OK);
   if (ret != -1)
-    execve((const char*)path, opts, env);
+    execve((const char*)path, opts, ev->env);
   else
-    my_put_error("command-not-found\n");
+    aff_error(exec);
   return (0);
 }
 
@@ -99,7 +99,7 @@ char	**exec_line(char *exec, char **opts, t_env *ev, pid_t my_pid)
       if (where_exec(exec) == 1)
 	path_exec(exec, opts, ev->env);
       if (where_exec(exec) == 0
-	  && (update_std(ev, 1) == -1 || find_exec(exec, opts, ev->env, -1)) == -1)
+	  && (update_std(ev, 1) == -1 || find_exec(exec, opts, ev, -1)) == -1)
 	return (NULL);
     }
   if (my_pid == 0)
@@ -109,5 +109,6 @@ char	**exec_line(char *exec, char **opts, t_env *ev, pid_t my_pid)
     return (NULL);
   if (WTERMSIG(status) == SIGSEGV)
     my_putstr("Segmentation Fault\n");
+  ev->val_exit = WEXITSTATUS(status);
   return (ev->env);
 }

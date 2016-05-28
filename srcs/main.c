@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Jan 16 20:40:01 2016 Paul Wery
-** Last update Sat May 28 23:34:14 2016 Paul Wery
+** Last update Sun May 29 00:07:18 2016 Paul Wery
 */
 
 #include <signal.h>
@@ -68,6 +68,7 @@ int	comp_builtins(char *word1, char *word2)
 
 int	ini_env(t_env *ev)
 {
+  ev->val_exit = 0;
   ev->state_p = 0;
   ev->result = 0;
   ev->oldpwd = NULL;
@@ -89,18 +90,18 @@ int	main(int ac UNUSED, char **av UNUSED, char **environ)
     {
       my_putstr("prompt$>");
       if (signal(SIGINT, SIG_IGN) == SIG_ERR)
-	return (0);
+	return (ev.val_exit);
       if (buffer != NULL)
 	free(buffer);
       if ((buffer = get_next_line()) == NULL)
-	return (0);
+	return (ev.val_exit);
       if (buffer[0] != '\0')
 	{
 	  my_exit(buffer, "exit", buffer, &ev);
 	  if (valid_line(buffer) == 0
 	      && (ev.env = next_step(buffer, &ev)) == NULL)
-	    return (0);
+	    return (ev.val_exit);
 	}
     }
-  return (0);
+  return (ev.val_exit);
 }

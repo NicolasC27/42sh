@@ -5,13 +5,21 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Jan 20 02:49:57 2016 Paul Wery
-** Last update Sat Apr  2 00:45:20 2016 Paul Wery
+** Last update Sun May 29 00:18:13 2016 Paul Wery
 */
 
+#include <stdlib.h>
 #include <unistd.h>
 #include "mins.h"
 
 void	my_put_error(char *error)
 {
   write(2, error, my_strlen(error));
+}
+
+void	aff_error(char *exec)
+{
+  my_put_error(exec);
+  my_put_error(": Command not found.\n");
+  exit(1);
 }
