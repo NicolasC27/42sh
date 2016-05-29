@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Mar 17 00:54:45 2016 Paul Wery
-** Last update Fri Apr  8 23:42:05 2016 Paul Wery
+** Last update Sun May 29 02:20:19 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -61,8 +61,9 @@ char	**moove_directory(char **opts, t_env *ev)
     return (NULL);
   if (chdir((const char*)opts[1]) == -1)
     {
+      ev->val_exit = 1;
       my_put_error(opts[1]);
-      my_put_error(" can't be opened\n");
+      my_put_error(": Permission non accordée.\n");
       return (ev->env);
     }
   if (ev->oldpwd != NULL)
@@ -80,6 +81,7 @@ char	**actualize_pwd(char **opts, t_env *ev)
   if (opts[1][0] == '-' && opts[1][1] == '\0' &&
       ev->oldpwd == NULL)
     {
+      ev->val_exit = 1;
       my_putstr("cd: OLDPWD not set\n");
       return (ev->env);
     }

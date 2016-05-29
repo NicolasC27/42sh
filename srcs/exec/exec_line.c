@@ -5,11 +5,9 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan 19 00:28:24 2016 Paul Wery
-** Last update Sun May 29 00:17:38 2016 Paul Wery
+** Last update Sun May 29 02:05:19 2016 Paul Wery
 */
 
-#include <signal.h>
-#include <sys/types.h>
 #include <sys/wait.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -75,10 +73,10 @@ int	find_exec(char *exec, char **opts, t_env *ev, int ret)
     }
   if (nb_path(n, ev->env) == 0 && (path = build_path("./", exec)) == NULL)
     return (-1);
-  if (ret == -1 && nb_path(n, ev->env) == 0)
-    ret = access(path, F_OK);
-  if (ret != -1)
+  if (ret != -1 || (nb_path(n, ev->env) == 0 && access(path, F_OK) != -1))
     execve((const char*)path, opts, ev->env);
+  else if (ret == -1 && access(exec, F_OK) != -1)
+    execve((const char*)exec, opts, ev->env);
   else
     aff_error(exec);
   return (0);
@@ -88,27 +86,27 @@ char	**exec_line(char *exec, char **opts, t_env *ev, pid_t my_pid)
 {
   int	status;
 
-  status = my_builtins(exec, opts, ev->env);
   if ((ev->env = set_env(exec, opts, ev->env)) == NULL ||
       (ev->env = unset_env(exec, opts, ev->env, 1)) == NULL ||
       (ev->env = swap_env(exec, opts, ev)) == NULL)
     return (NULL);
-  if (comp_builtins(exec, "unsetenv") == 0 && status == 0 &&
-      comp_builtins(exec, "setenv") == 0 && (my_pid = fork()) == 0)
+  if ((my_pid = fork()) == 0)
     {
-      if (where_exec(exec) == 1)
-	path_exec(exec, opts, ev->env);
-      if (where_exec(exec) == 0
-	  && (update_std(ev, 1) == -1 || find_exec(exec, opts, ev, -1)) == -1)
+      if (update_std(ev, 1) == -1)
 	return (NULL);
+      if (my_env(ev->env, opts, exec) == 0 && my_builtins(exec) == 0)
+	{
+	  if (where_exec(exec) == 1)
+	    path_exec(exec, opts, ev->env);
+	  if (where_exec(exec) == 0 && find_exec(exec, opts, ev, -1) == -1)
+	    return (NULL);
+	}
     }
   if (my_pid == 0)
     return (NULL);
   wait(&status);
   if (update_std(ev, 2) == -1)
     return (NULL);
-  if (WTERMSIG(status) == SIGSEGV)
-    my_putstr("Segmentation Fault\n");
-  ev->val_exit = WEXITSTATUS(status);
+  get_status(status, ev);
   return (ev->env);
 }

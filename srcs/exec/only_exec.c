@@ -5,21 +5,22 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Jan 21 11:55:15 2016 Paul Wery
-** Last update Sat Apr  2 00:45:28 2016 Paul Wery
+** Last update Sun May 29 01:55:26 2016 Paul Wery
 */
 
+#include <signal.h>
+#include <sys/types.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include "mins.h"
 
 void	path_exec(char *exec, char **opts, char **env)
 {
-  int	ret;
 
-  ret = access(exec, F_OK);
-  if (ret != -1)
+  if (access(exec, F_OK) != -1)
     execve((const char*)exec, opts, env);
-  if (ret == -1)
-    my_put_error("command-not-found\n");
+  else
+    aff_error(exec);
 }
 
 int	where_exec(char *exec)
@@ -37,4 +38,11 @@ int	where_exec(char *exec)
   if (exec[0] == '/')
     return (1);
   return (0);
+}
+
+void	get_status(int status, t_env *ev)
+{
+  if (WTERMSIG(status) == SIGSEGV)
+    my_putstr("Segmentation Fault\n");
+  ev->val_exit = WEXITSTATUS(status);
 }

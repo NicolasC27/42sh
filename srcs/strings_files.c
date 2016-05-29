@@ -5,55 +5,31 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Jan 17 03:46:45 2016 Paul Wery
-** Last update Sat Apr  2 06:56:36 2016 Paul Wery
+** Last update Sun May 29 16:49:20 2016 Paul Wery
 */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include "mins.h"
 
-int	nb_opts(char *str, int n, int i, int cop)
+int	nb_opts(char *str, int n, int i)
 {
   while (str[n] != '\0')
     {
-      while ((str[n] == ' ' || str[n] == '\t') && str[n] != '\0')
+      while (str[n] != '\0' && (str[n] == ' ' || str[n] == '\t'))
 	n += 1;
-      cop = n;
-      while (str[n] != '\0' && str[n] != ' ' && str[n] != '\t'
-	     && str[n] != ';' && str[n] != '|'
-	     && str[n] != '<' && str[n] != '>')
+      if (str[n] == '\0')
+	return (i + 1);
+      while (str[n] != '\0' && str[n] != ' ' && str[n] != '\t')
 	n += 1;
-      if (cop != n)
-	i += 1;
-      if (str[n] == ';' || str[n] == '|'
-	  || str[n] == '<' || str[n] == '>')
-	{
-	  if ((str[n] == '<' && str[n + 1] == '<')
-	      || (str[n] == '>' && str[n + 1] == '>'))
-	    n += 2;
-	  else
-	    n += 1;
-	  i += 1;
-	}
+      i += 1;
     }
   return (i + 1);
 }
 
 int	ret_curs(int n, char *str)
 {
-  if (str[n] == ';' || str[n] == '|'
-      || str[n] == '<' || str[n] == '>')
-    {
-      if ((str[n] == '<' && str[n + 1] == '<')
-	  || (str[n] == '>' && str[n + 1] == '>'))
-	n += 2;
-      else
-	n += 1;
-      return (n);
-    }
-  while (str[n] != '\0' && str[n] != ' ' && str[n] != '\t'
-	 && str[n] != ';' && str[n] != '|'
-	 && str[n] != '<' && str[n] != '>')
+  while (str[n] != '\0' && str[n] != ' ' && str[n] != '\t')
     n += 1;
   return (n);
 }
@@ -79,7 +55,7 @@ char	**get_opts(char *str, int n, int z)
 {
   char	**opts;
 
-  if ((opts = malloc((nb_opts(str, 0, 0, 0)) * sizeof(char*))) == NULL)
+  if ((opts = malloc((nb_opts(str, 0, 0)) * sizeof(char*))) == NULL)
     return (NULL);
   while (str[n] != '\0')
     {

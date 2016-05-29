@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed May 25 19:22:23 2016 Paul Wery
-** Last update Fri May 27 02:17:01 2016 Paul Wery
+** Last update Sun May 29 16:40:46 2016 Paul Wery
 */
 
 #include <unistd.h>
@@ -103,6 +103,7 @@ char		**exec_list(t_exec *list, t_env *ev)
 	it = next_command(list, it);
       else if (elem_redirection(it->tab[0], "<<,>>,||,&&,<,>,|,&,;") == 0)
 	{
+	  ev->val_exit = 0;
 	  if ((ev->env = exec_line(it->tab[0], it->tab, ev, 1)) == NULL
 	      || (it != list && (it = next_exec(it->next, list, ev)) == NULL))
 	    return (NULL);

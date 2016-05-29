@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Apr  2 01:01:53 2016 Paul Wery
-** Last update Fri Apr  8 12:29:05 2016 Paul Wery
+** Last update Sun May 29 02:20:47 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -18,8 +18,9 @@ char	**moove_old_directory(t_env *ev)
 
   if (chdir((const char*)ev->oldpwd) == -1)
     {
+      ev->val_exit = 1;
       my_put_error(ev->oldpwd);
-      my_put_error(" can't be opened\n");
+      my_put_error(": Permission non accordée.\n");
       return (ev->env);
     }
   free(ev->oldpwd);
@@ -44,8 +45,9 @@ char	**moove_home(t_env *ev)
     return (NULL);
   if (chdir((const char*)pwd) == -1)
     {
+      ev->val_exit = 1;
       my_put_error(pwd);
-      my_put_error(" can't be opened\n");
+      my_put_error(": Permission non accordée.\n");
       return (ev->env);
     }
   if ((ev->oldpwd = get_elem_env(ev->env, "PWD", 0, 0)) == NULL)

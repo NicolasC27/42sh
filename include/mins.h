@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan  5 01:26:12 2016 paul wery
-** Last update Sun May 29 00:17:55 2016 Paul Wery
+** Last update Sun May 29 01:56:40 2016 Paul Wery
 */
 
 #ifndef MINS
@@ -70,7 +70,7 @@ int	my_cd(char *exec, char **opts);
 int	comp_words(char *word1, char *word2);
 char	**create_my_env(char **str, int n, int i);
 void	free_opts(char **opts);
-int	my_builtins(char *exec, char **opts, char **env);
+int	my_builtins(char *exec);
 int	comp_builtins(char *word1, char *word2);
 void	*my_realloc(char *str, int new_size);
 int	nb_env(char **str);
@@ -94,6 +94,8 @@ char	*conv_str(char *str);
 char	*conv_strs(char *one, char *two, char *three);
 char	**final_env(char **str, char **env);
 void	aff_error(char *exec);
+int	my_env(char **env, char **opts, char *exec);
+void	get_status(int status, t_env *ev);
 
 t_exec	*create_list(void);
 int	add_elem_prev(t_exec *elem, char **tab);
