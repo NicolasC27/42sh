@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed May 25 19:22:23 2016 Paul Wery
-** Last update Sun May 29 16:40:46 2016 Paul Wery
+** Last update Sun May 29 18:36:17 2016 Paul Wery
 */
 
 #include <unistd.h>
@@ -51,6 +51,8 @@ t_exec	*next_exec(t_exec *it, t_exec *list, t_env *ev)
 {
   int	num;
 
+  if (ev->val_exit == 1)
+    return (next_command(list, it->prev));
   if (it == list)
     return (it);
   num = elem_redirection(it->tab[0], "<<,>>,||,&&,<,>,|,&,;");
@@ -68,7 +70,7 @@ t_exec	*next_exec(t_exec *it, t_exec *list, t_env *ev)
   return (it);
 }
 
-int		use_pipe(t_exec *list, t_exec *it, t_env *ev)
+int		use_pipe(t_exec *list, t_exec *it, t_env *ev, int num)
 {
   ev->state_p = 0;
   if (elem_redirection(it->prev->tab[0], "<<,>>,||,&&,<,>,|,&,;") == 9
@@ -76,7 +78,18 @@ int		use_pipe(t_exec *list, t_exec *it, t_env *ev)
     return (-1);
   if (list == it)
     return (0);
+  if (list != it->next && list != it->next->next)
+    num = elem_redirection(it->next->next->tab[0], "<<,>>,||,&&,<,>,|,&,;");
   if (elem_redirection(it->tab[0], "<<,>>,||,&&,<,>,|,&,;") == 7)
+    {
+      ev->state_p = 1;
+      if (pipe(ev->pipe_t) == -1)
+	return (-1);
+    }
+  else if (num == 7 &&
+	   (elem_redirection(it->tab[0], "<<,>>,||,&&,<,>,|,&,;") == 2
+	    || elem_redirection(it->tab[0], "<<,>>,||,&&,<,>,|,&,;") == 5
+	    || elem_redirection(it->tab[0], "<<,>>,||,&&,<,>,|,&,;") == 6))
     {
       ev->state_p = 1;
       if (pipe(ev->pipe_t) == -1)
@@ -95,12 +108,12 @@ char		**exec_list(t_exec *list, t_env *ev)
   while (valid_command(list) == 0 && it != list)
     {
       if (open_files(list, it, 0, 0) == -1
-	  || use_pipe(list, it->next, ev) == -1
+	  || use_pipe(list, it->next, ev, 0) == -1
 	  || (errin = change_input(list, it->next, 0)) == -1
 	  || (errout = change_output(list, it->next, ev->stdout, 0)) == -1)
 	return (NULL);
       if (errin == -2 || errout == -2)
-	it = next_command(list, it);
+	  it = next_command(list, it);
       else if (elem_redirection(it->tab[0], "<<,>>,||,&&,<,>,|,&,;") == 0)
 	{
 	  ev->val_exit = 0;
