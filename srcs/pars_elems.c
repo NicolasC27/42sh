@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed May 25 16:35:51 2016 Paul Wery
-** Last update Sun May 29 16:44:26 2016 Paul Wery
+** Last update Sun May 29 17:43:10 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -40,15 +40,11 @@ int	new_elem(char *buffer, int n, char *ref)
   return (0);
 }
 
-int	get_nb_elems(char *buffer, char *ref)
+int	get_nb_elems(char *buffer, char *ref, int n, int size)
 {
-  int	n;
   int	add;
   int	elem;
-  int	size;
 
-  n = 0;
-  size = 0;
   while (buffer[n] != '\0')
     {
       elem = 0;
@@ -64,6 +60,8 @@ int	get_nb_elems(char *buffer, char *ref)
 	size += 1;
       if (add != 0)
 	size += 1;
+      while (buffer[n] != '\0' && (buffer[n] == ' ' || buffer[n] == '\t'))
+	n += 1;
     }
   return (size);
 }
@@ -113,7 +111,7 @@ char	**pars_elems(char *buffer)
 
   n = 0;
   i = 0;
-  size = get_nb_elems(buffer, "<<,>>,||,&&,<,>,|,&,;");
+  size = get_nb_elems(buffer, "<<,>>,||,&&,<,>,|,&,;", 0, 0);
   if ((pars = malloc(sizeof(char*) * (size + 1))) == NULL)
     return (NULL);
   while (n < size)
