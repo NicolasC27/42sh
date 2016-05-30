@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Jan 21 19:57:50 2016 Paul Wery
-** Last update Sun May 29 01:12:11 2016 Paul Wery
+** Last update Mon May 30 20:42:03 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -31,15 +31,21 @@ int	my_env(char **env, char **opts, char *exec)
 	  return (1);
 	}
     }
+  else if ((n = equal_w_space("echo", exec)) != 0)
+    {
+      echo_built(exec, n);
+      return (1);
+    }
   return (0);
 }
 
 int	my_builtins(char *exec)
 {
   if (comp_builtins(exec, "env") == 1
-      || comp_builtins(exec, "setenv")
+      || comp_builtins(exec, "setenv") == 1
       || comp_builtins(exec, "unsetenv") == 1
-      || comp_builtins(exec, "cd") == 1)
+      || comp_builtins(exec, "cd") == 1
+      || equal_w_space("echo", exec) != 0)
     return (1);
   return (0);
 }

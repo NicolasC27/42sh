@@ -5,11 +5,34 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed May 25 17:57:04 2016 Paul Wery
-** Last update Wed May 25 18:08:40 2016 Paul Wery
+** Last update Mon May 30 20:32:10 2016 Paul Wery
 */
 
+#include <stdlib.h>
 #include <unistd.h>
 #include "mins.h"
+
+int	put_echo_line(char *echo, t_exec *list)
+{
+  char	**opts;
+  int	n;
+
+  n = 0;
+  if ((opts = malloc(2 * sizeof(char*))) == NULL)
+    return (-1);
+  if ((opts[0] = malloc(my_strlen(echo) + 1)) == NULL)
+    return (-1);
+  while (echo[n] != '\0')
+    {
+      opts[0][n] = echo[n];
+      n += 1;
+    }
+  opts[0][n] = '\0';
+  opts[1] = NULL;
+  if (add_elem_prev(list, opts) == -1)
+    return (-1);
+  return (0);
+}
 
 int	full_list(t_exec *list, char **pars)
 {
@@ -19,8 +42,13 @@ int	full_list(t_exec *list, char **pars)
   n = 0;
   while (pars[n] != NULL)
     {
-      if ((opts = get_opts(pars[n], 0, 0)) == NULL
-	  || (add_elem_prev(list, opts)) == -1)
+      if (equal_w_space("echo", pars[n]) == 0)
+	{
+	  if ((opts = get_opts(pars[n], 0, 0)) == NULL
+	      || (add_elem_prev(list, opts)) == -1)
+	    return (-1);
+	}
+      else if (put_echo_line(pars[n], list) == -1)
 	return (-1);
       n += 1;
     }
