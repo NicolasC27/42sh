@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan  5 01:26:12 2016 paul wery
-** Last update Sun May 29 01:56:40 2016 Paul Wery
+** Last update Tue May 31 00:21:32 2016 Paul Wery
 */
 
 #ifndef MINS
@@ -117,5 +117,7 @@ int	valid_command(t_exec *list);
 t_exec	*jump(t_exec *list, t_exec *it);
 int	equal_w_space(char *one, char *two);
 int	echo_built(char *buffer, int n);
+void	aff_echo(char *echo, int new_line, int s_one, int s_two);
+int	and_or(t_env *ev, t_exec *it);
 
 #endif /* !MINS */
