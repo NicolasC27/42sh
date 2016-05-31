@@ -5,22 +5,24 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Jan 17 03:46:45 2016 Paul Wery
-** Last update Sun May 29 16:49:20 2016 Paul Wery
+** Last update Tue May 31 18:16:36 2016 Paul Wery
 */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include "mins.h"
-
+#include <stdio.h>
 int	nb_opts(char *str, int n, int i)
 {
+  inhib(str, 0, 1);
   while (str[n] != '\0')
     {
       while (str[n] != '\0' && (str[n] == ' ' || str[n] == '\t'))
 	n += 1;
       if (str[n] == '\0')
 	return (i + 1);
-      while (str[n] != '\0' && str[n] != ' ' && str[n] != '\t')
+      while (str[n] != '\0' && (inhib(str, n, 0) == 1
+				|| (str[n] != ' ' && str[n] != '\t')))
 	n += 1;
       i += 1;
     }
@@ -29,7 +31,9 @@ int	nb_opts(char *str, int n, int i)
 
 int	ret_curs(int n, char *str)
 {
-  while (str[n] != '\0' && str[n] != ' ' && str[n] != '\t')
+  inhib(str, 0, 1);
+  while (str[n] != '\0' && (inhib(str, n, 0) == 1
+			    || (str[n] != ' ' && str[n] != '\t')))
     n += 1;
   return (n);
 }
@@ -45,8 +49,17 @@ char	*build_opts(char *str, int n)
   if ((opt = malloc(size)) == NULL)
     return (NULL);
   size = n;
+  not_inhib(str, 0, 1);
   while (size < ret_curs(n, str))
-    opt[i++] = str[size++];
+    {
+      if ((not_inhib(str, size, 0) == 0
+	   && str[size] != '"' && str[size] != '\'')
+	  || (not_inhib(str, size, 2) == 1 && str[size] != '"')
+	  || (not_inhib(str, size, 2) == 2 && str[size] != '\''))
+	opt[i++] = str[size++];
+      else
+	size += 1;
+    }
   opt[i] = '\0';
   return (opt);
 }

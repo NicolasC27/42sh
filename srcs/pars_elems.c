@@ -5,11 +5,12 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed May 25 16:35:51 2016 Paul Wery
-** Last update Sun May 29 17:43:10 2016 Paul Wery
+** Last update Tue May 31 17:41:30 2016 Paul Wery
 */
 
 #include <stdlib.h>
 #include <unistd.h>
+#include "mins.h"
 
 int	new_elem(char *buffer, int n, char *ref)
 {
@@ -50,10 +51,12 @@ int	get_nb_elems(char *buffer, char *ref, int n, int size)
       elem = 0;
       while (buffer[n] != '\0' && (buffer[n] == ' ' || buffer[n] == '\t'))
 	n += 1;
-      while (buffer[n] != '\0' && (add = new_elem(buffer, n, ref)) == 0)
+      while ((buffer[n] != '\0' && inhib(buffer, n, 0) == 1)
+	     || (buffer[n] != '\0' && (add = new_elem(buffer, n, ref)) == 0))
 	{
 	  n += 1;
 	  elem = 1;
+	  add = 0;
 	}
       n += add;
       if (elem == 1)
@@ -76,7 +79,8 @@ char	*parsed_elem(char *buffer, int n, char *ref)
   i = 0;
   if (new_elem(buffer, n, ref) == 0)
     {
-      while (buffer[size] != '\0' && new_elem(buffer, size, ref) == 0)
+      while (buffer[size] != '\0'
+	     && (inhib(buffer, size, 0) == 1 || new_elem(buffer, size, ref) == 0))
 	size += 1;
     }
   else
@@ -91,9 +95,11 @@ char	*parsed_elem(char *buffer, int n, char *ref)
 
 int	new_pos(char *buffer, int i)
 {
+  inhib(buffer, 0, 1);
   if (new_elem(buffer, i, "<<,>>,||,&&,<,>,|,&,;") == 0)
     {
-      while (new_elem(buffer, i, "<<,>>,||,&&,<,>,|,&,;") == 0
+      while ((inhib(buffer, i, 0) == 1
+	      || new_elem(buffer, i, "<<,>>,||,&&,<,>,|,&,;") == 0)
 	     && buffer[i] != '\0')
 	i += 1;
     }
@@ -111,6 +117,7 @@ char	**pars_elems(char *buffer)
 
   n = 0;
   i = 0;
+  inhib(buffer, 0, 1);
   size = get_nb_elems(buffer, "<<,>>,||,&&,<,>,|,&,;", 0, 0);
   if ((pars = malloc(sizeof(char*) * (size + 1))) == NULL)
     return (NULL);

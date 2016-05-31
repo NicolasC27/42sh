@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan  5 01:26:12 2016 paul wery
-** Last update Tue May 31 01:10:47 2016 Paul Wery
+** Last update Tue May 31 17:54:44 2016 Paul Wery
 */
 
 #ifndef MINS
@@ -120,5 +120,7 @@ int	echo_built(char *buffer, int n, t_env *ev);
 void	aff_echo(char *echo, int new_line, int s_one, int s_two);
 int	and_or(t_env *ev, t_exec *it);
 int	pair(char *buffer, int n, int s_one, int s_two);
+int	inhib(char *buffer, int n, int state);
+int	not_inhib(char *buffer, int n, int state);
 
 #endif /* !MINS */

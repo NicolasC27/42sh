@@ -5,7 +5,7 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sat Apr  2 00:37:51 2016 Paul Wery
-## Last update Tue May 31 00:20:56 2016 Paul Wery
+## Last update Tue May 31 17:14:24 2016 Paul Wery
 ##
 
 NAME    =	42sh
@@ -47,7 +47,8 @@ SRCS    =	srcs/main.c \
 		srcs/builtins/fonc_cd.c \
 		srcs/builtins/if_empty_path.c \
 		srcs/builtins/final_env.c \
-		srcs/builtins/conv_fonc.c
+		srcs/builtins/conv_fonc.c \
+		srcs/inhib/inhib_fonc.c
 
 $(NAME) :	$(OBJS)
 	$(CC) $(OBJS) -o $(NAME)
