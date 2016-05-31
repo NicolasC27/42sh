@@ -5,11 +5,12 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri Apr  8 20:57:17 2016 Paul Wery
-** Last update Wed Apr 13 13:47:42 2016 Paul Wery
+** Last update Tue May 31 12:42:07 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
 #include <unistd.h>
+#include "function.h"
 #include "mins.h"
 
 void	my_putstr(char *str)

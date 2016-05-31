@@ -5,11 +5,12 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri Apr  8 16:53:29 2016 Paul Wery
-** Last update Fri Apr  8 17:47:52 2016 Paul Wery
+** Last update Tue May 31 12:41:57 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
 #include <unistd.h>
+#include "function.h"
 #include "mins.h"
 
 char	*build_path(char *path, char *exec)

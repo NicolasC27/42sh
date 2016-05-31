@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan  5 01:26:12 2016 paul wery
-** Last update Sun May 29 01:56:40 2016 Paul Wery
+** Last update Tue May 31 12:35:03 2016 Nicolas Chevalier
 */
 
 #ifndef MINS
@@ -16,7 +16,7 @@
 
 #endif /* !READ_SIZE */
 
-#    define UNUSED __attribute__((unused))
+# define UNUSED __attribute__((unused))
 
 # include <unistd.h>
 # include <sys/stat.h>
@@ -59,10 +59,7 @@ char	*get_exec(char *str);
 int	find_path(char **env);
 char	*get_path(int n, int nb_t, char **env, int i);
 int	nb_path(int n, char **env);
-int	my_strlen(char *str);
 char	*final_path(char *path, char *exec);
-void	my_putstr(char *str);
-void	my_put_error(char *error);
 void	path_exec(char *exec, char **opts, char **env);
 int	where_exec(char *exec);
 void	my_exit(char *w1, char *word2, char *buffer, t_env *ev);

@@ -5,11 +5,12 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Jan 21 18:44:21 2016 Paul Wery
-** Last update Sun May 29 00:08:07 2016 Paul Wery
+** Last update Tue May 31 12:38:34 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
 #include <unistd.h>
+#include "function.h"
 #include "mins.h"
 
 int	act_place(char *word1, int i)

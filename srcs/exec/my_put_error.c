@@ -5,11 +5,12 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Jan 20 02:49:57 2016 Paul Wery
-** Last update Sun May 29 00:18:13 2016 Paul Wery
+** Last update Tue May 31 12:37:46 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
 #include <unistd.h>
+#include "function.h"
 #include "mins.h"
 
 void	my_put_error(char *error)

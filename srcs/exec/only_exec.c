@@ -5,13 +5,14 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Jan 21 11:55:15 2016 Paul Wery
-** Last update Sun May 29 01:55:26 2016 Paul Wery
+** Last update Tue May 31 12:38:20 2016 Nicolas Chevalier
 */
 
 #include <signal.h>
 #include <sys/types.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "function.h"
 #include "mins.h"
 
 void	path_exec(char *exec, char **opts, char **env)

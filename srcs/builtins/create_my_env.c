@@ -5,11 +5,12 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Jan 21 22:07:49 2016 Paul Wery
-** Last update Fri Apr  8 21:20:24 2016 Paul Wery
+** Last update Tue May 31 12:39:00 2016 Nicolas Chevalier
 */
 
 #include <unistd.h>
 #include <stdlib.h>
+#include "function.h"
 #include "mins.h"
 
 int	build_env(char **str, char **env, int n)

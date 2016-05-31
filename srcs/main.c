@@ -5,12 +5,14 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Jan 16 20:40:01 2016 Paul Wery
-** Last update Sun May 29 00:07:18 2016 Paul Wery
+** Last update Tue May 31 12:35:58 2016 Nicolas Chevalier
 */
 
 #include <signal.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "get_line.h"
+#include "function.h"
 #include "mins.h"
 
 void	free_opts(char **opts)
@@ -93,7 +95,7 @@ int	main(int ac UNUSED, char **av UNUSED, char **environ)
 	return (ev.val_exit);
       if (buffer != NULL)
 	free(buffer);
-      if ((buffer = get_next_line()) == NULL)
+      if ((buffer = get_line()) == NULL)
 	return (ev.val_exit);
       if (buffer[0] != '\0')
 	{

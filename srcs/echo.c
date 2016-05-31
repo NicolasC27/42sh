@@ -5,11 +5,12 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri May 27 15:30:57 2016 Paul Wery
-** Last update Sun May 29 18:50:14 2016 Paul Wery
+** Last update Tue May 31 12:36:55 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
 #include <unistd.h>
+#include "function.h"
 #include "mins.h"
 
 static void	afferror(int state)

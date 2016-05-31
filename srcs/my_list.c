@@ -5,11 +5,12 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Apr  2 01:20:11 2016 Paul Wery
-** Last update Fri May 27 01:22:31 2016 Paul Wery
+** Last update Tue May 31 12:36:09 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
 #include <unistd.h>
+#include "function.h"
 #include "mins.h"
 
 int	valid_command(t_exec *list)

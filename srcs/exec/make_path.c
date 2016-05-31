@@ -5,11 +5,12 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan 19 17:55:41 2016 Paul Wery
-** Last update Sun May 29 01:55:42 2016 Paul Wery
+** Last update Tue May 31 12:37:23 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
 #include <unistd.h>
+#include "function.h"
 #include "mins.h"
 
 char	*final_path(char *path, char *exec)

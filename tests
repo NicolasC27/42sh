@@ -1,6 +1,6 @@
 [01]
 NAME="Path 1"
-SETUP="PATH='/usr/bin:/bin' ; touch file$$"
+sETUP="PATH='/usr/bin:/bin' ; touch file$$"
 CLEAN="rm -f file$$"
 TESTS=
   echo 'ls -la /bin .'
@@ -297,3 +297,4 @@ TESTS=
   echo "cat fic >> fic"
   echo "cat fic"
 [32-END]
+

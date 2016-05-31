@@ -5,11 +5,12 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Mar 16 18:13:32 2016 Paul Wery
-** Last update Fri Apr  8 22:55:23 2016 Paul Wery
+** Last update Tue May 31 12:39:48 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
 #include <unistd.h>
+#include "function.h"
 #include "mins.h"
 
 int	get_start_elem(char **env, int n)

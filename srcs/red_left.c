@@ -5,11 +5,12 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed May 25 22:32:13 2016 Paul Wery
-** Last update Sat May 28 18:39:25 2016 Paul Wery
+** Last update Tue May 31 12:36:40 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
 #include <unistd.h>
+#include "function.h"
 #include "mins.h"
 
 int	equal_w_space(char *one, char *two)

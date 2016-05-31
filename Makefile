@@ -5,7 +5,7 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sat Apr  2 00:37:51 2016 Paul Wery
-## Last update Fri May 27 15:52:40 2016 Paul Wery
+## Last update Tue May 31 10:58:27 2016 Nicolas Chevalier
 ##
 
 NAME    =	42sh
@@ -45,10 +45,11 @@ SRCS    =	srcs/main.c \
 		srcs/builtins/fonc_cd.c \
 		srcs/builtins/if_empty_path.c \
 		srcs/builtins/final_env.c \
-		srcs/builtins/conv_fonc.c
+		srcs/builtins/conv_fonc.c \
+		srcs/get_line/get_line.c
 
 $(NAME) :	$(OBJS)
-	$(CC) $(OBJS) -o $(NAME)
+		$(CC) $(OBJS) -o $(NAME) -lncurses
 
 all     :	$(NAME)
 

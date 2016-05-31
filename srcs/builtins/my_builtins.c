@@ -5,11 +5,12 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Jan 21 19:57:50 2016 Paul Wery
-** Last update Sun May 29 01:12:11 2016 Paul Wery
+** Last update Tue May 31 12:38:48 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
 #include <unistd.h>
+#include "function.h"
 #include "mins.h"
 
 int	my_env(char **env, char **opts, char *exec)

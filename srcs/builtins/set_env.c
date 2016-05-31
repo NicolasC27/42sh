@@ -5,11 +5,12 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri Jan 22 18:33:53 2016 Paul Wery
-** Last update Sat Apr  2 00:46:20 2016 Paul Wery
+** Last update Tue May 31 12:39:22 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
 #include <unistd.h>
+#include "function.h"
 #include "mins.h"
 
 void	add_env(char **cop, char **opts, int n)

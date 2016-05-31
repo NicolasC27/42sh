@@ -5,13 +5,14 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed May 25 20:44:03 2016 Paul Wery
-** Last update Sun May 29 18:56:29 2016 Paul Wery
+** Last update Tue May 31 12:36:23 2016 Nicolas Chevalier
 */
 
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include "function.h"
 #include "mins.h"
 
 int	change_output(t_exec *list, t_exec *elem, int stdout, int num)
