@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed May 25 20:44:03 2016 Paul Wery
-** Last update Tue May 31 02:11:09 2016 Paul Wery
+** Last update Tue May 31 13:50:54 2016 Lucas Debouté
 */
 
 #include <sys/types.h>
@@ -33,8 +33,8 @@ int	change_output(t_exec *list, t_exec *elem, int stdout, int num)
           return (-2);
         }
       close(1);
-      if ((num == 2 && open(elem->next->tab[0], O_APPEND | O_WRONLY)) == -1
-          || (num == 6 && (open(elem->next->tab[0], O_WRONLY | O_TRUNC))) == -1)
+      if ((num == 2 && (open(elem->next->tab[0], O_APPEND | O_WRONLY)) == -1)
+          || (num == 6 && ((open(elem->next->tab[0], O_WRONLY | O_TRUNC))) == -1))
         return (-1);
     }
   return (0);
