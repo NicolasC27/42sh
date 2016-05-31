@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed May 25 20:44:03 2016 Paul Wery
-** Last update Sun May 29 18:56:29 2016 Paul Wery
+** Last update Tue May 31 02:11:09 2016 Paul Wery
 */
 
 #include <sys/types.h>
@@ -54,6 +54,14 @@ int	change_input(t_exec *list, t_exec *elem, int num)
       close(0);
       if ((num = open(elem->next->tab[0], O_RDONLY)) == -1)
         return (-1);
+      if (list != elem->next && list != elem->next->next)
+	{
+	  num = elem_redirection(elem->next->next->tab[0],
+				 "<<,>>,||,&&,<,>,|,&,;");
+	  if ((num == 2 || num == 6)
+	      && change_output(list, elem->next->next, 1, 0) == -1)
+	    return (-1);
+	}
     }
   return (0);
 }

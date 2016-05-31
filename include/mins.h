@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan  5 01:26:12 2016 paul wery
-** Last update Tue May 31 00:21:32 2016 Paul Wery
+** Last update Tue May 31 01:10:47 2016 Paul Wery
 */
 
 #ifndef MINS
@@ -94,7 +94,7 @@ char	*conv_str(char *str);
 char	*conv_strs(char *one, char *two, char *three);
 char	**final_env(char **str, char **env);
 void	aff_error(char *exec);
-int	my_env(char **env, char **opts, char *exec);
+int	my_env(t_env *ev, char **opts, char *exec);
 void	get_status(int status, t_env *ev);
 
 t_exec	*create_list(void);
@@ -116,8 +116,9 @@ int	update_std(t_env *ev, int state);
 int	valid_command(t_exec *list);
 t_exec	*jump(t_exec *list, t_exec *it);
 int	equal_w_space(char *one, char *two);
-int	echo_built(char *buffer, int n);
+int	echo_built(char *buffer, int n, t_env *ev);
 void	aff_echo(char *echo, int new_line, int s_one, int s_two);
 int	and_or(t_env *ev, t_exec *it);
+int	pair(char *buffer, int n, int s_one, int s_two);
 
 #endif /* !MINS */

@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Jan 16 20:40:01 2016 Paul Wery
-** Last update Mon May 30 20:42:27 2016 Paul Wery
+** Last update Tue May 31 01:10:17 2016 Paul Wery
 */
 
 #include <signal.h>
@@ -28,14 +28,22 @@ char		**next_step(char *buffer, t_env *ev)
   char		**pars;
   t_exec	*list;
 
-  if ((pars = pars_elems(buffer)) == NULL
-      || (list = create_list()) == NULL
-      || full_list(list, pars) == -1
-      || (ev->env = exec_list(list, ev)) == NULL
-      || default_io(ev->stdin, ev->stdout, 3) == -1)
-    return (NULL);
-  free_opts(pars);
-  delete_list(&list);
+  if (pair(buffer, 0, 0, 0) == -1)
+    {
+      ev->val_exit = 1;
+      return (ev->env);
+    }
+  else
+    {
+      if ((pars = pars_elems(buffer)) == NULL
+	  || (list = create_list()) == NULL
+	  || full_list(list, pars) == -1
+	  || (ev->env = exec_list(list, ev)) == NULL
+	  || default_io(ev->stdin, ev->stdout, 3) == -1)
+	return (NULL);
+      free_opts(pars);
+      delete_list(&list);
+    }
   return (ev->env);
 }
 

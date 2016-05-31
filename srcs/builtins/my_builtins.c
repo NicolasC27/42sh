@@ -5,14 +5,14 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Jan 21 19:57:50 2016 Paul Wery
-** Last update Mon May 30 20:42:03 2016 Paul Wery
+** Last update Tue May 31 01:06:04 2016 Paul Wery
 */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include "mins.h"
 
-int	my_env(char **env, char **opts, char *exec)
+int	my_env(t_env *ev, char **opts, char *exec)
 {
   int	n;
 
@@ -22,9 +22,9 @@ int	my_env(char **env, char **opts, char *exec)
     {
       if (opts[1] == NULL)
 	{
-	  while (env[n] != NULL)
+	  while (ev->env[n] != NULL)
 	    {
-	      my_putstr(env[n]);
+	      my_putstr(ev->env[n]);
 	      my_putstr("\n");
 	      n += 1;
 	    }
@@ -33,7 +33,7 @@ int	my_env(char **env, char **opts, char *exec)
     }
   else if ((n = equal_w_space("echo", exec)) != 0)
     {
-      echo_built(exec, n);
+      echo_built(exec, n, ev);
       return (1);
     }
   return (0);

@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan 19 00:28:24 2016 Paul Wery
-** Last update Sun May 29 02:05:19 2016 Paul Wery
+** Last update Tue May 31 01:05:28 2016 Paul Wery
 */
 
 #include <sys/wait.h>
@@ -94,7 +94,7 @@ char	**exec_line(char *exec, char **opts, t_env *ev, pid_t my_pid)
     {
       if (update_std(ev, 1) == -1)
 	return (NULL);
-      if (my_env(ev->env, opts, exec) == 0 && my_builtins(exec) == 0)
+      if (my_env(ev, opts, exec) == 0 && my_builtins(exec) == 0)
 	{
 	  if (where_exec(exec) == 1)
 	    path_exec(exec, opts, ev->env);

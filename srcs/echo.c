@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri May 27 15:30:57 2016 Paul Wery
-** Last update Tue May 31 00:15:10 2016 Paul Wery
+** Last update Tue May 31 01:20:14 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -23,7 +23,7 @@ static void	afferror(int state)
     }
 }
 
-static int	pair(char *buffer, int n, int s_one, int s_two)
+int	pair(char *buffer, int n, int s_one, int s_two)
 {
   while (buffer[n] != '\0')
     {
@@ -35,7 +35,10 @@ static int	pair(char *buffer, int n, int s_one, int s_two)
     }
   if ((s_one % 2) == 1 || (s_two % 2) == 1)
     {
-      afferror(-1);
+      if ((s_one % 2) == 1)
+	afferror(-1);
+      if ((s_two % 2) == 1)
+	afferror(-2);
       return (-1);
     }
   return (0);
@@ -65,13 +68,17 @@ static int	check_opts(char *opt, char *ref)
   return (0);
 }
 
-int	echo_built(char *buffer, int n)
+int	echo_built(char *buffer, int n, t_env *ev)
 {
   char	**opts;
   char	*echo;
 
-  if (pair(buffer, n, 0, 0) == -1
-      || (echo = malloc(my_strlen(buffer) - n + 1)) == NULL
+  if (pair(buffer, n, 0, 0) == -1)
+    {
+      ev->val_exit = 1;
+      return (-1);
+    }
+  if ((echo = malloc(my_strlen(buffer) - n + 1)) == NULL
       || full_echo(echo, buffer, n) == -1
       || (opts = get_opts(echo, 0, 0)) == NULL)
     return (-1);
