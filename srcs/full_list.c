@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed May 25 17:57:04 2016 Paul Wery
-** Last update Mon May 30 20:32:10 2016 Paul Wery
+** Last update Wed Jun  1 22:51:29 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -42,6 +42,8 @@ int	full_list(t_exec *list, char **pars)
   n = 0;
   while (pars[n] != NULL)
     {
+      if ((pars[n] = echo_star(pars[n], 0, my_strlen(pars[n]))) == NULL)
+	return (-1);
       if (equal_w_space("echo", pars[n]) == 0)
 	{
 	  if ((opts = get_opts(pars[n], 0, 0)) == NULL

@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan  5 01:26:12 2016 paul wery
-** Last update Wed Jun  1 03:37:46 2016 Paul Wery
+** Last update Wed Jun  1 22:34:44 2016 Paul Wery
 */
 
 #ifndef MINS
@@ -21,6 +21,7 @@
 # include <unistd.h>
 # include <sys/stat.h>
 
+typedef struct dirent t_dir;
 typedef struct	stat t_stat;
 
 char	*get_next_line(void);
@@ -133,5 +134,8 @@ int	not_inhib(char *buffer, int n, int state);
 void	aff_cd_error(char *exec, t_env *ev);
 int	valid_name(char *name, t_env *ev);
 void	aff_input_error(char *exec, t_env *ev);
+char	*echo_star(char *buffer, int start, int end);
+char	*replace_seg(char *buffer, char *replace);
+int	valid_star(char *buffer);
 
 #endif /* !MINS */
