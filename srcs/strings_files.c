@@ -5,13 +5,13 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Jan 17 03:46:45 2016 Paul Wery
-** Last update Tue May 31 18:16:36 2016 Paul Wery
+** Last update Wed Jun  1 02:14:01 2016 Paul Wery
 */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include "mins.h"
-#include <stdio.h>
+
 int	nb_opts(char *str, int n, int i)
 {
   inhib(str, 0, 1);

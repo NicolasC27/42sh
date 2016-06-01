@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed May 25 19:22:23 2016 Paul Wery
-** Last update Tue May 31 01:52:48 2016 Paul Wery
+** Last update Wed Jun  1 03:37:58 2016 Paul Wery
 */
 
 #include <unistd.h>
@@ -116,7 +116,7 @@ char		**exec_list(t_exec *list, t_env *ev)
     {
       if (open_files(list, it, 0, 0) == -1
 	  || use_pipe(list, it->next, ev, 0) == -1
-	  || (errin = change_input(list, it->next, 0)) == -1
+	  || (errin = change_input(list, it->next, 0, ev)) == -1
 	  || (errout = change_output(list, it->next, ev->stdout, 0)) == -1)
 	return (NULL);
       if (errin == -2 || errout == -2 || and_or(ev, it) == 1)
@@ -124,7 +124,7 @@ char		**exec_list(t_exec *list, t_env *ev)
       else if (elem_redirection(it->tab[0], "<<,>>,||,&&,<,>,|,&,;") == 0)
 	{
 	  ev->val_exit = 0;
-	  if ((ev->env = exec_line(it->tab[0], it->tab, ev, 1)) == NULL
+	  if ((ev->env = exec_line(it->tab, ev, 1, 0)) == NULL
 	      || (it != list && (it = next_exec(it->next, list, ev)) == NULL))
 	    return (NULL);
 	}

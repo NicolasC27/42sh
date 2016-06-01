@@ -5,44 +5,12 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri May 27 15:30:57 2016 Paul Wery
-** Last update Tue May 31 01:20:14 2016 Paul Wery
+** Last update Tue May 31 18:40:13 2016 Paul Wery
 */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include "mins.h"
-
-static void	afferror(int state)
-{
-  if (state < 0)
-    {
-      if (state == -1)
-	my_put_error("Unmatched \".\n");
-      else
-	my_put_error("Unmatched '.\n");
-    }
-}
-
-int	pair(char *buffer, int n, int s_one, int s_two)
-{
-  while (buffer[n] != '\0')
-    {
-      if ((s_two % 2) == 0 && buffer[n] == '"')
-	s_one += 1;
-      if ((s_one % 2) == 0 && buffer[n] == '\'')
-	s_two += 1;
-      n += 1;
-    }
-  if ((s_one % 2) == 1 || (s_two % 2) == 1)
-    {
-      if ((s_one % 2) == 1)
-	afferror(-1);
-      if ((s_two % 2) == 1)
-	afferror(-2);
-      return (-1);
-    }
-  return (0);
-}
 
 static int	full_echo(char *echo, char *buffer, int n)
 {

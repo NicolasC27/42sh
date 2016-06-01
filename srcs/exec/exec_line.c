@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan 19 00:28:24 2016 Paul Wery
-** Last update Tue May 31 01:05:28 2016 Paul Wery
+** Last update Wed Jun  1 02:51:07 2016 Paul Wery
 */
 
 #include <sys/wait.h>
@@ -82,23 +82,22 @@ int	find_exec(char *exec, char **opts, t_env *ev, int ret)
   return (0);
 }
 
-char	**exec_line(char *exec, char **opts, t_env *ev, pid_t my_pid)
+char	**exec_line(char **opts, t_env *ev, pid_t my_pid, int status)
 {
-  int	status;
-
-  if ((ev->env = set_env(exec, opts, ev->env)) == NULL ||
-      (ev->env = unset_env(exec, opts, ev->env, 1)) == NULL ||
-      (ev->env = swap_env(exec, opts, ev)) == NULL)
+  my_exit(ev, opts);
+  if ((ev->env = set_env(opts[0], opts, ev)) == NULL ||
+      (ev->env = unset_env(opts[0], opts, ev->env, 1)) == NULL ||
+      (ev->env = swap_env(opts[0], opts, ev)) == NULL)
     return (NULL);
   if ((my_pid = fork()) == 0)
     {
       if (update_std(ev, 1) == -1)
 	return (NULL);
-      if (my_env(ev, opts, exec) == 0 && my_builtins(exec) == 0)
+      if (my_env(ev, opts, opts[0]) == 0 && my_builtins(opts[0]) == 0)
 	{
-	  if (where_exec(exec) == 1)
-	    path_exec(exec, opts, ev->env);
-	  if (where_exec(exec) == 0 && find_exec(exec, opts, ev, -1) == -1)
+	  if (where_exec(opts[0]) == 1)
+	    path_exec(opts[0], opts, ev->env);
+	  if (where_exec(opts[0]) == 0 && find_exec(opts[0], opts, ev, -1) == -1)
 	    return (NULL);
 	}
     }

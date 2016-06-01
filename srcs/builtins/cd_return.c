@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Mar 16 18:13:32 2016 Paul Wery
-** Last update Fri Apr  8 22:55:23 2016 Paul Wery
+** Last update Wed Jun  1 02:53:25 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -65,7 +65,7 @@ char	*create_opt(char *opt)
   return (cop);
 }
 
-char	**swap_elems(char *pwd, char **env)
+char	**swap_elems(char *pwd, t_env *ev)
 {
   char	**opts;
 
@@ -75,8 +75,8 @@ char	**swap_elems(char *pwd, char **env)
       (opts[2] = create_opt(pwd)) == NULL)
     return (NULL);
   opts[3] = NULL;
-  if ((env = set_env("setenv", opts, env)) == NULL)
+  if ((ev->env = set_env("setenv", opts, ev)) == NULL)
     return (NULL);
   free_opts(opts);
-  return (env);
+  return (ev->env);
 }

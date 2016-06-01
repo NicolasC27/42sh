@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Jan 21 19:57:50 2016 Paul Wery
-** Last update Tue May 31 01:06:04 2016 Paul Wery
+** Last update Wed Jun  1 01:31:17 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -36,6 +36,7 @@ int	my_env(t_env *ev, char **opts, char *exec)
       echo_built(exec, n, ev);
       return (1);
     }
+  my_exit(ev, opts);
   return (0);
 }
 
@@ -45,6 +46,7 @@ int	my_builtins(char *exec)
       || comp_builtins(exec, "setenv") == 1
       || comp_builtins(exec, "unsetenv") == 1
       || comp_builtins(exec, "cd") == 1
+      || comp_builtins(exec, "exit") == 1
       || equal_w_space("echo", exec) != 0)
     return (1);
   return (0);

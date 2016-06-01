@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Jan 24 16:08:56 2016 Paul Wery
-** Last update Sat Apr  2 00:45:39 2016 Paul Wery
+** Last update Wed Jun  1 03:02:46 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -38,4 +38,26 @@ char	**realloc_env2(char **env, int size, int n, char **opts)
   cop[n + 1] = NULL;
   free_opts(env);
   return (cop);
+}
+
+int	valid_name(char *name, t_env *ev)
+{
+  int	n;
+
+  n = 0;
+  while (name[n] != '\0')
+    {
+      if ((name[n] > 47 && name[n] < 58)
+	  || (name[n] > 64 && name[n] < 91)
+	  || (name[n] > 96 && name[n] < 123))
+	n += 1;
+      else
+	{
+	  ev->val_exit = 1;
+	  my_put_error("setenv: ");
+	  my_put_error("Variable name must contain alphanumeric characters.\n");
+	  return (1);
+	}
+    }
+  return (0);
 }

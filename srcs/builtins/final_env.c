@@ -5,14 +5,14 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri Apr  8 19:53:29 2016 Paul Wery
-** Last update Sat Apr  9 01:33:25 2016 Paul Wery
+** Last update Wed Jun  1 02:57:53 2016 Paul Wery
 */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include "mins.h"
 
-char	**full_pwd(char **env, int n)
+char	**full_pwd(t_env *ev, int n)
 {
   char	**opts;
 
@@ -20,23 +20,23 @@ char	**full_pwd(char **env, int n)
     return (NULL);
   opts[3] = NULL;
   if ((opts[0] = conv_str("setenv")) == NULL
-      || (n = find_set_unset(env, "PWD")) == -1
+      || (n = find_set_unset(ev->env, "PWD")) == -1
       || (opts[1] = conv_str("PWD")) == NULL)
     return (NULL);
-  if (env[n] == NULL || env[n][0] == '\0')
+  if (ev->env[n] == NULL || ev->env[n][0] == '\0')
     {
       if ((opts[2] = ini_elem()) == NULL)
 	return (NULL);
-      if ((env = set_env("setenv", opts, env)) == NULL)
+      if ((ev->env = set_env("setenv", opts, ev)) == NULL)
 	return (NULL);
     }
   else
     opts[2] = NULL;
   free_opts(opts);
-  return (env);
+  return (ev->env);
 }
 
-char	**full_path(char **env, int n)
+char	**full_path(t_env *ev, int n)
 {
   char	**opts;
 
@@ -44,34 +44,34 @@ char	**full_path(char **env, int n)
     return (NULL);
   opts[3] = NULL;
   if ((opts[0] = conv_str("setenv")) == NULL
-      || (n = find_set_unset(env, "PATH")) == -1
+      || (n = find_set_unset(ev->env, "PATH")) == -1
       || (opts[1] = conv_str("PATH")) == NULL)
     return (NULL);
-  if (env[n] == NULL || env[n][0] == '\0')
+  if (ev->env[n] == NULL || ev->env[n][0] == '\0')
     {
       if ((opts[2] = conv_strs("/bin:/sbin:/usr/bin:/usr/sbin",
 			       ":/usr/heimdal/bin:/usr/heimdal",
 			       "/sbin")) == NULL)
 	return (NULL);
-      if ((env = set_env("setenv", opts, env)) == NULL)
+      if ((ev->env = set_env("setenv", opts, ev)) == NULL)
 	return (NULL);
     }
   else
     opts[2] = NULL;
   free_opts(opts);
-  return (env);
+  return (ev->env);
 }
 
-char	**final_env(char **str, char **env)
+char	**final_env(char **str, t_env *ev)
 {
   if (nb_env(str) == 0)
     {
-      if ((env = malloc(1 * sizeof(char*))) == NULL)
+      if ((ev->env = malloc(1 * sizeof(char*))) == NULL)
         return (NULL);
-      env[0] = NULL;
+      ev->env[0] = NULL;
     }
-  if ((env = full_path(env, 0)) == NULL
-      || (env = full_pwd(env, 0)) == NULL)
+  if ((ev->env = full_path(ev, 0)) == NULL
+      || (ev->env = full_pwd(ev, 0)) == NULL)
     return (NULL);
-  return (env);
+  return (ev->env);
 }

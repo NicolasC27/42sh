@@ -5,9 +5,9 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue May 31 17:05:53 2016 Paul Wery
-** Last update Tue May 31 18:10:45 2016 Paul Wery
+** Last update Wed Jun  1 02:15:02 2016 Paul Wery
 */
-#include <stdio.h>
+
 int		inhib(char *buffer, int n, int state)
 {
   static int	s_one = 0;

@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Jan 16 20:40:01 2016 Paul Wery
-** Last update Tue May 31 01:10:17 2016 Paul Wery
+** Last update Wed Jun  1 03:00:34 2016 Paul Wery
 */
 
 #include <signal.h>
@@ -25,9 +25,7 @@ void	free_opts(char **opts)
 
 char		**next_step(char *buffer, t_env *ev)
 {
-  char		**pars;
-  t_exec	*list;
-
+  ev->free.buffer = buffer;
   if (pair(buffer, 0, 0, 0) == -1)
     {
       ev->val_exit = 1;
@@ -35,14 +33,14 @@ char		**next_step(char *buffer, t_env *ev)
     }
   else
     {
-      if ((pars = pars_elems(buffer)) == NULL
-	  || (list = create_list()) == NULL
-	  || full_list(list, pars) == -1
-	  || (ev->env = exec_list(list, ev)) == NULL
+      if ((ev->free.pars = pars_elems(buffer)) == NULL
+	  || (ev->free.list = create_list()) == NULL
+	  || full_list(ev->free.list, ev->free.pars) == -1
+	  || (ev->env = exec_list(ev->free.list, ev)) == NULL
 	  || default_io(ev->stdin, ev->stdout, 3) == -1)
 	return (NULL);
-      free_opts(pars);
-      delete_list(&list);
+      free_opts(ev->free.pars);
+      delete_list(&ev->free.list);
     }
   return (ev->env);
 }
@@ -86,7 +84,8 @@ int	main(int ac UNUSED, char **av UNUSED, char **environ)
   char	*buffer;
 
   buffer = NULL;
-  if (ini_env(&ev) == -1 || (ev.env = create_my_env(environ, 0, 0)) == NULL)
+  if (ini_env(&ev) == -1
+      || (ev.env = create_my_env(environ, 0, 0, &ev)) == NULL)
     return (0);
   while (1)
     {
@@ -99,7 +98,6 @@ int	main(int ac UNUSED, char **av UNUSED, char **environ)
 	return (ev.val_exit);
       if (buffer[0] != '\0')
 	{
-	  my_exit(buffer, "exit", buffer, &ev);
 	  if (valid_line(buffer) == 0
 	      && (ev.env = next_step(buffer, &ev)) == NULL)
 	    return (ev.val_exit);

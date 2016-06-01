@@ -5,9 +5,10 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed May 25 20:44:03 2016 Paul Wery
-** Last update Tue May 31 13:50:54 2016 Lucas Debouté
+** Last update Wed Jun  1 04:01:48 2016 Paul Wery
 */
 
+#include <errno.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -40,7 +41,7 @@ int	change_output(t_exec *list, t_exec *elem, int stdout, int num)
   return (0);
 }
 
-int	change_input(t_exec *list, t_exec *elem, int num)
+int	change_input(t_exec *list, t_exec *elem, int num, t_env *ev)
 {
   if (elem != list)
     num = elem_redirection(elem->tab[0], "<<,>>,||,&&,<,>,|,&,;");
@@ -52,8 +53,11 @@ int	change_input(t_exec *list, t_exec *elem, int num)
           return (-2);
         }
       close(0);
-      if ((num = open(elem->next->tab[0], O_RDONLY)) == -1)
-        return (-1);
+      if ((num = open(elem->next->tab[0], O_RDONLY)) == -1 && errno == ENOENT)
+	{
+	  aff_input_error(elem->next->tab[0], ev);
+	  return (-2);
+	}
       if (list != elem->next && list != elem->next->next)
 	{
 	  num = elem_redirection(elem->next->next->tab[0],

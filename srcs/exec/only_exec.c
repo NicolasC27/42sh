@@ -5,20 +5,33 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Jan 21 11:55:15 2016 Paul Wery
-** Last update Sun May 29 01:55:26 2016 Paul Wery
+** Last update Wed Jun  1 03:43:26 2016 Paul Wery
 */
 
 #include <signal.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include "mins.h"
 
-void	path_exec(char *exec, char **opts, char **env)
+void		path_exec(char *exec, char **opts, char **env)
 {
+  struct stat	stat_t;
+  int		ret;
 
+  ret = stat(exec, &stat_t);
   if (access(exec, F_OK) != -1)
-    execve((const char*)exec, opts, env);
+    {
+      if (ret != -1 && S_ISDIR(stat_t.st_mode))
+	{
+	  my_put_error(exec);
+	  my_put_error(": Permission denied.\n");
+	  exit(1);
+	}
+      else
+	execve((const char*)exec, opts, env);
+    }
   else
     aff_error(exec);
 }
@@ -43,6 +56,10 @@ int	where_exec(char *exec)
 void	get_status(int status, t_env *ev)
 {
   if (WTERMSIG(status) == SIGSEGV)
-    my_putstr("Segmentation Fault\n");
-  ev->val_exit = WEXITSTATUS(status);
+    {
+      my_putstr("Segmentation Fault\n");
+      ev->val_exit = 139;
+    }
+  else
+    ev->val_exit = WEXITSTATUS(status);
 }

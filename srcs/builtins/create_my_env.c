@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Jan 21 22:07:49 2016 Paul Wery
-** Last update Fri Apr  8 21:20:24 2016 Paul Wery
+** Last update Wed Jun  1 02:59:42 2016 Paul Wery
 */
 
 #include <unistd.h>
@@ -63,28 +63,26 @@ char	*regroup_str(char *one, char *two, int state)
   return (result);
 }
 
-char	**create_my_env(char **str, int n, int i)
+char	**create_my_env(char **str, int n, int i, t_env *ev)
 {
-  char	**env;
-
   if (nb_env(str) != 0)
     {
-      if ((env = malloc((nb_env(str) + 1) * sizeof(char *))) == NULL
-	  || build_env(str, env, 0) == 1)
+      if ((ev->env = malloc((nb_env(str) + 1) * sizeof(char *))) == NULL
+	  || build_env(str, ev->env, 0) == 1)
 	return (NULL);
       while (str[i] != NULL)
 	{
 	  n = 0;
 	  while (str[i][n] != '\0')
 	    {
-	      env[i][n] = str[i][n];
+	      ev->env[i][n] = str[i][n];
 	      n += 1;
 	    }
 	  i += 1;
 	}
-      env[i] = NULL;
+      ev->env[i] = NULL;
     }
-  if ((env = final_env(str, env)) == NULL)
+  if ((ev->env = final_env(str, ev)) == NULL)
     return (NULL);
-  return (env);
+  return (ev->env);
 }

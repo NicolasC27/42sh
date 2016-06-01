@@ -5,7 +5,7 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sat Apr  2 00:37:51 2016 Paul Wery
-## Last update Tue May 31 17:14:24 2016 Paul Wery
+## Last update Tue May 31 18:39:42 2016 Paul Wery
 ##
 
 NAME    =	42sh
@@ -28,6 +28,7 @@ SRCS    =	srcs/main.c \
 		srcs/red_left.c \
 		srcs/and_or.c \
 		srcs/echo.c \
+		srcs/pair.c \
 		srcs/echo_next.c \
 		srcs/exec/get_next_line.c \
 		srcs/exec/exec_line.c \

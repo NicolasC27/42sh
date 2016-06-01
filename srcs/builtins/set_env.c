@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri Jan 22 18:33:53 2016 Paul Wery
-** Last update Sat Apr  2 00:46:20 2016 Paul Wery
+** Last update Wed Jun  1 02:51:24 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -105,7 +105,7 @@ char	**realloc_env(char **env, int size, int n, char **opts)
   return (cop);
 }
 
-char	**set_env(char *exec, char **opts, char **env)
+char	**set_env(char *exec, char **opts, t_env *ev)
 {
   int	n;
   int	size;
@@ -113,22 +113,23 @@ char	**set_env(char *exec, char **opts, char **env)
   size = 0;
   while (opts[size] != NULL)
     size += 1;
-  if (comp_builtins(exec, "setenv") == 1 && (size == 3 || size == 2))
+  if (comp_builtins(exec, "setenv") == 1 && (size == 3 || size == 2)
+      && valid_name(opts[1], ev) == 0)
     {
-      if ((n = find_set_unset(env, opts[1])) == -1)
+      if ((n = find_set_unset(ev->env, opts[1])) == -1)
         return (NULL);
-      if (env[n] == NULL)
+      if (ev->env[n] == NULL)
 	{
 	  if (opts[2] != NULL)
-	    if ((env = realloc_env(env, n + 2, 0, opts)) == NULL)
+	    if ((ev->env = realloc_env(ev->env, n + 2, 0, opts)) == NULL)
 	      return (NULL);
 	  if (opts[2] == NULL)
-	    if ((env = realloc_env2(env, n + 2, 0, opts)) == NULL)
+	    if ((ev->env = realloc_env2(ev->env, n + 2, 0, opts)) == NULL)
 	      return (NULL);
 	}
       else
-	if ((env = realloc_part_env(env, opts, n, 0)) == NULL)
+	if ((ev->env = realloc_part_env(ev->env, opts, n, 0)) == NULL)
 	  return (NULL);
     }
-  return (env);
+  return (ev->env);
 }
