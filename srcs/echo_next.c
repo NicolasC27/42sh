@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Mon May 30 21:31:09 2016 Paul Wery
-** Last update Tue May 31 00:00:00 2016 Paul Wery
+** Last update Wed Jun  1 23:18:10 2016 Paul Wery
 */
 
 #include <unistd.h>
@@ -38,10 +38,10 @@ int	new_n(int new_line, char *echo)
   int	n;
 
   n = 0;
+  while (echo[n] != '\0' && (echo[n] == ' ' || echo[n] == '\t'))
+    echo[n++] = '\0';
   if (new_line == 1)
     {
-      while (echo[n] != '\0' && (echo[n] == ' ' || echo[n] == '\t'))
-	echo[n++] = '\0';
       while (echo[n] != '\0' && echo[n] != ' ' && echo[n] != '\t')
 	echo[n++] = '\0';
       while (echo[n] != '\0' && (echo[n] == ' ' || echo[n] == '\t'))

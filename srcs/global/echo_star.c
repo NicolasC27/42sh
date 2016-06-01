@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Jun  1 04:06:44 2016 Paul Wery
-** Last update Wed Jun  1 22:52:18 2016 Paul Wery
+** Last update Wed Jun  1 23:25:04 2016 Paul Wery
 */
 
 #include <glob.h>
@@ -25,6 +25,9 @@ char	*get_ext_d(char *buffer, int start, int end)
   while (buffer[start] != '*' && buffer[start] != '\0')
     start += 1;
   start += 1;
+  end = start;
+  while (buffer[end] != '\0' && buffer[end] != ' ' && buffer[end] != '\t')
+    end += 1;
   if ((ext = malloc(end - start + 1)) == NULL)
     return (NULL);
   while (start < end)
