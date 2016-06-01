@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri May 27 15:30:57 2016 Paul Wery
-** Last update Wed Jun  1 23:15:48 2016 Paul Wery
+** Last update Wed Jun  1 23:46:30 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -28,6 +28,8 @@ static int	check_opts(char *opt, char *ref)
   int		n;
 
   n = 0;
+  if (opt == NULL)
+    return (0);
   while (opt[n] == ref[n] && opt[n] != '\0' && ref[n] != '\0')
     n += 1;
   if ((opt[n] == ' ' || opt[n] == '\t' || opt[n] == '\0')
