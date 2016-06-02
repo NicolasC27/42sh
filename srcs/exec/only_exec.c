@@ -5,9 +5,10 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Jan 21 11:55:15 2016 Paul Wery
-** Last update Wed Jun  1 03:43:26 2016 Paul Wery
+** Last update Thu Jun  2 01:03:37 2016 Paul Wery
 */
 
+#include <errno.h>
 #include <signal.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -30,7 +31,8 @@ void		path_exec(char *exec, char **opts, char **env)
 	  exit(1);
 	}
       else
-	execve((const char*)exec, opts, env);
+	if (execve((const char*)exec, opts, env) == -1)
+	  aff_error(exec);
     }
   else
     aff_error(exec);
@@ -57,8 +59,13 @@ void	get_status(int status, t_env *ev)
 {
   if (WTERMSIG(status) == SIGSEGV)
     {
-      my_putstr("Segmentation Fault\n");
+      my_put_error("Segmentation Fault\n");
       ev->val_exit = 139;
+    }
+  else if (WTERMSIG(status) == SIGFPE)
+    {
+      my_put_error("Floating exception\n");
+      ev->val_exit = 136;
     }
   else
     ev->val_exit = WEXITSTATUS(status);

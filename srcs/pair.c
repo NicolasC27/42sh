@@ -5,10 +5,20 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue May 31 18:27:11 2016 Paul Wery
-** Last update Tue May 31 18:40:58 2016 Paul Wery
+** Last update Thu Jun  2 01:08:14 2016 Paul Wery
 */
 
 #include "mins.h"
+
+int	my_strlen(char *str)
+{
+  int	n;
+
+  n = 0;
+  while (str[n] != '\0')
+    n += 1;
+  return (n);
+}
 
 static void    afferror(int state)
 {

@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Apr  2 01:20:11 2016 Paul Wery
-** Last update Fri May 27 01:22:31 2016 Paul Wery
+** Last update Thu Jun  2 01:59:43 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -47,13 +47,14 @@ void	delete_list(t_exec **root)
   *root = NULL;
 }
 
-int		add_elem_prev(t_exec *elem, char **tab)
+int		add_elem_prev(t_exec *elem, char **tab, int error)
 {
   t_exec	*new_elem;
 
   if ((new_elem = malloc(sizeof(*new_elem))) == NULL)
     return (-1);
   new_elem->tab = tab;
+  new_elem->error = error;
   new_elem->next = elem;
   new_elem->prev = elem->prev;
   elem->prev->next = new_elem;

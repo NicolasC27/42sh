@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Jan 17 03:46:45 2016 Paul Wery
-** Last update Wed Jun  1 02:14:01 2016 Paul Wery
+** Last update Thu Jun  2 01:53:22 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -21,8 +21,10 @@ int	nb_opts(char *str, int n, int i)
 	n += 1;
       if (str[n] == '\0')
 	return (i + 1);
-      while (str[n] != '\0' && (inhib(str, n, 0) == 1
-				|| (str[n] != ' ' && str[n] != '\t')))
+      while (str[n] != '\0'
+	     && (inhib(str, n, 0) == 1
+		 || ((str[n] != ' ' || (n > 0 && str[n - 1] == '\\'))
+		     && str[n] != '\t')))
 	n += 1;
       i += 1;
     }
@@ -32,8 +34,10 @@ int	nb_opts(char *str, int n, int i)
 int	ret_curs(int n, char *str)
 {
   inhib(str, 0, 1);
-  while (str[n] != '\0' && (inhib(str, n, 0) == 1
-			    || (str[n] != ' ' && str[n] != '\t')))
+  while (str[n] != '\0'
+	 && (inhib(str, n, 0) == 1
+	     || ((str[n] != ' ' || (n > 0 && str[n - 1] == '\\'))
+		 && str[n] != '\t')))
     n += 1;
   return (n);
 }
@@ -52,7 +56,7 @@ char	*build_opts(char *str, int n)
   not_inhib(str, 0, 1);
   while (size < ret_curs(n, str))
     {
-      if ((not_inhib(str, size, 0) == 0
+      if ((not_inhib(str, size, 0) == 0 && str[size] != '\\'
 	   && str[size] != '"' && str[size] != '\'')
 	  || (not_inhib(str, size, 2) == 1 && str[size] != '"')
 	  || (not_inhib(str, size, 2) == 2 && str[size] != '\''))

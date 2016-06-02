@@ -5,23 +5,13 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan 19 00:28:24 2016 Paul Wery
-** Last update Wed Jun  1 02:51:07 2016 Paul Wery
+** Last update Thu Jun  2 01:10:46 2016 Paul Wery
 */
 
 #include <sys/wait.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include "mins.h"
-
-int	my_strlen(char *str)
-{
-  int	n;
-
-  n = 0;
-  while (str[n] != '\0')
-    n += 1;
-  return (n);
-}
 
 int	comp_words(char *word1, char *word2)
 {
@@ -53,6 +43,17 @@ int	find_path(char **env)
   return (n);
 }
 
+void	cond_next(int ret, char *exec, char **opts, t_env *ev)
+{
+  if (ret == -1 && access(exec, F_OK) != -1)
+    {
+      if (execve((const char*)exec, opts, ev->env) == -1)
+	aff_error(exec);
+    }
+  else
+    aff_error(exec);
+}
+
 int	find_exec(char *exec, char **opts, t_env *ev, int ret)
 {
   char	*path;
@@ -66,19 +67,19 @@ int	find_exec(char *exec, char **opts, t_env *ev, int ret)
       if ((path = get_path(n, i, ev->env, 0)) == NULL
 	  || (path = final_path(path, exec)) == NULL)
 	return (-1);
-      ret = access(path, F_OK);
-      if (ret == -1)
+      if ((ret = access(path, F_OK)) == -1)
 	free(path);
       i += 1;
     }
   if (nb_path(n, ev->env) == 0 && (path = build_path("./", exec)) == NULL)
     return (-1);
   if (ret != -1 || (nb_path(n, ev->env) == 0 && access(path, F_OK) != -1))
-    execve((const char*)path, opts, ev->env);
-  else if (ret == -1 && access(exec, F_OK) != -1)
-    execve((const char*)exec, opts, ev->env);
+    {
+      if (execve((const char*)path, opts, ev->env) == -1)
+	aff_error(exec);
+    }
   else
-    aff_error(exec);
+    cond_next(ret, exec, opts, ev);
   return (0);
 }
 

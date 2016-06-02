@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Jun  1 04:06:44 2016 Paul Wery
-** Last update Wed Jun  1 23:25:04 2016 Paul Wery
+** Last update Thu Jun  2 02:00:44 2016 Paul Wery
 */
 
 #include <glob.h>
@@ -114,7 +114,7 @@ char	*create_replace(DIR *directory, char *ext, t_dir *file, int size)
   return (replace);
 }
 
-char		*echo_star(char *buffer, int start, int end)
+char		*echo_star(char *buffer, int *error)
 {
   DIR		*directory;
   char		*path;
@@ -123,14 +123,14 @@ char		*echo_star(char *buffer, int start, int end)
 
   while (valid_star(buffer) == 1)
     {
-      if ((path = get_path_d(buffer, start)) == NULL
-	  || (ext = get_ext_d(buffer, start, end)) == NULL)
+      if ((path = get_path_d(buffer, 0)) == NULL
+	  || (ext = get_ext_d(buffer, 0, 0)) == NULL)
 	return (NULL);
       if ((path[0] == '\0' && (directory = opendir("./")) == NULL)
 	  || (path[0] != '\0' && (directory = opendir(path)) == NULL))
 	return (buffer);
       if ((replace = create_replace(directory, ext, NULL, 1)) == NULL
-	  || (buffer = replace_seg(buffer, replace)) == NULL)
+	  || (buffer = replace_seg(buffer, replace, error)) == NULL)
 	return (NULL);
       free(path);
       free(ext);

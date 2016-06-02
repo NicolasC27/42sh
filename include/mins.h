@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan  5 01:26:12 2016 paul wery
-** Last update Wed Jun  1 22:34:44 2016 Paul Wery
+** Last update Thu Jun  2 02:11:33 2016 Paul Wery
 */
 
 #ifndef MINS
@@ -37,6 +37,7 @@ typedef struct	s_line
 typedef struct	s_exec
 {
   char		**tab;
+  int		error;
   struct s_exec	*next;
   struct s_exec	*prev;
 }		t_exec;
@@ -107,7 +108,7 @@ int	my_env(t_env *ev, char **opts, char *exec);
 void	get_status(int status, t_env *ev);
 
 t_exec	*create_list(void);
-int	add_elem_prev(t_exec *elem, char **tab);
+int	add_elem_prev(t_exec *elem, char **tab, int error);
 int	add_elem_pipe(t_exec *elem, char **tab);
 void	delete_list(t_exec **root);
 
@@ -134,8 +135,9 @@ int	not_inhib(char *buffer, int n, int state);
 void	aff_cd_error(char *exec, t_env *ev);
 int	valid_name(char *name, t_env *ev);
 void	aff_input_error(char *exec, t_env *ev);
-char	*echo_star(char *buffer, int start, int end);
-char	*replace_seg(char *buffer, char *replace);
+char	*echo_star(char *buffer, int *error);
+char	*replace_seg(char *buffer, char *replace, int *error);
 int	valid_star(char *buffer);
+int	notm(t_exec *it, t_env *ev);
 
 #endif /* !MINS */

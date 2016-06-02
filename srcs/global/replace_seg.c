@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Jun  1 22:09:07 2016 Paul Wery
-** Last update Wed Jun  1 23:26:25 2016 Paul Wery
+** Last update Thu Jun  2 02:03:03 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -68,7 +68,7 @@ int	size_result(char *buffer, char *replace)
   return (my_strlen(buffer) - (end - start) + my_strlen(replace));
 }
 
-char	*replace_seg(char *buffer, char *replace)
+char	*replace_seg(char *buffer, char *replace, int *error)
 {
   char	*result;
   int	n;
@@ -76,6 +76,8 @@ char	*replace_seg(char *buffer, char *replace)
 
   n = 0;
   i = 0;
+  if (replace[0] == '\0')
+    *error = -1;
   if ((result = malloc(size_result(buffer, replace) + 1)) == NULL)
     return (NULL);
   while (n < start_elem(buffer))
