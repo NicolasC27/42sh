@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Jan 21 18:44:21 2016 Paul Wery
-** Last update Wed Jun  1 01:31:05 2016 Paul Wery
+** Last update Fri Jun  3 00:02:34 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -61,6 +61,8 @@ void	my_exit(t_env *ev, char **opts)
 {
   int	status;
 
+  if (ev->state_p == 1)
+    return ;
   if (comp_builtins(opts[0], "exit") == 0)
     return ;
   if ((opts[1] != NULL && opts[2] != NULL)

@@ -5,12 +5,12 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed May 25 19:22:23 2016 Paul Wery
-** Last update Thu Jun  2 12:18:27 2016 Paul Wery
+** Last update Fri Jun  3 00:27:18 2016 Paul Wery
 */
 
 #include <unistd.h>
 #include "mins.h"
-#include <stdio.h>
+
 int	elem_redirection(char *elem, char *ref)
 {
   int	n;
@@ -105,21 +105,21 @@ int		use_pipe(t_exec *list, t_exec *it, t_env *ev, int num)
   return (0);
 }
 
-char		**exec_list(t_exec *list, t_env *ev)
+char		**exec_list(t_exec *list, t_env *ev, int in, int out)
 {
   t_exec	*it;
-  int		in;
-  int		out;
+  int		op;
 
   it = list->next;
   while (valid_command(list) == 0 && it != list)
     {
-      if (open_files(list, it, 0, 0) == -1
-	  || use_pipe(list, it->next, ev, 0) == -1
-	  || (in = change_input(list, it->next, 0, ev)) == -1
-	  || (out = change_output(list, it->next, ev->stdout, 0)) == -1)
+      if ((op = open_files(list, it, 0, ev)) == -1
+	  || (op == 0 && use_pipe(list, it->next, ev, 0) == -1)
+	  || (op == 0 && (in = change_input(list, it->next, 0, ev)) == -1)
+	  || (op == 0 && (out = change_output(list, it->next, ev->stdout, ev)) == -1))
 	return (NULL);
-      if (in == -2 || out == -2 || and_or(ev, it) == 1 || notm(it, ev) == 1)
+      if (op == -2 || in == -2 || out == -2
+	  || and_or(ev, it) == 1 || notm(it, ev) == 1)
 	  it = next_command(list, it);
       else if (elem_redirection(it->tab[0], "<<,>>,||,&&,<,>,|,&,;") == 0)
 	{

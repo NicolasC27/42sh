@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan  5 01:26:12 2016 paul wery
-** Last update Thu Jun  2 02:11:33 2016 Paul Wery
+** Last update Thu Jun  2 23:47:46 2016 Paul Wery
 */
 
 #ifndef MINS
@@ -115,12 +115,12 @@ void	delete_list(t_exec **root);
 char	**pars_elems(char *buffer);
 int	full_list(t_exec *list, char **pars);
 char	**get_opts(char *str, int n, int z);
-char	**exec_list(t_exec *list, t_env *ev);
-int	change_output(t_exec *list, t_exec *elem, int stdout, int num);
+char	**exec_list(t_exec *list, t_env *ev, int in, int out);
+int	change_output(t_exec *list, t_exec *elem, int stdout, t_env *ev);
 int	change_input(t_exec *list, t_exec *elem, int num, t_env *ev);
 int	elem_redirection(char *elem, char *ref);
 int	default_io(int stdin, int stdout, int state);
-int	open_files(t_exec *list, t_exec *it, int num, int fd);
+int	open_files(t_exec *list, t_exec *it, int num, t_env *ev);
 int	wait_lef(t_exec *list, t_exec *it, int num);
 int	update_std(t_env *ev, int state);
 int	valid_command(t_exec *list);
@@ -134,10 +134,10 @@ int	inhib(char *buffer, int n, int state);
 int	not_inhib(char *buffer, int n, int state);
 void	aff_cd_error(char *exec, t_env *ev);
 int	valid_name(char *name, t_env *ev);
-void	aff_input_error(char *exec, t_env *ev);
 char	*echo_star(char *buffer, int *error);
 char	*replace_seg(char *buffer, char *replace, int *error);
 int	valid_star(char *buffer);
 int	notm(t_exec *it, t_env *ev);
+void	files_error(char *file, t_env *ev, int state);
 
 #endif /* !MINS */
