@@ -5,12 +5,12 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed May 25 19:22:23 2016 Paul Wery
-** Last update Thu Jun  2 02:08:35 2016 Paul Wery
+** Last update Thu Jun  2 12:18:27 2016 Paul Wery
 */
 
 #include <unistd.h>
 #include "mins.h"
-
+#include <stdio.h>
 int	elem_redirection(char *elem, char *ref)
 {
   int	n;

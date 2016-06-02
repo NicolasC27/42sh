@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Jan 17 03:46:45 2016 Paul Wery
-** Last update Thu Jun  2 01:53:22 2016 Paul Wery
+** Last update Thu Jun  2 02:38:44 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -24,7 +24,7 @@ int	nb_opts(char *str, int n, int i)
       while (str[n] != '\0'
 	     && (inhib(str, n, 0) == 1
 		 || ((str[n] != ' ' || (n > 0 && str[n - 1] == '\\'))
-		     && str[n] != '\t')))
+		     && (str[n] != '\t' || (n > 0 && str[n - 1] == '\\')))))
 	n += 1;
       i += 1;
     }
@@ -37,7 +37,7 @@ int	ret_curs(int n, char *str)
   while (str[n] != '\0'
 	 && (inhib(str, n, 0) == 1
 	     || ((str[n] != ' ' || (n > 0 && str[n - 1] == '\\'))
-		 && str[n] != '\t')))
+		 && (str[n] != '\t' || (n > 0 && str[n - 1] == '\\')))))
     n += 1;
   return (n);
 }

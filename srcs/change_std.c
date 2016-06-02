@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed May 25 20:44:03 2016 Paul Wery
-** Last update Wed Jun  1 04:01:48 2016 Paul Wery
+** Last update Thu Jun  2 12:20:47 2016 Paul Wery
 */
 
 #include <errno.h>
@@ -14,7 +14,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include "mins.h"
-
+#include <stdio.h>
 int	change_output(t_exec *list, t_exec *elem, int stdout, int num)
 {
   if (elem != list)
@@ -23,7 +23,7 @@ int	change_output(t_exec *list, t_exec *elem, int stdout, int num)
     {
       close(1);
       if (dup(stdout) == -1)
-        return (-1);
+	return (-1);
       return (1);
     }
   else if (num == 2 || num == 6)
@@ -35,8 +35,9 @@ int	change_output(t_exec *list, t_exec *elem, int stdout, int num)
         }
       close(1);
       if ((num == 2 && (open(elem->next->tab[0], O_APPEND | O_WRONLY)) == -1)
-          || (num == 6 && ((open(elem->next->tab[0], O_WRONLY | O_TRUNC))) == -1))
-        return (-1);
+          || (num == 6 && ((open(elem->next->tab[0],
+				 O_WRONLY | O_TRUNC))) == -1))
+        return (-2);
     }
   return (0);
 }
@@ -64,7 +65,7 @@ int	change_input(t_exec *list, t_exec *elem, int num, t_env *ev)
 				 "<<,>>,||,&&,<,>,|,&,;");
 	  if ((num == 2 || num == 6)
 	      && change_output(list, elem->next->next, 1, 0) == -1)
-	    return (-1);
+	    return (-2);
 	}
     }
   return (0);
@@ -105,11 +106,11 @@ int		open_files(t_exec *list, t_exec *it, int num, int fd)
 	  if (num == 2 && ((fd = open(elem->next->tab[0], O_CREAT,
 				      S_IRUSR | S_IWUSR)) == -1
 			   || close(fd) == -1))
-	    return (-1);
+	    return (-2);
 	  if (num == 6 && ((fd = open(elem->next->tab[0], O_CREAT | O_TRUNC,
 				      S_IRUSR | S_IWUSR)) == -1
 			   || close(fd) == -1))
-	    return (-1);
+	    return (-2);
 	}
       elem = elem->next;
     }
