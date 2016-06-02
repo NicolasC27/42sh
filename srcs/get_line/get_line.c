@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:27:38 2016 Nicolas Chevalier
-** Last update Thu Jun  2 14:46:56 2016 Nicolas Chevalier
+** Last update Thu Jun  2 16:38:02 2016 Nicolas Chevalier
 */
 
 #include <sys/ioctl.h>
@@ -105,8 +105,8 @@ char		*get_line(void)
       my_putstr(buff);
       if (buff[0] == '\t')
 	{
-	  my_putstr("\t");
-	  /* return ("\t"); */
+	  my_putstr("\n");
+	  return (str);
 	}
       str = realloc(str, i + 2);
       str[i] = buff[0];
