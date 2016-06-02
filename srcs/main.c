@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Jan 16 20:40:01 2016 Paul Wery
-** Last update Tue May 31 12:35:58 2016 Nicolas Chevalier
+** Last update Thu Jun  2 00:51:26 2016 Nicolas Chevalier
 */
 
 #include <signal.h>
@@ -90,7 +90,7 @@ int	main(int ac UNUSED, char **av UNUSED, char **environ)
     return (0);
   while (1)
     {
-      my_putstr("prompt$>");
+      /* my_putstr("prompt$>"); */
       if (signal(SIGINT, SIG_IGN) == SIG_ERR)
 	return (ev.val_exit);
       if (buffer != NULL)
