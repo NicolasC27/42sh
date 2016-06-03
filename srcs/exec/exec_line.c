@@ -5,23 +5,13 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan 19 00:28:24 2016 Paul Wery
-** Last update Sun May 29 02:05:19 2016 Paul Wery
+** Last update Thu Jun  2 01:10:46 2016 Paul Wery
 */
 
 #include <sys/wait.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include "mins.h"
-
-int	my_strlen(char *str)
-{
-  int	n;
-
-  n = 0;
-  while (str[n] != '\0')
-    n += 1;
-  return (n);
-}
 
 int	comp_words(char *word1, char *word2)
 {
@@ -53,6 +43,17 @@ int	find_path(char **env)
   return (n);
 }
 
+void	cond_next(int ret, char *exec, char **opts, t_env *ev)
+{
+  if (ret == -1 && access(exec, F_OK) != -1)
+    {
+      if (execve((const char*)exec, opts, ev->env) == -1)
+	aff_error(exec);
+    }
+  else
+    aff_error(exec);
+}
+
 int	find_exec(char *exec, char **opts, t_env *ev, int ret)
 {
   char	*path;
@@ -66,39 +67,38 @@ int	find_exec(char *exec, char **opts, t_env *ev, int ret)
       if ((path = get_path(n, i, ev->env, 0)) == NULL
 	  || (path = final_path(path, exec)) == NULL)
 	return (-1);
-      ret = access(path, F_OK);
-      if (ret == -1)
+      if ((ret = access(path, F_OK)) == -1)
 	free(path);
       i += 1;
     }
   if (nb_path(n, ev->env) == 0 && (path = build_path("./", exec)) == NULL)
     return (-1);
   if (ret != -1 || (nb_path(n, ev->env) == 0 && access(path, F_OK) != -1))
-    execve((const char*)path, opts, ev->env);
-  else if (ret == -1 && access(exec, F_OK) != -1)
-    execve((const char*)exec, opts, ev->env);
+    {
+      if (execve((const char*)path, opts, ev->env) == -1)
+	aff_error(exec);
+    }
   else
-    aff_error(exec);
+    cond_next(ret, exec, opts, ev);
   return (0);
 }
 
-char	**exec_line(char *exec, char **opts, t_env *ev, pid_t my_pid)
+char	**exec_line(char **opts, t_env *ev, pid_t my_pid, int status)
 {
-  int	status;
-
-  if ((ev->env = set_env(exec, opts, ev->env)) == NULL ||
-      (ev->env = unset_env(exec, opts, ev->env, 1)) == NULL ||
-      (ev->env = swap_env(exec, opts, ev)) == NULL)
+  my_exit(ev, opts);
+  if ((ev->env = set_env(opts[0], opts, ev)) == NULL ||
+      (ev->env = unset_env(opts[0], opts, ev->env, 1)) == NULL ||
+      (ev->env = swap_env(opts[0], opts, ev)) == NULL)
     return (NULL);
   if ((my_pid = fork()) == 0)
     {
       if (update_std(ev, 1) == -1)
 	return (NULL);
-      if (my_env(ev->env, opts, exec) == 0 && my_builtins(exec) == 0)
+      if (my_env(ev, opts, opts[0]) == 0 && my_builtins(opts[0]) == 0)
 	{
-	  if (where_exec(exec) == 1)
-	    path_exec(exec, opts, ev->env);
-	  if (where_exec(exec) == 0 && find_exec(exec, opts, ev, -1) == -1)
+	  if (where_exec(opts[0]) == 1)
+	    path_exec(opts[0], opts, ev->env);
+	  if (where_exec(opts[0]) == 0 && find_exec(opts[0], opts, ev, -1) == -1)
 	    return (NULL);
 	}
     }

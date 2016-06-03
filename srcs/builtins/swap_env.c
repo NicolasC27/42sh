@@ -5,7 +5,11 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Mar 17 00:54:45 2016 Paul Wery
+<<<<<<< HEAD
 ** Last update Tue May 31 12:41:33 2016 Nicolas Chevalier
+=======
+** Last update Wed Jun  1 02:55:03 2016 Paul Wery
+>>>>>>> master
 */
 
 #include <stdlib.h>
@@ -62,9 +66,7 @@ char	**moove_directory(char **opts, t_env *ev)
     return (NULL);
   if (chdir((const char*)opts[1]) == -1)
     {
-      ev->val_exit = 1;
-      my_put_error(opts[1]);
-      my_put_error(": Permission non accordée.\n");
+      aff_cd_error(opts[1], ev);
       return (ev->env);
     }
   if (ev->oldpwd != NULL)
@@ -72,7 +74,7 @@ char	**moove_directory(char **opts, t_env *ev)
   if ((ev->oldpwd = get_elem_env(ev->env, "PWD", 0, 0)) == NULL ||
       (pwd = ini_elem()) == NULL)
     return (NULL);
-  if ((ev->env = swap_elems(pwd, ev->env)))
+  if ((ev->env = swap_elems(pwd, ev)))
     free(pwd);
   return (ev->env);
 }

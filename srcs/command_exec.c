@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed May 25 19:22:23 2016 Paul Wery
-** Last update Sun May 29 18:36:17 2016 Paul Wery
+** Last update Fri Jun  3 05:04:03 2016 Paul Wery
 */
 
 #include <unistd.h>
@@ -41,8 +41,15 @@ int	elem_redirection(char *elem, char *ref)
 
 t_exec	*next_command(t_exec *list, t_exec *it)
 {
+  int	num;
+
+  num = elem_redirection(it->tab[0], "<<,>>,||,&&,<,>,|,&,;");
+  if (num == 3 || num == 4)
+    it = it->next;
   while (it != list
-	 && elem_redirection(it->tab[0], "<<,>>,||,&&,<,>,|,&,;") != 9)
+	 && elem_redirection(it->tab[0], "<<,>>,||,&&,<,>,|,&,;") != 9
+	 && elem_redirection(it->tab[0], "<<,>>,||,&&,<,>,|,&,;") != 3
+	 && elem_redirection(it->tab[0], "<<,>>,||,&&,<,>,|,&,;") != 4)
     it = it->next;
   return (it);
 }
@@ -56,7 +63,7 @@ t_exec	*next_exec(t_exec *it, t_exec *list, t_env *ev)
   if (it == list)
     return (it);
   num = elem_redirection(it->tab[0], "<<,>>,||,&&,<,>,|,&,;");
-  if (num == 3 || num == 4 || num == 7 || num == 8)
+  if (num == 7 || num == 8)
     return (it->next);
   else if (num == 1 || num == 2 || num == 5 || num == 6)
     {
@@ -98,26 +105,26 @@ int		use_pipe(t_exec *list, t_exec *it, t_env *ev, int num)
   return (0);
 }
 
-char		**exec_list(t_exec *list, t_env *ev)
+char		**exec_list(t_exec *list, t_env *ev, int in, int out)
 {
   t_exec	*it;
-  int		errin;
-  int		errout;
+  int		op;
 
   it = list->next;
   while (valid_command(list) == 0 && it != list)
     {
-      if (open_files(list, it, 0, 0) == -1
-	  || use_pipe(list, it->next, ev, 0) == -1
-	  || (errin = change_input(list, it->next, 0)) == -1
-	  || (errout = change_output(list, it->next, ev->stdout, 0)) == -1)
+      if ((op = open_files(list, it, 0, ev)) == -1
+	  || (op == 0 && use_pipe(list, it->next, ev, 0) == -1)
+	  || (op == 0 && (in = change_input(list, it->next, 0, ev)) == -1)
+	  || (op == 0 && (out = change_output(list, it->next, ev->stdout, ev)) == -1))
 	return (NULL);
-      if (errin == -2 || errout == -2)
+      if (op == -2 || in == -2 || out == -2
+	  || and_or(ev, it) == 1 || notm(it, ev, 0, 0) == 1)
 	  it = next_command(list, it);
       else if (elem_redirection(it->tab[0], "<<,>>,||,&&,<,>,|,&,;") == 0)
 	{
 	  ev->val_exit = 0;
-	  if ((ev->env = exec_line(it->tab[0], it->tab, ev, 1)) == NULL
+	  if ((ev->env = exec_line(it->tab, ev, 1, 0)) == NULL
 	      || (it != list && (it = next_exec(it->next, list, ev)) == NULL))
 	    return (NULL);
 	}

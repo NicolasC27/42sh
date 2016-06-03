@@ -5,7 +5,11 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Apr  2 01:01:53 2016 Paul Wery
+<<<<<<< HEAD
 ** Last update Tue May 31 12:41:47 2016 Nicolas Chevalier
+=======
+** Last update Wed Jun  1 02:54:44 2016 Paul Wery
+>>>>>>> master
 */
 
 #include <stdlib.h>
@@ -21,14 +25,14 @@ char	**moove_old_directory(t_env *ev)
     {
       ev->val_exit = 1;
       my_put_error(ev->oldpwd);
-      my_put_error(": Permission non accordée.\n");
+      my_put_error(": Permission denied.\n");
       return (ev->env);
     }
   free(ev->oldpwd);
   if ((ev->oldpwd = get_elem_env(ev->env, "PWD", 0, 0)) == NULL ||
       (pwd = ini_elem()) == NULL)
     return (NULL);
-  if ((ev->env = swap_elems(pwd, ev->env)) == NULL)
+  if ((ev->env = swap_elems(pwd, ev)) == NULL)
     return (NULL);
   free(pwd);
   return (ev->env);
@@ -48,12 +52,12 @@ char	**moove_home(t_env *ev)
     {
       ev->val_exit = 1;
       my_put_error(pwd);
-      my_put_error(": Permission non accordée.\n");
+      my_put_error(": Permission denied.\n");
       return (ev->env);
     }
   if ((ev->oldpwd = get_elem_env(ev->env, "PWD", 0, 0)) == NULL)
     return (NULL);
-  if ((ev->env = swap_elems(pwd, ev->env)) == NULL)
+  if ((ev->env = swap_elems(pwd, ev)) == NULL)
     return (NULL);
   free(pwd);
   return (ev->env);

@@ -5,7 +5,11 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Jan 16 20:40:01 2016 Paul Wery
+<<<<<<< HEAD
 ** Last update Thu Jun  2 18:49:04 2016 Nicolas Chevalier
+=======
+** Last update Fri Jun  3 05:04:23 2016 Paul Wery
+>>>>>>> master
 */
 
 #include <signal.h>
@@ -27,22 +31,22 @@ void	free_opts(char **opts)
 
 char		**next_step(char *buffer, t_env *ev)
 {
-  char		**pars;
-  t_exec	*list;
-  int		n;
-
-  if ((n = equal_w_space("echo", buffer)) != 0)
-    echo_built(buffer, n);
+  ev->free.buffer = buffer;
+  if (pair(buffer, 0, 0, 0) == -1)
+    {
+      ev->val_exit = 1;
+      return (ev->env);
+    }
   else
     {
-      if ((pars = pars_elems(buffer)) == NULL
-	  || (list = create_list()) == NULL
-	  || full_list(list, pars) == -1
-	  || (ev->env = exec_list(list, ev)) == NULL
+      if ((ev->free.pars = pars_elems(buffer)) == NULL
+	  || (ev->free.list = create_list()) == NULL
+	  || full_list(ev->free.list, ev->free.pars, ev) == -1
+	  || (ev->env = exec_list(ev->free.list, ev, 0, 0)) == NULL
 	  || default_io(ev->stdin, ev->stdout, 3) == -1)
 	return (NULL);
-      free_opts(pars);
-      delete_list(&list);
+      free_opts(ev->free.pars);
+      delete_list(&ev->free.list);
     }
   return (ev->env);
 }
@@ -86,11 +90,17 @@ int	main(int ac UNUSED, char **av UNUSED, char **environ)
   char	*buffer;
 
   buffer = NULL;
-  if (ini_env(&ev) == -1 || (ev.env = create_my_env(environ, 0, 0)) == NULL)
+  if (ini_env(&ev) == -1
+      || (ev.env = create_my_env(environ, 0, 0, &ev)) == NULL)
     return (0);
   while (1)
     {
+<<<<<<< HEAD
       /* my_putstr("prompt$>"); */
+=======
+      if (isatty(0) == 1)
+	my_putstr("prompt$>");
+>>>>>>> master
       if (signal(SIGINT, SIG_IGN) == SIG_ERR)
 	return (ev.val_exit);
       if (buffer != NULL)
@@ -99,7 +109,6 @@ int	main(int ac UNUSED, char **av UNUSED, char **environ)
 	return (ev.val_exit);
       if (buffer[0] != '\0')
 	{
-	  my_exit(buffer, "exit", buffer, &ev);
 	  if (valid_line(buffer) == 0
 	      && (ev.env = next_step(buffer, &ev)) == NULL)
 	    return (ev.val_exit);

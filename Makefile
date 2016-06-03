@@ -5,7 +5,11 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sat Apr  2 00:37:51 2016 Paul Wery
+<<<<<<< HEAD
 ## Last update Fri Jun  3 21:40:21 2016 Nicolas Chevalier
+=======
+## Last update Fri Jun  3 04:31:27 2016 Paul Wery
+>>>>>>> master
 ##
 
 NAME    =	42sh
@@ -26,8 +30,13 @@ SRCS    =	srcs/main.c \
 		srcs/strings_files.c \
 		srcs/command_exec.c \
 		srcs/change_std.c \
+		srcs/change_std_next.c \
+		srcs/gest_files.c \
 		srcs/red_left.c \
+		srcs/and_or.c \
 		srcs/echo.c \
+		srcs/pair.c \
+		srcs/echo_next.c \
 		srcs/exec/get_next_line.c \
 		srcs/exec/exec_line.c \
 		srcs/exec/make_path.c \
@@ -47,12 +56,20 @@ SRCS    =	srcs/main.c \
 		srcs/builtins/if_empty_path.c \
 		srcs/builtins/final_env.c \
 		srcs/builtins/conv_fonc.c \
+<<<<<<< HEAD
 		srcs/get_line/get_line.c \
 		srcs/get_line/getterm.c \
 		srcs/get_line/my_strncmp.c \
 		srcs/get_line/mode.c \
 		srcs/get_line/keyboard.c \
 		srcs/get_line/init.c
+=======
+		srcs/inhib/inhib_fonc.c \
+		srcs/global/echo_star.c \
+		srcs/global/replace_seg.c \
+		srcs/var_env/replace_var.c \
+		srcs/var_env/replace_seg_v.c \
+>>>>>>> master
 
 $(NAME) :	$(OBJS)
 		$(CC) $(OBJS) -o $(NAME) -lncurses
