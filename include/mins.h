@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan  5 01:26:12 2016 paul wery
-** Last update Fri Jun  3 21:32:50 2016 Paul Wery
+** Last update Sat Jun  4 01:10:59 2016 Paul Wery
 */
 
 #ifndef MINS
@@ -25,6 +25,21 @@ typedef struct dirent t_dir;
 typedef struct	stat t_stat;
 
 char	*get_next_line(void);
+
+typedef struct	s_limit
+{
+  int		start;
+  int		end;
+}		t_limit;
+
+typedef struct		s_elems
+{
+  char			*path;
+  char			*one;
+  char			*two;
+  char			*ref;
+  struct s_limit	l;
+}			t_elems;
 
 typedef struct	s_glob_error
 {
@@ -147,6 +162,7 @@ char	*echo_star(char *buffer, int *error);
 char	*echo_quest(char *buffer, int *error);
 char	*replace_seg(char *buffer, char *replace, int *error);
 char	*replace_seg_q(char *buffer, char *replace, int *error, int start);
+char	*replace_seg_b(char *buffer, char *replace, int *error, int start);
 int	valid_star(char *buffer);
 int	notm(t_exec *it, t_env *ev, int n, int i);
 void	files_error(char *file, t_env *ev, int state);
@@ -157,7 +173,13 @@ char	*replace_seg_v(char *buffer, char *replace);
 int	end_elem(char *buffer, char c);
 int	start_elem(char *buffer, char c);
 int	match_elem(char *name, char *ref);
+int	match_elem_brak(char *name, char *one, char *two, char *ref);
 int	size_result(char *buffer, char *replace, char c);
 int	glob_two(char *buffer, int start);
+int	glob_three(char *buffer, t_limit *l);
+int	create_replace_q_next(char *path, char *name, int n, char *replace);
+char	*get_elem_path(char *buffer, int start, int end);
+char	*replace_seg_q_next(char *buffer, char *replace, int start);
+char	*echo_bracket(char *buffer, int *error);
 
 #endif /* !MINS */

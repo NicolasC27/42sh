@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri Jun  3 20:52:35 2016 Paul Wery
-** Last update Fri Jun  3 23:17:58 2016 Paul Wery
+** Last update Sat Jun  4 01:28:07 2016 Paul Wery
 */
 
 #include <unistd.h>
@@ -36,8 +36,7 @@ int	notm_next(t_exec *it, t_env *ev, int n)
 
 int	notm(t_exec *it, t_env *ev, int n, int i)
 {
-  if (it->error == -1 || it->error == -3
-      || it->error == -4 || it->error == -7)
+  if (it->error < 0 && it->error != -2)
     {
       if (equal_w_space("echo", it->tab[0]) == 0)
 	my_put_error(it->tab[0]);

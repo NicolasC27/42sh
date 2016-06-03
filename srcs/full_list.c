@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed May 25 17:57:04 2016 Paul Wery
-** Last update Fri Jun  3 21:57:59 2016 Paul Wery
+** Last update Sat Jun  4 01:11:35 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -54,7 +54,8 @@ int		full_list(t_exec *list, char **pars, t_env *ev)
       ini_glob_error(&error);
       if ((pars[n] = echo_star(pars[n], &error.one)) == NULL
 	  || (pars[n] = echo_var(pars[n], &error.two, ev->env)) == NULL
-	  || (pars[n] = echo_quest(pars[n], &error.three)) == NULL)
+	  || (pars[n] = echo_quest(pars[n], &error.three)) == NULL
+	  || (pars[n] = echo_bracket(pars[n], &error.three)) == NULL)
 	return (-1);
       if (equal_w_space("echo", pars[n]) == 0)
 	{
