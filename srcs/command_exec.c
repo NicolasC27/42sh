@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed May 25 19:22:23 2016 Paul Wery
-** Last update Fri Jun  3 00:27:18 2016 Paul Wery
+** Last update Fri Jun  3 05:04:03 2016 Paul Wery
 */
 
 #include <unistd.h>
@@ -119,7 +119,7 @@ char		**exec_list(t_exec *list, t_env *ev, int in, int out)
 	  || (op == 0 && (out = change_output(list, it->next, ev->stdout, ev)) == -1))
 	return (NULL);
       if (op == -2 || in == -2 || out == -2
-	  || and_or(ev, it) == 1 || notm(it, ev) == 1)
+	  || and_or(ev, it) == 1 || notm(it, ev, 0, 0) == 1)
 	  it = next_command(list, it);
       else if (elem_redirection(it->tab[0], "<<,>>,||,&&,<,>,|,&,;") == 0)
 	{

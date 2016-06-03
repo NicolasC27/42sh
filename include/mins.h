@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan  5 01:26:12 2016 paul wery
-** Last update Thu Jun  2 23:47:46 2016 Paul Wery
+** Last update Fri Jun  3 04:58:25 2016 Paul Wery
 */
 
 #ifndef MINS
@@ -54,6 +54,7 @@ typedef struct	s_env
   char		**env;
   char		*oldpwd;
   int		pipe_t[2];
+  int		backquote[2];
   int		state_p;
   int		result;
   int		stdin;
@@ -108,12 +109,12 @@ int	my_env(t_env *ev, char **opts, char *exec);
 void	get_status(int status, t_env *ev);
 
 t_exec	*create_list(void);
-int	add_elem_prev(t_exec *elem, char **tab, int error);
+int	add_elem_prev(t_exec *elem, char **tab, int error, int error_two);
 int	add_elem_pipe(t_exec *elem, char **tab);
 void	delete_list(t_exec **root);
 
 char	**pars_elems(char *buffer);
-int	full_list(t_exec *list, char **pars);
+int	full_list(t_exec *list, char **pars, t_env *ev);
 char	**get_opts(char *str, int n, int z);
 char	**exec_list(t_exec *list, t_env *ev, int in, int out);
 int	change_output(t_exec *list, t_exec *elem, int stdout, t_env *ev);
@@ -137,7 +138,11 @@ int	valid_name(char *name, t_env *ev);
 char	*echo_star(char *buffer, int *error);
 char	*replace_seg(char *buffer, char *replace, int *error);
 int	valid_star(char *buffer);
-int	notm(t_exec *it, t_env *ev);
+int	notm(t_exec *it, t_env *ev, int n, int i);
 void	files_error(char *file, t_env *ev, int state);
+t_exec	*next_command(t_exec *list, t_exec *it);
+int	elem_redirection(char *elem, char *ref);
+char	*echo_var(char *buffer, int *error, char **env);
+char	*replace_seg_v(char *buffer, char *replace);
 
 #endif /* !MINS */

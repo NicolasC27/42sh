@@ -5,10 +5,9 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Jun  1 04:06:44 2016 Paul Wery
-** Last update Thu Jun  2 02:00:44 2016 Paul Wery
+** Last update Fri Jun  3 03:50:40 2016 Paul Wery
 */
 
-#include <glob.h>
 #include <sys/types.h>
 #include <fcntl.h>
 #include <dirent.h>
