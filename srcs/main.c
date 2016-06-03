@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Jan 16 20:40:01 2016 Paul Wery
-** Last update Thu Jun  2 00:51:26 2016 Nicolas Chevalier
+** Last update Thu Jun  2 18:49:04 2016 Nicolas Chevalier
 */
 
 #include <signal.h>
@@ -95,7 +95,7 @@ int	main(int ac UNUSED, char **av UNUSED, char **environ)
 	return (ev.val_exit);
       if (buffer != NULL)
 	free(buffer);
-      if ((buffer = get_line()) == NULL)
+      if ((buffer = get_line(environ)) == NULL)
 	return (ev.val_exit);
       if (buffer[0] != '\0')
 	{

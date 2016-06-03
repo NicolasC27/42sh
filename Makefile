@@ -5,7 +5,7 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sat Apr  2 00:37:51 2016 Paul Wery
-## Last update Tue May 31 16:32:34 2016 Nicolas Chevalier
+## Last update Fri Jun  3 21:40:21 2016 Nicolas Chevalier
 ##
 
 NAME    =	42sh
@@ -47,7 +47,12 @@ SRCS    =	srcs/main.c \
 		srcs/builtins/if_empty_path.c \
 		srcs/builtins/final_env.c \
 		srcs/builtins/conv_fonc.c \
-		srcs/get_line/get_line.c
+		srcs/get_line/get_line.c \
+		srcs/get_line/getterm.c \
+		srcs/get_line/my_strncmp.c \
+		srcs/get_line/mode.c \
+		srcs/get_line/keyboard.c \
+		srcs/get_line/init.c
 
 $(NAME) :	$(OBJS)
 		$(CC) $(OBJS) -o $(NAME) -lncurses
