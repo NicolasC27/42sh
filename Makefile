@@ -5,7 +5,7 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sat Apr  2 00:37:51 2016 Paul Wery
-## Last update Fri Jun  3 04:31:27 2016 Paul Wery
+## Last update Fri Jun  3 21:02:11 2016 Paul Wery
 ##
 
 NAME    =	42sh
@@ -32,6 +32,7 @@ SRCS    =	srcs/main.c \
 		srcs/echo.c \
 		srcs/pair.c \
 		srcs/echo_next.c \
+		srcs/notm.c \
 		srcs/exec/get_next_line.c \
 		srcs/exec/exec_line.c \
 		srcs/exec/make_path.c \
@@ -54,6 +55,8 @@ SRCS    =	srcs/main.c \
 		srcs/inhib/inhib_fonc.c \
 		srcs/global/echo_star.c \
 		srcs/global/replace_seg.c \
+		srcs/global/glob_two/echo_quest.c \
+		srcs/global/glob_two/replace_seg_q.c \
 		srcs/var_env/replace_var.c \
 		srcs/var_env/replace_seg_v.c \
 

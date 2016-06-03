@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Jun  1 04:06:44 2016 Paul Wery
-** Last update Fri Jun  3 03:50:40 2016 Paul Wery
+** Last update Fri Jun  3 19:04:25 2016 Paul Wery
 */
 
 #include <sys/types.h>
@@ -15,13 +15,13 @@
 #include <unistd.h>
 #include "mins.h"
 
-char	*get_ext_d(char *buffer, int start, int end)
+char	*get_ext_d(char *buffer, int start, int end, char c)
 {
   char	*ext;
   int	n;
 
   n = 0;
-  while (buffer[start] != '*' && buffer[start] != '\0')
+  while (buffer[start] != c && buffer[start] != '\0')
     start += 1;
   start += 1;
   end = start;
@@ -35,7 +35,7 @@ char	*get_ext_d(char *buffer, int start, int end)
   return (ext);
 }
 
-char	*get_path_d(char *buffer, int start)
+char	*get_path_d(char *buffer, int start, char c)
 {
   char	*path;
   int	size;
@@ -43,7 +43,7 @@ char	*get_path_d(char *buffer, int start)
 
   n = 0;
   size = 0;
-  while (buffer[size] != '*' && buffer[size] != '\0')
+  while (buffer[size] != c && buffer[size] != '\0')
     size += 1;
   start = size;
   while (start > 0 && buffer[start] != ' ' && buffer[start] != '\t')
@@ -122,8 +122,8 @@ char		*echo_star(char *buffer, int *error)
 
   while (valid_star(buffer) == 1)
     {
-      if ((path = get_path_d(buffer, 0)) == NULL
-	  || (ext = get_ext_d(buffer, 0, 0)) == NULL)
+      if ((path = get_path_d(buffer, 0, '*')) == NULL
+	  || (ext = get_ext_d(buffer, 0, 0, '*')) == NULL)
 	return (NULL);
       if ((path[0] == '\0' && (directory = opendir("./")) == NULL)
 	  || (path[0] != '\0' && (directory = opendir(path)) == NULL))

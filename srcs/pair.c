@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue May 31 18:27:11 2016 Paul Wery
-** Last update Thu Jun  2 01:08:14 2016 Paul Wery
+** Last update Fri Jun  3 23:17:45 2016 Paul Wery
 */
 
 #include "mins.h"
@@ -20,7 +20,7 @@ int	my_strlen(char *str)
   return (n);
 }
 
-static void    afferror(int state)
+static void	afferror(int state)
 {
   if (state < 0)
     {

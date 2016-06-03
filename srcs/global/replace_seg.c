@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Jun  1 22:09:07 2016 Paul Wery
-** Last update Thu Jun  2 02:03:03 2016 Paul Wery
+** Last update Fri Jun  3 19:59:17 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -24,24 +24,24 @@ int	valid_star(char *buffer)
   return (0);
 }
 
-int	end_elem(char *buffer)
+int	end_elem(char *buffer, char c)
 {
   int	end;
 
   end = 0;
-  while (buffer[end] != '*' && buffer[end] != '\0')
+  while (buffer[end] != c && buffer[end] != '\0')
     end += 1;
   while (buffer[end] != ' ' && buffer[end] != '\t' && buffer[end] != '\0')
     end += 1;
   return (end);
 }
 
-int	start_elem(char *buffer)
+int	start_elem(char *buffer, char c)
 {
   int	start;
 
   start = 0;
-  while (buffer[start] != '*' && buffer[start] != '\0')
+  while (buffer[start] != c && buffer[start] != '\0')
     start += 1;
   while (start > 0 && buffer[start] != ' ' && buffer[start] != '\t')
     start -= 1;
@@ -50,13 +50,13 @@ int	start_elem(char *buffer)
   return (start);
 }
 
-int	size_result(char *buffer, char *replace)
+int	size_result(char *buffer, char *replace, char c)
 {
   int	start;
   int	end;
 
   start = 0;
-  while (buffer[start] != '*' && buffer[start] != '\0')
+  while (buffer[start] != c && buffer[start] != '\0')
     start += 1;
   end = start;
   while (buffer[end] != ' ' && buffer[end] != '\t' && buffer[end] != '\0')
@@ -78,15 +78,15 @@ char	*replace_seg(char *buffer, char *replace, int *error)
   i = 0;
   if (replace[0] == '\0')
     *error = -1;
-  if ((result = malloc(size_result(buffer, replace) + 1)) == NULL)
+  if ((result = malloc(size_result(buffer, replace, '*') + 1)) == NULL)
     return (NULL);
-  while (n < start_elem(buffer))
+  while (n < start_elem(buffer, '*'))
     result[n++] = buffer[i++];
   i = 0;
   while (replace[i] != '\0')
     result[n++] = replace[i++];
   i = 0;
-  while (i < end_elem(buffer))
+  while (i < end_elem(buffer, '*'))
     i += 1;
   while (buffer[i] != '\0')
     result[n++] = buffer[i++];
