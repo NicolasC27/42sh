@@ -5,11 +5,12 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Jun  4 04:51:04 2016 Paul Wery
-** Last update Sat Jun  4 05:00:15 2016 Paul Wery
+** Last update Sat Jun  4 05:17:35 2016 Paul Wery
 */
 
 #include <stdlib.h>
 #include <unistd.h>
+#include "mins.h"
 
 int	size_ret(int val)
 {
@@ -26,11 +27,13 @@ int	size_ret(int val)
   return (n);
 }
 
-char	*get_val_ret(int val)
+char	*get_val_ret(int val, char *buffer)
 {
   char	*val_exit;
   int	size;
 
+  if (check_loc(buffer) == 2)
+    val = getpid();
   if ((val_exit = malloc(size_ret(val) + 1)) == NULL)
     return (NULL);
   size = size_ret(val);

@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan  5 01:26:12 2016 paul wery
-** Last update Sat Jun  4 04:56:04 2016 Paul Wery
+** Last update Sat Jun  4 05:16:20 2016 Paul Wery
 */
 
 #ifndef MINS
@@ -181,6 +181,7 @@ int	create_replace_q_next(char *path, char *name, int n, char *replace);
 char	*get_elem_path(char *buffer, int start, int end);
 char	*replace_seg_q_next(char *buffer, char *replace, int start);
 char	*echo_bracket(char *buffer, int *error);
-char	*get_val_ret(int val);
+char	*get_val_ret(int val, char *buffer);
+int	check_loc(char *buffer);
 
 #endif /* !MINS */

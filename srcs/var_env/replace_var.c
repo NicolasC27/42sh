@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Jun  1 04:06:44 2016 Paul Wery
-** Last update Sat Jun  4 04:56:37 2016 Paul Wery
+** Last update Sat Jun  4 05:17:07 2016 Paul Wery
 */
 
 #include <sys/types.h>
@@ -82,6 +82,9 @@ int	check_loc(char *buffer)
   if (buffer[n + 1] != '\0' && buffer[n + 1] == '?'
       && buffer[n + 2] == '\0')
     return (1);
+  if (buffer[n + 1] != '\0' && buffer[n + 1] == '$'
+      && buffer[n + 2] == '\0')
+    return (2);
   return (0);
 }
 
@@ -104,8 +107,8 @@ char		*echo_var(char *buffer, int *error, t_env *ev)
 	}
       if ((check_loc(buffer) == 0
 	   && (replace = create_replace_v(ext, 1, ev, num)) == NULL)
-	  || (check_loc(buffer) == 1
-	      && (replace = get_val_ret(ev->val_exit)) == NULL)
+	  || (check_loc(buffer) != 0
+	      && (replace = get_val_ret(ev->val_exit, buffer)) == NULL)
 	  || (buffer = replace_seg_v(buffer, replace)) == NULL)
 	return (NULL);
       free(ext);
