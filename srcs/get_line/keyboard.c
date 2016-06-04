@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Fri Jun  3 21:29:38 2016 Nicolas Chevalier
-** Last update Sat Jun  4 16:07:10 2016 Nicolas Chevalier
+** Last update Sat Jun  4 16:22:25 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -61,8 +61,10 @@ static char	*my_autocomplete(char *str)
   while ((dirent = readdir(dir)))
     {
       if (dirent->d_name[0] != '.')
-	write(fd, dirent->d_name, my_strlen(dirent->d_name));
-      my_putstr("\t");
+	{
+	  write(fd, dirent->d_name, my_strlen(dirent->d_name));
+	  my_putstr(" ");
+	}
     }
   s = tigetstr("rc");
   write(fd, s, my_strlen(s));

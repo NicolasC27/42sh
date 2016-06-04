@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:27:38 2016 Nicolas Chevalier
-** Last update Sat Jun  4 15:57:10 2016 Nicolas Chevalier
+** Last update Sat Jun  4 16:26:00 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -95,7 +95,7 @@ char		*get_line(char **env)
 	{
 	  if (line.pos == 0)
 	    {
-	      line.cmd = realloc(line.cmd, line.len + 10);
+	      line.cmd = realloc(line.cmd, line.len + 3);
 	      line.cmd[line.len] = buff[0];
 	      line.cmd[line.len + 1] = '\0';
 	      line.len += 1;
@@ -104,10 +104,10 @@ char		*get_line(char **env)
 	    {
 	      stock = NULL;
 	      stock = malloc(sizeof(char) * (line.len + 2));
-	      /* line.cmd = realloc(line.cmd, line.len + 1); */
+	      line.cmd = realloc(line.cmd, line.len + 2);
 	      j = 0;
 	      i = line.len + (line.pos); // sadlut
-	      while (line.cmd[i] && i != line.len)
+	      while (i >= 0 && line.cmd[i] && i != line.len)
 		{
 		  stock[j] = line.cmd[i];
 		  j += 1;
@@ -127,9 +127,7 @@ char		*get_line(char **env)
 	      write(fd, s, my_strlen(s));
 	      i += 1;
 	      while (line.cmd[i])
-		{
-		  write(1, &line.cmd[i++], 1);
-		}
+		write(1, &line.cmd[i++], 1);
 	      /* my_putstr(&line.cmd[i + 1]); */
 	      save = tigetstr("rc");
 	      write(fd, save, my_strlen(save));
