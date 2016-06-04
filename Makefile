@@ -5,7 +5,7 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sat Apr  2 00:37:51 2016 Paul Wery
-## Last update Fri Jun  3 23:30:11 2016 Nicolas Chevalier
+## Last update Sat Jun  4 18:26:50 2016 Nicolas Chevalier
 ##
 
 NAME    =	42sh
@@ -57,7 +57,9 @@ SRCS    =	srcs/main.c \
 		srcs/get_line/my_strncmp.c \
 		srcs/get_line/mode.c \
 		srcs/get_line/keyboard.c \
+		srcs/get_line/history.c \
 		srcs/get_line/init.c \
+		srcs/get_line/autocomplete.c \
 		srcs/inhib/inhib_fonc.c \
 		srcs/global/echo_star.c \
 		srcs/global/replace_seg.c \

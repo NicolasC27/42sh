@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:27:38 2016 Nicolas Chevalier
-** Last update Sat Jun  4 16:26:00 2016 Nicolas Chevalier
+** Last update Sat Jun  4 18:02:42 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -91,7 +91,7 @@ char		*get_line(char **env, t_history *history)
       keyboard(&line, buff, history);
       /* manage_pos(); */
       if (buff[0] != '\t' && buff[0] != 127 && buff[2] != LEFT &&
-	  buff[2] != RIGHT)
+	  buff[2] != RIGHT && buff[2] != DOWN && buff[2] != UP)
 	{
 	  if (line.pos == 0)
 	    {
