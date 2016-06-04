@@ -7,12 +7,16 @@
 ** Started on  Thu Jan 21 11:55:15 2016 Paul Wery
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ** Last update Tue May 31 12:38:20 2016 Nicolas Chevalier
 =======
 ** Last update Thu Jun  2 01:03:37 2016 Paul Wery
 >>>>>>> master
 =======
 ** Last update Sat Jun  4 03:07:36 2016 Paul Wery
+>>>>>>> master
+=======
+** Last update Sat Jun  4 23:57:28 2016 Paul Wery
 >>>>>>> master
 */
 
@@ -68,7 +72,7 @@ void	get_status(int status, t_env *ev)
 {
   if (WTERMSIG(status) == SIGSEGV)
     {
-      my_put_error("Segmentation Fault\n");
+      my_put_error("Segmentation fault\n");
       ev->val_exit = 139;
     }
   else if (WTERMSIG(status) == SIGFPE)
