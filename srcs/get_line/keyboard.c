@@ -5,7 +5,11 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Fri Jun  3 21:29:38 2016 Nicolas Chevalier
+<<<<<<< HEAD
 ** Last update Sat Jun  4 16:22:25 2016 Nicolas Chevalier
+=======
+** Last update Fri Jun  3 23:14:01 2016 Nicolas Chevalier
+>>>>>>> 1b9dadc400c33c04216e3cf7c08774a060767ef8
 */
 
 #include <stdlib.h>
@@ -13,136 +17,77 @@
 #include <fcntl.h>
 #include <curses.h>
 #include <term.h>
-#include <fcntl.h>
-#include <string.h>
+#include "history.h"
 #include "get_line.h"
-
-static void	history(t_edit *line)
-{
-}
 
 static int	is_key(char *buff, int ESC, int HOOK, int KEY)
 {
-  if (buff[1] == '\0')
-    return (EXIT_FAILURE);
   if (buff[0] == ESC && buff[1] == HOOK && buff[2] == KEY)
     return (EXIT_SUCCESS);
   return (EXIT_FAILURE);
+}
 
+static int	history_func(t_edit *line, t_history *history, char *buff)
+{
+  char	*el;
+  char	*home;
+  char	*save;
+  int	fd;
+
+  fd = open("/dev/tty", O_RDWR);
+  save = tigetstr("rc");
+  home = tigetstr("cub1");
+  el = tigetstr("el");
+  if  (buff[2] == 'A' && history->current_cmd != NULL &&
+       history->current_cmd->prev != NULL)
+    {
+      write(fd, save, my_strlen(save));
+      write(fd, el, my_strlen(el));
+      history->current_cmd = history->current_cmd->prev;
+      my_putstr(history->current_cmd->command);
+    }
+  else if (buff[2] == 'B' && history->current_cmd != NULL &&
+       history->current_cmd->next != NULL)
+    {
+      write(fd, save, my_strlen(save));
+      write(fd, el, my_strlen(el));
+      history->current_cmd = history->current_cmd->next;
+      my_putstr(history->current_cmd->command);
+    }
 }
 
 static char	*my_autocomplete(char *str)
 {
   struct dirent	*dirent;
   DIR		*dir;
-  char		*s;
-  char		*cursor;
-  int		fd;
-  int		i;
-  int		x;
-  int		y;
-  char		*save;
 
   if ((dir = opendir("./")) == NULL)
     {
       my_putstr("ERROR");
       exit(EXIT_FAILURE);
     }
-  x = 0;
-  y = 0;
-  fd = open("/dev/tty", O_RDWR);
-  save = tigetstr("sc");
-  write(fd, save, my_strlen(save));
-  s = tigetstr("cud1");
-  cursor = tgoto(s, 0, 0);
-  i = -1;
-  while (cursor[++i] != '\0');
-  write(fd, cursor, i);
+  my_putstr("\n");
   while ((dirent = readdir(dir)))
     {
       if (dirent->d_name[0] != '.')
+<<<<<<< HEAD
 	{
 	  write(fd, dirent->d_name, my_strlen(dirent->d_name));
 	  my_putstr(" ");
 	}
+=======
+  	my_putstr(dirent->d_name);
+      my_putstr(" ");
+>>>>>>> 1b9dadc400c33c04216e3cf7c08774a060767ef8
     }
-  s = tigetstr("rc");
-  write(fd, s, my_strlen(s));
+  /* my_putstr("\n"); */
+  /* return (str); */
 }
 
-void		delete_string(t_edit *line)
+int		keyboard(t_edit *line, char *buff, t_history *history)
 {
-  char		*str;
-  char		*s;
-  int		fd;
-  int		i;
-
-  i = 0;
-  fd = open("/dev/tty", O_RDWR);
-  s = tigetstr("cub1");
-  write(fd, s, my_strlen(s));
-  s = tigetstr("el");
-  write(fd, s, my_strlen(s));
-  line->cmd[line->len - 1] = '\0';
-  line->len -= 1;
-}
-
-int		left(t_edit *line)
-{
-  char		*s;
-  int		fd;
-  int		i;
-  char		*save;
-
-
-  i = 0;
-  fd = open("/dev/tty", O_RDWR);
-  if (line->cmd == NULL)
-    return (EXIT_FAILURE);
-  i -= line->len;
-  if (i == line->pos)
-    return (EXIT_FAILURE);
-  s = tigetstr("cub1");
-  write(fd, s, my_strlen(s));
-  line->pos -= 1;
-  /* save = tigetstr("sc"); */
-  /* write(fd, save, my_strlen(save)); */
-  /* s = tigetstr("el"); */
-  /* write(fd, s, my_strlen(s)); */
-  /* save = tigetstr("rc"); */
-  /* write(fd, save, my_strlen(save)); */
-
-}
-
-int		right(t_edit *line)
-{
-  char		*s;
-  int		fd;
-
-  fd = open("/dev/tty", O_RDWR);
-  if (line->cmd == NULL)
-    return (EXIT_FAILURE);
-  if (line->cmd[line->len + (line->pos)] == '\0')
-    return (EXIT_FAILURE);
-  s = tigetstr("cuf1");
-  write(fd, s, my_strlen(s));
-  line->pos += 1;
-  return (0);
-}
-
-int		keyboard(t_edit *line, char *buff)
-{
-  if (buff[0] && buff[1] != 0)
-    {
-      if (is_key(buff, 27, 91, UP) || is_key(buff, 27, 91, DOWN))
-	history(line);
-      if (is_key(buff, 27, 91, LEFT))
-	left(line);
-      if (is_key(buff, 27, 91, RIGHT))
-	right(line);
-    }
+  if (is_key(buff, 27, 91, UP) || is_key(buff, 27, 91, DOWN))
+    history_func(line, history, buff);
   if (buff[0] == '\t')
     my_autocomplete(line->cmd);
-  if (buff[0] == 127)
-    delete_string(line);
 }

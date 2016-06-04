@@ -52,7 +52,7 @@ void		manage_pos()
   write(fd, cursor, i);
 }
 
-char		*get_line(char **env)
+char		*get_line(char **env, t_history *history)
 {
   t_edit	line;
   t_info	info;
@@ -88,7 +88,7 @@ char		*get_line(char **env)
 	return (NULL);
       if (buff[0] == '\n')
 	return (return_str(line.cmd));
-      keyboard(&line, buff);
+      keyboard(&line, buff, history);
       /* manage_pos(); */
       if (buff[0] != '\t' && buff[0] != 127 && buff[2] != LEFT &&
 	  buff[2] != RIGHT)

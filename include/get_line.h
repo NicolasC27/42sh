@@ -17,6 +17,8 @@
 #define	RIGHT	68
 #define POS_CUR	"\033[6n"
 
+# include "history.h"
+
 typedef struct	s_info
 {
   char		*keyleft;
@@ -35,7 +37,7 @@ typedef struct	s_edit
 /*
 ** get_line.c
 */
-char		*get_line(char **);
+char		*get_line(char **, t_history *history);
 
 /*
 ** getterm.c
@@ -55,7 +57,7 @@ int		mode(int, int, int);
 /*
 ** keyboard.c
 */
-int		keyboard(t_edit *, char *);
+int		keyboard(t_edit *, char *, t_history *);
 
 /*
 ** init.c
