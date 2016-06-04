@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Fri Jun  3 21:29:38 2016 Nicolas Chevalier
-** Last update Sat Jun  4 05:02:58 2016 Nicolas Chevalier
+** Last update Sat Jun  4 05:10:52 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -126,12 +126,12 @@ void		delete_string(t_edit *line)
 
 void		left(t_edit *line)
 {
-  char		*s;
-  int		fd;
+  /* char		*s; */
+  /* int		fd; */
 
-  s = tigetstr("le");
-  fd = open("/dev/tty", O_RDWR);
-  write(fd, s, my_strlen(s));
+  /* s = tigetstr("le"); */
+  /* fd = open("/dev/tty", O_RDWR); */
+  /* write(fd, s, my_strlen(s)); */
 }
 
 void		right(t_edit *line)
@@ -141,8 +141,8 @@ void		right(t_edit *line)
 
 int		keyboard(t_edit *line, char *buff)
 {
-  if (buff[0] != 27)
-    return ;
+  /* if (buff[0] != 27) */
+  /*   return ; */
   if (is_key(buff, 27, 91, UP) || is_key(buff, 27, 91, DOWN))
     history(line);
   if (is_key(buff, 27, 91, LEFT))
