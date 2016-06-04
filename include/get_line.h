@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:48:14 2016 Nicolas Chevalier
-** Last update Sat Jun  4 18:26:40 2016 Nicolas Chevalier
+** Last update Sat Jun  4 23:37:24 2016 Nicolas Chevalier
 */
 
 #ifndef GET_LINE_H_
@@ -13,10 +13,11 @@
 
 #define	UP	65
 #define	DOWN	66
-#define	LEFT	67
-#define	RIGHT	68
+#define	LEFT	68
+#define	RIGHT	67
+#define DELETE	51
 #define POS_CUR	"\033[6n"
-
+#define CLEAR	12
 # include "history.h"
 
 typedef struct	s_info
@@ -63,7 +64,7 @@ int		keyboard(t_edit *, char *, t_history *);
 /*
 ** init.c
 */
-char		*init(t_edit *, t_info *, char **);
+char		*init(t_edit *);
 
 /*
 ** history.c
@@ -74,5 +75,12 @@ int		history_func(t_edit *, t_history *, char *);
 ** autocomplete.c
 */
 char		*my_autocomplete(char *str);
+
+/*
+** cursor.c
+*/
+int		cursors_left(t_edit *);
+int		cursors_right(t_edit *);
+int		cursors_delete(t_edit *, char *);
 
 #endif /* !GET_LINE_H_ */

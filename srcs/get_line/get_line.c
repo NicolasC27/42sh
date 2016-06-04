@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:27:38 2016 Nicolas Chevalier
-** Last update Sat Jun  4 18:02:42 2016 Nicolas Chevalier
+** Last update Sat Jun  4 23:40:48 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -73,7 +73,7 @@ char		*get_line(char **env, t_history *history)
       stock = get_next_line();
       return (stock);
     }
-  init(&line, &info, env);
+  init(&line);
   while (len > 0)
     {
       memset(buff, '\0', 9);
@@ -82,7 +82,8 @@ char		*get_line(char **env, t_history *history)
       buff[len] = '\0';
       if (buff[0] != '\t' && buff[0] != '\n' && buff[0] != 127
 	  && buff[2] != LEFT && buff[2] != RIGHT
-	  && buff[2] != DOWN && buff[2] != UP)
+	  && buff[2] != DOWN && buff[2] != UP
+	  && buff[2] != DELETE && buff[0] != CLEAR)
 	my_putstr(buff);
       if (buff[0] == 4 && buff[1] == '\0')
 	return (NULL);
@@ -91,7 +92,7 @@ char		*get_line(char **env, t_history *history)
       keyboard(&line, buff, history);
       /* manage_pos(); */
       if (buff[0] != '\t' && buff[0] != 127 && buff[2] != LEFT &&
-	  buff[2] != RIGHT && buff[2] != DOWN && buff[2] != UP)
+	  buff[2] != RIGHT && buff[2] != DOWN && buff[2] != UP && buff[0] != CLEAR)
 	{
 	  if (line.pos == 0)
 	    {
@@ -102,6 +103,8 @@ char		*get_line(char **env, t_history *history)
 	    }
 	  else
 	    {
+	      /* printf("%d", line.pos); */
+	      /* exit (0); */
 	      stock = NULL;
 	      stock = malloc(sizeof(char) * (line.len + 2));
 	      line.cmd = realloc(line.cmd, line.len + 2);
