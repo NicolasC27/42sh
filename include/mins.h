@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan  5 01:26:12 2016 paul wery
-** Last update Sat Jun  4 01:53:51 2016 Paul Wery
+** Last update Sat Jun  4 04:56:04 2016 Paul Wery
 */
 
 #ifndef MINS
@@ -168,7 +168,7 @@ int	notm(t_exec *it, t_env *ev, int n, int i);
 void	files_error(char *file, t_env *ev, int state);
 t_exec	*next_command(t_exec *list, t_exec *it);
 int	elem_redirection(char *elem, char *ref);
-char	*echo_var(char *buffer, int *error, char **env);
+char	*echo_var(char *buffer, int *error, t_env *ev);
 char	*replace_seg_v(char *buffer, char *replace);
 int	end_elem(char *buffer, char c);
 int	start_elem(char *buffer, char c);
@@ -181,5 +181,6 @@ int	create_replace_q_next(char *path, char *name, int n, char *replace);
 char	*get_elem_path(char *buffer, int start, int end);
 char	*replace_seg_q_next(char *buffer, char *replace, int start);
 char	*echo_bracket(char *buffer, int *error);
+char	*get_val_ret(int val);
 
 #endif /* !MINS */

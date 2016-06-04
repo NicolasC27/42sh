@@ -5,7 +5,7 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sat Apr  2 00:37:51 2016 Paul Wery
-## Last update Sat Jun  4 01:30:03 2016 Paul Wery
+## Last update Sat Jun  4 04:56:57 2016 Paul Wery
 ##
 
 NAME    =	42sh
@@ -62,6 +62,7 @@ SRCS    =	srcs/main.c \
 		srcs/global/glob_three/match_brak.c \
 		srcs/var_env/replace_var.c \
 		srcs/var_env/replace_seg_v.c \
+		srcs/var_env/get_val_ret.c \
 
 $(NAME) :	$(OBJS)
 	$(CC) $(OBJS) -o $(NAME)
