@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Jun  1 22:09:07 2016 Paul Wery
-** Last update Fri Jun  3 04:24:28 2016 Paul Wery
+** Last update Sat Jun  4 05:09:01 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -29,7 +29,7 @@ int	start_elem_v(char *buffer)
   int	start;
 
   start = 0;
-  while (buffer[start] != '*' && buffer[start] != '\0')
+  while (buffer[start] != '$' && buffer[start] != '\0')
     start += 1;
   while (start > 0 && buffer[start] != ' ' && buffer[start] != '\t')
     start -= 1;

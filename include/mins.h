@@ -6,9 +6,13 @@
 **
 ** Started on  Tue Jan  5 01:26:12 2016 paul wery
 <<<<<<< HEAD
+<<<<<<< HEAD
 ** Last update Tue May 31 12:35:03 2016 Nicolas Chevalier
 =======
 ** Last update Fri Jun  3 04:58:25 2016 Paul Wery
+>>>>>>> master
+=======
+** Last update Sat Jun  4 05:16:20 2016 Paul Wery
 >>>>>>> master
 */
 
@@ -29,6 +33,29 @@ typedef struct dirent t_dir;
 typedef struct	stat t_stat;
 
 char	*get_next_line(void);
+
+typedef struct	s_limit
+{
+  int		start;
+  int		end;
+}		t_limit;
+
+typedef struct		s_elems
+{
+  char			*path;
+  char			*one;
+  char			*two;
+  char			*ref;
+  struct s_limit	l;
+}			t_elems;
+
+typedef struct	s_glob_error
+{
+  int		one;
+  int		two;
+  int		three;
+  int		four;
+}		t_glob_error;
 
 typedef struct	s_line
 {
@@ -58,7 +85,7 @@ typedef struct	s_env
   char		**env;
   char		*oldpwd;
   int		pipe_t[2];
-  int		backquote[2];
+  int		red[2];
   int		state_p;
   int		result;
   int		stdin;
@@ -110,7 +137,7 @@ int	my_env(t_env *ev, char **opts, char *exec);
 void	get_status(int status, t_env *ev);
 
 t_exec	*create_list(void);
-int	add_elem_prev(t_exec *elem, char **tab, int error, int error_two);
+int	add_elem_prev(t_exec *elem, char **tab, t_glob_error *error);
 int	add_elem_pipe(t_exec *elem, char **tab);
 void	delete_list(t_exec **root);
 
@@ -137,13 +164,29 @@ int	not_inhib(char *buffer, int n, int state);
 void	aff_cd_error(char *exec, t_env *ev);
 int	valid_name(char *name, t_env *ev);
 char	*echo_star(char *buffer, int *error);
+char	*echo_quest(char *buffer, int *error);
 char	*replace_seg(char *buffer, char *replace, int *error);
+char	*replace_seg_q(char *buffer, char *replace, int *error, int start);
+char	*replace_seg_b(char *buffer, char *replace, int *error, int start);
 int	valid_star(char *buffer);
 int	notm(t_exec *it, t_env *ev, int n, int i);
 void	files_error(char *file, t_env *ev, int state);
 t_exec	*next_command(t_exec *list, t_exec *it);
 int	elem_redirection(char *elem, char *ref);
-char	*echo_var(char *buffer, int *error, char **env);
+char	*echo_var(char *buffer, int *error, t_env *ev);
 char	*replace_seg_v(char *buffer, char *replace);
+int	end_elem(char *buffer, char c);
+int	start_elem(char *buffer, char c);
+int	match_elem(char *name, char *ref);
+int	match_elem_brak(char *name, char *one, char *two, char *ref);
+int	size_result(char *buffer, char *replace, char c);
+int	glob_two(char *buffer, int start);
+int	glob_three(char *buffer, t_limit *l);
+int	create_replace_q_next(char *path, char *name, int n, char *replace);
+char	*get_elem_path(char *buffer, int start, int end);
+char	*replace_seg_q_next(char *buffer, char *replace, int start);
+char	*echo_bracket(char *buffer, int *error);
+char	*get_val_ret(int val, char *buffer);
+int	check_loc(char *buffer);
 
 #endif /* !MINS */

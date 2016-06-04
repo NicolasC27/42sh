@@ -5,9 +5,14 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed May 25 19:22:23 2016 Paul Wery
+<<<<<<< HEAD
 ** Last update Sat Jun  4 16:13:00 2016 Nicolas Chevalier
+=======
+** Last update Sat Jun  4 03:27:24 2016 Paul Wery
+>>>>>>> master
 */
 
+#include <stdio.h>
 #include <unistd.h>
 #include "mins.h"
 
@@ -67,6 +72,8 @@ t_exec	*next_exec(t_exec *it, t_exec *list, t_env *ev)
     return (it->next);
   else if (num == 1 || num == 2 || num == 5 || num == 6)
     {
+      if (num == 1)
+	remove(".my_teemo");
       if (it->next != list)
 	return (it->next->next);
       else

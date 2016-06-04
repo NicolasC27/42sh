@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan 19 00:28:24 2016 Paul Wery
-** Last update Thu Jun  2 01:10:46 2016 Paul Wery
+** Last update Sat Jun  4 03:27:00 2016 Paul Wery
 */
 
 #include <sys/wait.h>
@@ -43,15 +43,21 @@ int	find_path(char **env)
   return (n);
 }
 
-void	cond_next(int ret, char *exec, char **opts, t_env *ev)
+int	find_exec_next(char *exec, char **opts, t_env *ev)
 {
-  if (ret == -1 && access(exec, F_OK) != -1)
+  int	n;
+
+  n = 0;
+  while (exec[n] != '\0' && exec[n] != '/')
+    n += 1;
+  if (exec[n] == '/' && access(exec, F_OK) != -1)
     {
       if (execve((const char*)exec, opts, ev->env) == -1)
 	aff_error(exec);
     }
   else
     aff_error(exec);
+  return (0);
 }
 
 int	find_exec(char *exec, char **opts, t_env *ev, int ret)
@@ -78,8 +84,8 @@ int	find_exec(char *exec, char **opts, t_env *ev, int ret)
       if (execve((const char*)path, opts, ev->env) == -1)
 	aff_error(exec);
     }
-  else
-    cond_next(ret, exec, opts, ev);
+  else if (find_exec_next(exec, opts, ev) == -1)
+    return (-1);
   return (0);
 }
 

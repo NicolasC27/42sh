@@ -5,9 +5,15 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed May 25 22:32:13 2016 Paul Wery
+<<<<<<< HEAD
 ** Last update Tue May 31 12:36:40 2016 Nicolas Chevalier
+=======
+** Last update Sat Jun  4 02:55:42 2016 Paul Wery
+>>>>>>> master
 */
 
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include "function.h"
@@ -49,16 +55,26 @@ static int	equal(char *one, char *two)
 static int	loop(t_exec *elem)
 {
   char		*line;
+  int		fd;
 
   line = NULL;
+  if ((fd = open(".my_teemo", O_CREAT | O_TRUNC | O_WRONLY,
+		 S_IRUSR | S_IWUSR)) == -1)
+    return (-1);
   while (equal(elem->next->tab[0], line) == 0)
     {
       if (line != NULL)
-	free(line);
+	{
+	  if (write(fd, line, my_strlen(line)) == -1
+	      || write(fd, "\n", 1) == -1)
+	    return (-1);
+	  free(line);
+	}
       my_putstr("? ");
       if ((line = get_next_line()) == NULL)
 	return (-1);
     }
+  close(fd);
   if (line != NULL)
     free(line);
   return (0);
@@ -73,15 +89,12 @@ int		wait_lef(t_exec *list, t_exec *it, int num)
     {
       num = elem_redirection(elem->tab[0], "<<,>>,||,&&,<,>,|,&,;");
       if (num == 1)
-        {
-          if (elem->next == list
+	{
+	  if (elem->next == list
               || elem_redirection(elem->next->tab[0],
-				  "<<,>>,||,&&,<,>,|,&,;") != 0)
-            {
-              my_put_error("Missing name for redirect.\n");
-              return (0);
-            }
-          else if (loop(elem) == -1)
+                                  "<<,>>,||,&&,<,>,|,&,;") != 0)
+	    return (0);
+	  if (loop(elem) == -1)
 	    return (-1);
 	}
       elem = elem->next;

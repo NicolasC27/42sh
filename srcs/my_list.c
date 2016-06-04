@@ -6,9 +6,13 @@
 **
 ** Started on  Sat Apr  2 01:20:11 2016 Paul Wery
 <<<<<<< HEAD
+<<<<<<< HEAD
 ** Last update Tue May 31 12:36:09 2016 Nicolas Chevalier
 =======
 ** Last update Fri Jun  3 04:28:42 2016 Paul Wery
+>>>>>>> master
+=======
+** Last update Fri Jun  3 20:06:53 2016 Paul Wery
 >>>>>>> master
 */
 
@@ -53,14 +57,14 @@ void	delete_list(t_exec **root)
 }
 
 int		add_elem_prev(t_exec *elem, char **tab,
-			      int error, int error_two)
+			      t_glob_error *error)
 {
   t_exec	*new_elem;
 
   if ((new_elem = malloc(sizeof(*new_elem))) == NULL)
     return (-1);
   new_elem->tab = tab;
-  new_elem->error = error + error_two;
+  new_elem->error = error->one + error->two + error->three + error->four;
   new_elem->next = elem;
   new_elem->prev = elem->prev;
   elem->prev->next = new_elem;

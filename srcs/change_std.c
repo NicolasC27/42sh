@@ -6,9 +6,13 @@
 **
 ** Started on  Wed May 25 20:44:03 2016 Paul Wery
 <<<<<<< HEAD
+<<<<<<< HEAD
 ** Last update Tue May 31 12:36:23 2016 Nicolas Chevalier
 =======
 ** Last update Fri Jun  3 00:17:21 2016 Paul Wery
+>>>>>>> master
+=======
+** Last update Sat Jun  4 02:55:53 2016 Paul Wery
 >>>>>>> master
 */
 
@@ -82,11 +86,34 @@ int	change_input_next(t_exec *list, t_exec *elem, t_env *ev)
   return (0);
 }
 
+int	change_teemo(t_exec *list, t_exec *elem, t_env *ev)
+{
+  int	num;
+
+  if ((num = open(".my_teemo", O_RDONLY)) == -1)
+    {
+      files_error(".my_teemo", ev, 0);
+      return (-2);
+    }
+  if (list != elem->next && list != elem->next->next)
+    {
+      num = elem_redirection(elem->next->next->tab[0],
+			     "<<,>>,||,&&,<,>,|,&,;");
+      if ((num == 2 || num == 6)
+	  && change_output(list, elem->next->next, 1, 0) == -1)
+	{
+	  files_error(elem->next->tab[0], ev, 0);
+	  return (-2);
+	}
+    }
+  return (0);
+}
+
 int	change_input(t_exec *list, t_exec *elem, int num, t_env *ev)
 {
   if (elem != list)
     num = elem_redirection(elem->tab[0], "<<,>>,||,&&,<,>,|,&,;");
-  if (num == 5)
+  if (num == 5 || num == 1)
     {
       if (elem->next == list)
         {
@@ -95,8 +122,10 @@ int	change_input(t_exec *list, t_exec *elem, int num, t_env *ev)
         }
       if (close(0) == -1)
 	return (-1);
-      if (change_input_next(list, elem, ev) == -2)
-	return (-2);
     }
+  if (num == 5 && change_input_next(list, elem, ev) == -2)
+    return (-2);
+  else if (num == 1 && change_teemo(list, elem, ev) == -2)
+    return (-2);
   return (0);
 }

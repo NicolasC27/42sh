@@ -5,7 +5,11 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sat Apr  2 00:37:51 2016 Paul Wery
+<<<<<<< HEAD
 ## Last update Sat Jun  4 18:26:50 2016 Nicolas Chevalier
+=======
+## Last update Sat Jun  4 04:56:57 2016 Paul Wery
+>>>>>>> master
 ##
 
 NAME    =	42sh
@@ -33,6 +37,7 @@ SRCS    =	srcs/main.c \
 		srcs/echo.c \
 		srcs/pair.c \
 		srcs/echo_next.c \
+		srcs/notm.c \
 		srcs/exec/get_next_line.c \
 		srcs/exec/exec_line.c \
 		srcs/exec/make_path.c \
@@ -61,10 +66,16 @@ SRCS    =	srcs/main.c \
 		srcs/get_line/init.c \
 		srcs/get_line/autocomplete.c \
 		srcs/inhib/inhib_fonc.c \
-		srcs/global/echo_star.c \
-		srcs/global/replace_seg.c \
+		srcs/global/glob_one/echo_star.c \
+		srcs/global/glob_one/replace_seg.c \
+		srcs/global/glob_two/echo_quest.c \
+		srcs/global/glob_two/replace_seg_q.c \
+		srcs/global/glob_three/echo_bracket.c \
+		srcs/global/glob_three/replace_seg_b.c \
+		srcs/global/glob_three/match_brak.c \
 		srcs/var_env/replace_var.c \
 		srcs/var_env/replace_seg_v.c \
+<<<<<<< HEAD
 		srcs/history/canonical_mode.c \
 		srcs/history/init_history.c \
 		srcs/history/file/file.c \
@@ -75,6 +86,9 @@ SRCS    =	srcs/main.c \
 		srcs/history/lib/get_next_linee.c \
 		srcs/history/lib/my_strlen.c \
 		srcs/history/lib/my_putstr.c \
+=======
+		srcs/var_env/get_val_ret.c \
+>>>>>>> master
 
 $(NAME) :	$(OBJS)
 		$(CC) $(OBJS) -o $(NAME) -lncurses

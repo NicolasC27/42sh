@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Jun  1 04:06:44 2016 Paul Wery
-** Last update Fri Jun  3 05:02:34 2016 Paul Wery
+** Last update Sat Jun  4 05:17:07 2016 Paul Wery
 */
 
 #include <sys/types.h>
@@ -35,7 +35,7 @@ char	*get_ext_v(char *buffer, int start, int end)
   return (ext);
 }
 
-char	*create_replace_v(char *ext, int size, char **env, int num)
+char	*create_replace_v(char *ext, int size, t_env *ev, int num)
 {
   char	*replace;
   int	n;
@@ -45,15 +45,15 @@ char	*create_replace_v(char *ext, int size, char **env, int num)
   if ((replace = malloc(3)) == NULL)
     return (NULL);
   replace[0] = '\0';
-  size += my_strlen(env[num]) - my_strlen(ext);
+  size += my_strlen(ev->env[num]) - my_strlen(ext);
   if ((replace = realloc(replace, size)) == NULL)
     return (NULL);
   i = 0;
-  while (env[num][i] != '=')
+  while (ev->env[num][i] != '=')
     i += 1;
   i += 1;
-  while (env[num][i] != '\0')
-    replace[n++] = env[num][i++];
+  while (ev->env[num][i] != '\0')
+    replace[n++] = ev->env[num][i++];
   replace[n++] = ' ';
   replace[n] = '\0';
   return (replace);
@@ -72,7 +72,23 @@ int	valid_var(char *buffer)
   return (0);
 }
 
-char		*echo_var(char *buffer, int *error, char **env)
+int	check_loc(char *buffer)
+{
+  int	n;
+
+  n = 0;
+  while (buffer[n] != '\0' && buffer[n] != '$')
+    n += 1;
+  if (buffer[n + 1] != '\0' && buffer[n + 1] == '?'
+      && buffer[n + 2] == '\0')
+    return (1);
+  if (buffer[n + 1] != '\0' && buffer[n + 1] == '$'
+      && buffer[n + 2] == '\0')
+    return (2);
+  return (0);
+}
+
+char		*echo_var(char *buffer, int *error, t_env *ev)
 {
   char		*ext;
   char		*replace;
@@ -81,15 +97,18 @@ char		*echo_var(char *buffer, int *error, char **env)
   while (valid_var(buffer) == 1)
     {
       if ((ext = get_ext_v(buffer, 0, 0)) == NULL
-	  || (num = find_set_unset(env, ext)) == -1)
+	  || (num = find_set_unset(ev->env, ext)) == -1)
 	return (NULL);
-      if (env[num] == NULL)
+      if (ev->env[num] == NULL && check_loc(buffer) == 0)
 	{
 	  *error = -2;
 	  free(ext);
 	  return (buffer);
 	}
-      if ((replace = create_replace_v(ext, 1, env, num)) == NULL
+      if ((check_loc(buffer) == 0
+	   && (replace = create_replace_v(ext, 1, ev, num)) == NULL)
+	  || (check_loc(buffer) != 0
+	      && (replace = get_val_ret(ev->val_exit, buffer)) == NULL)
 	  || (buffer = replace_seg_v(buffer, replace)) == NULL)
 	return (NULL);
       free(ext);

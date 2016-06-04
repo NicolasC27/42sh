@@ -5,7 +5,11 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Jan 20 02:49:57 2016 Paul Wery
+<<<<<<< HEAD
 ** Last update Fri Jun  3 23:29:44 2016 Nicolas Chevalier
+=======
+** Last update Sat Jun  4 03:08:35 2016 Paul Wery
+>>>>>>> master
 */
 
 #include <errno.h>
@@ -47,52 +51,4 @@ void	aff_cd_error(char *exec, t_env *ev)
     my_put_error(": Path name too long.\n");
   else
     my_put_error(": Permission denied.\n");
-}
-
-int	notm_next(t_exec *it, t_env *ev, int n)
-{
-  char	c[2];
-  int	i;
-
-  i = 0;
-  c[1] = '\0';
-  if (it->tab[n] == NULL)
-    return (0);
-  while (it->tab[n][i] != '$')
-    i += 1;
-  i += 1;
-  while (it->tab[n][i] != '\0' && it->tab[n][i] != ' '
-	 && it->tab[n][i] != '\t')
-    {
-      c[0] = it->tab[n][i++];
-      my_put_error(c);
-    }
-  my_put_error(": Undefined variable.\n");
-  ev->val_exit = 1;
-  return (1);
-}
-
-int	notm(t_exec *it, t_env *ev, int n, int i)
-{
-  if (it->error == -1 || it->error == -3)
-    {
-      my_put_error(it->tab[0]);
-      my_put_error(": No match.\n");
-      ev->val_exit = 1;
-      return (1);
-    }
-  else if (it->error == -2)
-    {
-      while (it->tab[n] != NULL && it->tab[n][i] != '$')
-	{
-	  i = 0;
-	  while (it->tab[n][i] != '\0' && it->tab[n][i] != '$')
-	    i += 1;
-	  if (it->tab[n][i] == '\0')
-	    n += 1;
-	}
-      if (notm_next(it, ev, n) == 1)
-	return (1);
-    }
-  return (0);
 }
