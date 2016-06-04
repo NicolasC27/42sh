@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:27:38 2016 Nicolas Chevalier
-** Last update Sat Jun  4 23:40:48 2016 Nicolas Chevalier
+** Last update Sun Jun  5 00:23:04 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -56,7 +56,7 @@ char		*get_line(char **env, t_history *history)
 {
   t_edit	line;
   t_info	info;
-  char		buff[10];
+  char		buff[100];
   int		len;
   char		*stock;
   int		i;
@@ -68,16 +68,12 @@ char		*get_line(char **env, t_history *history)
   j = 0;
   i = 0;
   len = 1;
-  if ((isatty(0)) == 0)
-    {
-      stock = get_next_line();
-      return (stock);
-    }
+  return (get_next_line());
   init(&line);
   while (len > 0)
     {
       memset(buff, '\0', 9);
-      if ((len = read(0, buff, 10)) == -1)
+      if ((len = read(0, buff, 100)) == -1)
 	return (NULL);
       buff[len] = '\0';
       if (buff[0] != '\t' && buff[0] != '\n' && buff[0] != 127
