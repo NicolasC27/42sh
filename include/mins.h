@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan  5 01:26:12 2016 paul wery
-** Last update Sat Jun  4 01:10:59 2016 Paul Wery
+** Last update Sat Jun  4 01:53:51 2016 Paul Wery
 */
 
 #ifndef MINS
@@ -77,7 +77,7 @@ typedef struct	s_env
   char		**env;
   char		*oldpwd;
   int		pipe_t[2];
-  int		backquote[2];
+  int		red[2];
   int		state_p;
   int		result;
   int		stdin;
