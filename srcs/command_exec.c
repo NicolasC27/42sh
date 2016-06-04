@@ -6,9 +6,13 @@
 **
 ** Started on  Wed May 25 19:22:23 2016 Paul Wery
 <<<<<<< HEAD
+<<<<<<< HEAD
 ** Last update Sat Jun  4 16:13:00 2016 Nicolas Chevalier
 =======
 ** Last update Sat Jun  4 03:27:24 2016 Paul Wery
+>>>>>>> master
+=======
+** Last update Sat Jun  4 18:48:10 2016 Paul Wery
 >>>>>>> master
 */
 
@@ -24,7 +28,7 @@ int	elem_redirection(char *elem, char *ref)
 
   i = 0;
   num = 1;
-  while (ref[i] != '\0')
+  while (elem != NULL && ref != NULL && ref[i] != '\0')
     {
       n = 0;
       while (elem[n] == ref[i] && elem[n] != '\0'
@@ -49,7 +53,7 @@ t_exec	*next_command(t_exec *list, t_exec *it)
   int	num;
 
   num = elem_redirection(it->tab[0], "<<,>>,||,&&,<,>,|,&,;");
-  if (num == 3 || num == 4)
+  if (num == 3 || num == 4 || num == 9)
     it = it->next;
   while (it != list
 	 && elem_redirection(it->tab[0], "<<,>>,||,&&,<,>,|,&,;") != 9

@@ -6,9 +6,13 @@
 **
 ** Started on  Wed May 25 22:32:13 2016 Paul Wery
 <<<<<<< HEAD
+<<<<<<< HEAD
 ** Last update Tue May 31 12:36:40 2016 Nicolas Chevalier
 =======
 ** Last update Sat Jun  4 02:55:42 2016 Paul Wery
+>>>>>>> master
+=======
+** Last update Sat Jun  4 18:56:33 2016 Paul Wery
 >>>>>>> master
 */
 
@@ -52,16 +56,12 @@ static int	equal(char *one, char *two)
   return (0);
 }
 
-static int	loop(t_exec *elem)
+static int	loop(t_exec *elem, int turn, int fd, char *line)
 {
-  char		*line;
-  int		fd;
-
-  line = NULL;
   if ((fd = open(".my_teemo", O_CREAT | O_TRUNC | O_WRONLY,
 		 S_IRUSR | S_IWUSR)) == -1)
     return (-1);
-  while (equal(elem->next->tab[0], line) == 0)
+  while (equal(elem->next->tab[0], line) == 0 && turn < 1000)
     {
       if (line != NULL)
 	{
@@ -73,6 +73,7 @@ static int	loop(t_exec *elem)
       my_putstr("? ");
       if ((line = get_next_line()) == NULL)
 	return (-1);
+      turn += 1;
     }
   close(fd);
   if (line != NULL)
@@ -85,7 +86,7 @@ int		wait_lef(t_exec *list, t_exec *it, int num)
   t_exec	*elem;
 
   elem = it;
-  while (elem != list && elem->tab[0][0] != ';')
+  while (elem != list && elem->tab[0] != NULL && elem->tab[0][0] != ';')
     {
       num = elem_redirection(elem->tab[0], "<<,>>,||,&&,<,>,|,&,;");
       if (num == 1)
@@ -94,7 +95,7 @@ int		wait_lef(t_exec *list, t_exec *it, int num)
               || elem_redirection(elem->next->tab[0],
                                   "<<,>>,||,&&,<,>,|,&,;") != 0)
 	    return (0);
-	  if (loop(elem) == -1)
+	  if (loop(elem, 0, 0, NULL) == -1)
 	    return (-1);
 	}
       elem = elem->next;

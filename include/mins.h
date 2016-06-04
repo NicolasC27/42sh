@@ -7,12 +7,16 @@
 ** Started on  Tue Jan  5 01:26:12 2016 paul wery
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ** Last update Tue May 31 12:35:03 2016 Nicolas Chevalier
 =======
 ** Last update Fri Jun  3 04:58:25 2016 Paul Wery
 >>>>>>> master
 =======
 ** Last update Sat Jun  4 05:16:20 2016 Paul Wery
+>>>>>>> master
+=======
+** Last update Sat Jun  4 23:18:32 2016 Paul Wery
 >>>>>>> master
 */
 
@@ -28,6 +32,7 @@
 
 # include <unistd.h>
 # include <sys/stat.h>
+# include <dirent.h>
 
 typedef struct dirent t_dir;
 typedef struct	stat t_stat;
@@ -39,6 +44,14 @@ typedef struct	s_limit
   int		start;
   int		end;
 }		t_limit;
+
+typedef struct		s_order
+{
+  char			*name;
+  time_t		time;
+  struct s_order	*next;
+  struct s_order	*prev;
+}			t_order;
 
 typedef struct		s_elems
 {
@@ -141,6 +154,10 @@ int	add_elem_prev(t_exec *elem, char **tab, t_glob_error *error);
 int	add_elem_pipe(t_exec *elem, char **tab);
 void	delete_list(t_exec **root);
 
+t_order	*create_order(void);
+int	add_order_prev(t_order *elem, char *name);
+void	delete_order(t_order **root);
+
 char	**pars_elems(char *buffer);
 int	full_list(t_exec *list, char **pars, t_env *ev);
 char	**get_opts(char *str, int n, int z);
@@ -188,5 +205,7 @@ char	*replace_seg_q_next(char *buffer, char *replace, int start);
 char	*echo_bracket(char *buffer, int *error);
 char	*get_val_ret(int val, char *buffer);
 int	check_loc(char *buffer);
+int	parsing_error(t_exec *list);
+t_order	*order_names(DIR *directory);
 
 #endif /* !MINS */
