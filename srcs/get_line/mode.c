@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Fri Jun  3 21:30:17 2016 Nicolas Chevalier
-** Last update Fri Jun  3 21:41:02 2016 Nicolas Chevalier
+** Last update Sat Jun  4 15:55:45 2016 Nicolas Chevalier
 */
 
 #include <sys/ioctl.h>
@@ -28,7 +28,7 @@ int			mode(int fd, int i, int option)
       if (option == 1)
 	{
 	  newT.c_cc[VMIN] = 1;
-	  newT.c_cc[VTIME] = 0;
+	  newT.c_cc[VTIME] = 10;
 	}
       ioctl(fd, TCSETS, &newT);
     }

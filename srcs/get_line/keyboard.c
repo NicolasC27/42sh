@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Fri Jun  3 21:29:38 2016 Nicolas Chevalier
-** Last update Sat Jun  4 05:10:52 2016 Nicolas Chevalier
+** Last update Sat Jun  4 16:07:10 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -23,50 +23,12 @@ static void	history(t_edit *line)
 
 static int	is_key(char *buff, int ESC, int HOOK, int KEY)
 {
+  if (buff[1] == '\0')
+    return (EXIT_FAILURE);
   if (buff[0] == ESC && buff[1] == HOOK && buff[2] == KEY)
     return (EXIT_SUCCESS);
   return (EXIT_FAILURE);
 
-}
-
-int		get_pos_(int *y, int fd)
-{
-  char		*buff;
-  int		indice;
-  int		len;
-  int		i;
-  char		num[10];
-  char		num1[15];
-  int		j;
-  char		*s;
-
-  i = 0;
-  memset(buff, 30, 0);
-  write(fd, "\033[6n", my_strlen("\033[6n"));
-  len = read(fd, buff, 19);
-  buff[len] = '\0';
-  while (buff[i] == 27 && i < 100)
-    i += 1;
-  j = 0;
-  i += 1;
-  while (buff[i] && buff[i] != ';')
-    {
-      num[j] = buff[i];
-      i += 1;
-      j += 1;
-    }
-  num[j] = '\0';
-  *y = atoi(num) - 1;
-  i += 1;
-  j = 0;
-  while (buff[i] && buff[i] != 'R' && buff[i] != ';')
-    {
-      num1[j] = buff[i];
-      i += 1;
-      j += 1;
-    }
-  num1[j] = '\0';
-  return (atoi(num1) - 1);
 }
 
 static char	*my_autocomplete(char *str)
@@ -115,7 +77,6 @@ void		delete_string(t_edit *line)
 
   i = 0;
   fd = open("/dev/tty", O_RDWR);
-  /* write(fd, s, my_strlen(s)); */
   s = tigetstr("cub1");
   write(fd, s, my_strlen(s));
   s = tigetstr("el");
@@ -124,31 +85,60 @@ void		delete_string(t_edit *line)
   line->len -= 1;
 }
 
-void		left(t_edit *line)
+int		left(t_edit *line)
 {
-  /* char		*s; */
-  /* int		fd; */
+  char		*s;
+  int		fd;
+  int		i;
+  char		*save;
 
-  /* s = tigetstr("le"); */
-  /* fd = open("/dev/tty", O_RDWR); */
+
+  i = 0;
+  fd = open("/dev/tty", O_RDWR);
+  if (line->cmd == NULL)
+    return (EXIT_FAILURE);
+  i -= line->len;
+  if (i == line->pos)
+    return (EXIT_FAILURE);
+  s = tigetstr("cub1");
+  write(fd, s, my_strlen(s));
+  line->pos -= 1;
+  /* save = tigetstr("sc"); */
+  /* write(fd, save, my_strlen(save)); */
+  /* s = tigetstr("el"); */
   /* write(fd, s, my_strlen(s)); */
+  /* save = tigetstr("rc"); */
+  /* write(fd, save, my_strlen(save)); */
+
 }
 
-void		right(t_edit *line)
+int		right(t_edit *line)
 {
+  char		*s;
+  int		fd;
+
+  fd = open("/dev/tty", O_RDWR);
+  if (line->cmd == NULL)
+    return (EXIT_FAILURE);
+  if (line->cmd[line->len + (line->pos)] == '\0')
+    return (EXIT_FAILURE);
+  s = tigetstr("cuf1");
+  write(fd, s, my_strlen(s));
+  line->pos += 1;
   return (0);
 }
 
 int		keyboard(t_edit *line, char *buff)
 {
-  /* if (buff[0] != 27) */
-  /*   return ; */
-  if (is_key(buff, 27, 91, UP) || is_key(buff, 27, 91, DOWN))
-    history(line);
-  if (is_key(buff, 27, 91, LEFT))
-    left(line);
-  if (is_key(buff, 27, 91, RIGHT))
-    right(line);
+  if (buff[0] && buff[1] != 0)
+    {
+      if (is_key(buff, 27, 91, UP) || is_key(buff, 27, 91, DOWN))
+	history(line);
+      if (is_key(buff, 27, 91, LEFT))
+	left(line);
+      if (is_key(buff, 27, 91, RIGHT))
+	right(line);
+    }
   if (buff[0] == '\t')
     my_autocomplete(line->cmd);
   if (buff[0] == 127)

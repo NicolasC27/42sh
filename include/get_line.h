@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:48:14 2016 Nicolas Chevalier
-** Last update Sat Jun  4 04:57:18 2016 Nicolas Chevalier
+** Last update Sat Jun  4 15:10:27 2016 Nicolas Chevalier
 */
 
 #ifndef GET_LINE_H_
@@ -15,6 +15,7 @@
 #define	DOWN	66
 #define	LEFT	67
 #define	RIGHT	68
+#define POS_CUR	"\033[6n"
 
 typedef struct	s_info
 {
@@ -28,6 +29,7 @@ typedef struct	s_edit
 {
   char		*cmd;
   int		len;
+  int		pos;
 }		t_edit;
 
 /*

@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Fri Jun  3 21:33:04 2016 Nicolas Chevalier
-** Last update Fri Jun  3 21:43:49 2016 Nicolas Chevalier
+** Last update Sat Jun  4 06:32:37 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -31,7 +31,9 @@ char		*init(t_edit *line, t_info *info, char **env)
 
   line->cmd = NULL;
   line->len = 0;
+  line->pos = 0;
   mode(0, 0, 1);
+  /* setupterm("xterm", 1, (int *)0); */
   init_edit_line(info, env);
   write(1, "prompt$>", my_strlen("prompt$>"));
   if ((isatty(0)) == 0)
