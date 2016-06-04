@@ -5,11 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Jan 16 20:40:01 2016 Paul Wery
-<<<<<<< HEAD
-** Last update Sat Jun  4 22:42:50 2016 Nicolas Chevalier
-=======
-** Last update Sat Jun  4 18:33:54 2016 Paul Wery
->>>>>>> master
+** Last update Sat Jun  4 23:44:41 2016 Nicolas Chevalier
 */
 
 #include <signal.h>
