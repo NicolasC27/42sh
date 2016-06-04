@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include "get_line.h"
 #include "function.h"
+#include "history.h"
 #include "mins.h"
 
 void	free_opts(char **opts)
@@ -80,12 +81,14 @@ int	ini_env(t_env *ev)
   return (0);
 }
 
-int	main(int ac UNUSED, char **av UNUSED, char **environ)
+int		main(int ac UNUSED, char **av UNUSED, char **environ)
 {
-  t_env	ev;
-  char	*buffer;
+  t_env		ev;
+  t_history	history;
+  char		*buffer;
 
   buffer = NULL;
+  init_history(&history);
   if (ini_env(&ev) == -1
       || (ev.env = create_my_env(environ, 0, 0, &ev)) == NULL)
     return (0);
@@ -97,7 +100,7 @@ int	main(int ac UNUSED, char **av UNUSED, char **environ)
 	return (ev.val_exit);
       if (buffer != NULL)
 	free(buffer);
-      if ((buffer = get_line(environ)) == NULL)
+      if ((buffer = get_line(environ, &history)) == NULL)
 	return (ev.val_exit);
       if (buffer[0] != '\0')
 	{

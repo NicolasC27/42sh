@@ -62,7 +62,17 @@ SRCS    =	srcs/main.c \
 		srcs/global/echo_star.c \
 		srcs/global/replace_seg.c \
 		srcs/var_env/replace_var.c \
-		srcs/var_env/replace_seg_v.c
+		srcs/var_env/replace_seg_v.c \
+		srcs/history/canonical_mode.c \
+		srcs/history/init_history.c \
+		srcs/history/file/file.c \
+		srcs/history/file/read_file.c \
+		srcs/history/file/write_file.c \
+		srcs/history/commands/add_command.c \
+		srcs/history/commands/free_commands.c \
+		srcs/history/lib/get_next_linee.c \
+		srcs/history/lib/my_strlen.c \
+		srcs/history/lib/my_putstr.c \
 
 $(NAME) :	$(OBJS)
 		$(CC) $(OBJS) -o $(NAME) -lncurses
