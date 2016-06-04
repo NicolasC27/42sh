@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:27:38 2016 Nicolas Chevalier
-** Last update Sat Jun  4 15:57:10 2016 Nicolas Chevalier
+** Last update Sat Jun  4 17:47:49 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -104,7 +104,7 @@ char		*get_line(char **env)
 	    {
 	      stock = NULL;
 	      stock = malloc(sizeof(char) * (line.len + 2));
-	      /* line.cmd = realloc(line.cmd, line.len + 1); */
+	      line.cmd = realloc(line.cmd, line.len + 2);
 	      j = 0;
 	      i = line.len + (line.pos); // sadlut
 	      while (line.cmd[i] && i != line.len)
