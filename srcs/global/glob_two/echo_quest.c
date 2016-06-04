@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Jun  1 04:06:44 2016 Paul Wery
-** Last update Fri Jun  3 22:02:39 2016 Paul Wery
+** Last update Sat Jun  4 23:19:07 2016 Paul Wery
 */
 
 #include <sys/types.h>
@@ -30,28 +30,32 @@ int	create_replace_q_next(char *path, char *name, int n, char *replace)
   return (n);
 }
 
-char	*create_replace_q(DIR *directory, char *elem, t_dir *file, char *path)
+char		*create_replace_q(DIR *directory, char *elem, char *path, int size)
 {
-  char	*replace;
-  int	size;
-  int	n;
+  t_order	*order;
+  t_order	*it;
+  char		*replace;
+  int		n;
 
   n = 0;
-  size = 1;
-  if ((replace = malloc(1)) == NULL)
+  if ((replace = malloc(1)) == NULL
+      || (order = order_names(directory)) == NULL)
     return (NULL);
   replace[0] = '\0';
-  while ((file = readdir(directory)) != NULL)
+  it = order->next;
+  while (it != order)
     {
-      if (match_elem(file->d_name, elem) == 1)
+      if (match_elem(it->name, elem) == 1)
 	{
-	  size += my_strlen(file->d_name) + my_strlen(path) + 1;
+	  size += my_strlen(it->name) + my_strlen(path) + 1;
 	  if ((replace = realloc(replace, size)) == NULL)
 	    return (NULL);
-	  n = create_replace_q_next(path, file->d_name, n, replace);
+	  n = create_replace_q_next(path, it->name, n, replace);
 	}
+      it = it->next;
     }
   closedir(directory);
+  delete_order(&order);
   return (replace);
 }
 
@@ -117,7 +121,7 @@ char		*echo_quest(char *buffer, int *error)
       if ((path[0] == '\0' && (directory = opendir("./")) == NULL)
 	  || (path[0] != '\0' && (directory = opendir(path)) == NULL))
 	return (buffer);
-      if ((replace = create_replace_q(directory, elem, NULL, path)) == NULL
+      if ((replace = create_replace_q(directory, elem, path, 1)) == NULL
 	  || (buffer = replace_seg_q(buffer, replace, error, start)) == NULL)
 	return (NULL);
       free(path);

@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Jun  1 04:06:44 2016 Paul Wery
-** Last update Sat Jun  4 01:19:05 2016 Paul Wery
+** Last update Sat Jun  4 23:22:35 2016 Paul Wery
 */
 
 #include <sys/types.h>
@@ -15,28 +15,32 @@
 #include <unistd.h>
 #include "mins.h"
 
-char	*create_replace_b(DIR *directory, t_elems *e, t_dir *file)
+char		*create_replace_b(DIR *directory, t_elems *e, int size)
 {
-  char	*replace;
-  int	size;
-  int	n;
+  t_order	*order;
+  t_order	*it;
+  char		*replace;
+  int		n;
 
   n = 0;
-  size = 1;
-  if ((replace = malloc(1)) == NULL)
+  if ((replace = malloc(1)) == NULL
+      || (order = order_names(directory)) == NULL)
     return (NULL);
   replace[0] = '\0';
-  while ((file = readdir(directory)) != NULL)
+  it = order->next;
+  while (it != order)
     {
-      if (match_elem_brak(file->d_name, e->one, e->two, e->ref) == 1)
+      if (match_elem_brak(it->name, e->one, e->two, e->ref) == 1)
 	{
-	  size += my_strlen(file->d_name) + my_strlen(e->path) + 1;
+	  size += my_strlen(it->name) + my_strlen(e->path) + 1;
 	  if ((replace = realloc(replace, size)) == NULL)
 	    return (NULL);
-	  n = create_replace_q_next(e->path, file->d_name, n, replace);
+	  n = create_replace_q_next(e->path, it->name, n, replace);
 	}
+      it = it->next;
     }
   closedir(directory);
+  delete_order(&order);
   return (replace);
 }
 
@@ -109,7 +113,7 @@ char		*echo_bracket(char *buffer, int *error)
       if ((e.path[0] == '\0' && (directory = opendir("./")) == NULL)
 	  || (e.path[0] != '\0' && (directory = opendir(e.path)) == NULL))
 	return (buffer);
-      if ((replace = create_replace_b(directory, &e, NULL)) == NULL
+      if ((replace = create_replace_b(directory, &e, 1)) == NULL
 	  || (buffer = replace_seg_b(buffer, replace, error, e.l.start)) == NULL)
 	return (NULL);
       free(e.path);

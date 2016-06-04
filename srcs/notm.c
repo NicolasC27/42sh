@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri Jun  3 20:52:35 2016 Paul Wery
-** Last update Sat Jun  4 01:28:07 2016 Paul Wery
+** Last update Sat Jun  4 19:12:12 2016 Paul Wery
 */
 
 #include <unistd.h>
@@ -48,7 +48,8 @@ int	notm(t_exec *it, t_env *ev, int n, int i)
     }
   else if (it->error == -2)
     {
-      while (it->tab[n] != NULL && it->tab[n][i] != '$')
+      while (it->tab[n] != NULL && it->tab[n][i] != '\0'
+	     && it->tab[n][i] != '$')
         {
           i = 0;
           while (it->tab[n][i] != '\0' && it->tab[n][i] != '$')
