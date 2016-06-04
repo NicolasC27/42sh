@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Jan 16 20:40:01 2016 Paul Wery
-** Last update Sun Jun  5 00:23:20 2016 Nicolas Chevalier
+** Last update Sun Jun  5 00:43:04 2016 Nicolas Chevalier
 */
 
 #include <signal.h>
@@ -91,9 +91,14 @@ int		main(int ac UNUSED, char **av UNUSED, char **environ)
   t_info	info;
 
   buffer = NULL;
-  init_fct(&history, &ev, environ, &info);
+  if (ini_env(&ev) == -1
+      || (ev.env = create_my_env(environ, 0, 0, &ev)) == NULL)
+    return (0);
+  /* init_fct(&history, &ev, environ, &info); */
   while (1)
     {
+      if (isatty(0) == 1)
+	my_putstr("prompt$>");
       if (signal(SIGINT, SIG_IGN) == SIG_ERR)
 	return (ev.val_exit);
       if (buffer != NULL)
