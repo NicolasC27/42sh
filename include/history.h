@@ -11,8 +11,6 @@
 #ifndef HISTORY_H_
 # define HISTORY_H_
 
-# define HISTORY_FILE "/home/cheval_8/.42sh_history"
-
 # include <sys/ioctl.h>
 # include <string.h>
 # include <fcntl.h>
@@ -44,7 +42,7 @@ typedef struct		s_history
 {
   t_commands		commands;
   t_cmd			*current_cmd;
-  int			press;
+  char			*history_file;
   struct termios	oldt;
   struct termios	newt;
 }			t_history;
@@ -54,7 +52,7 @@ typedef struct		s_history
 */
 void	canonical_mode(struct termios *oldt, struct termios *newt, int mode);
 int	add_command(t_commands *commands, t_cmd *cmd);
-int	init_history(t_history *history);
+int	init_history(t_history *history, char **envp);
 void   	free_commands(t_commands *commands);
 void	my_putchar_out(char c, int out);
 void	my_putstr_out(char *str, int out);
@@ -65,8 +63,8 @@ int	my_strlen_out(char *str);
 */
 int	open_file(char *file_name, int mode);
 int    	open_error(char *file_name);
-int	read_file(t_commands *commands);
-int	write_file(t_commands *commands);
+int	read_file(t_history *history);
+int	write_file(t_history *history);
 int    	close_file(int id);
 int    	close_error(char *file_name);
 

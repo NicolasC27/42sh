@@ -92,7 +92,8 @@ int		main(int ac UNUSED, char **av UNUSED, char **env)
 
   buffer = NULL;
   fill_list(&list);
-  init_fct(&history, env, &info);
+  if (init_fct(&history, env, &info) == 1)
+    return (1);
   if (ini_env(&ev) == -1 || (ev.env = create_my_env(env, 0, 0, &ev)) == NULL)
     return (EXIT_FAILURE);
   while (1)

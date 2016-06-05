@@ -42,8 +42,9 @@ static int	init_editline(t_info *info, char **env)
   return (EXIT_SUCCESS);
 }
 
-void		init_fct(t_history *history,  char **env, t_info *info)
+int    	init_fct(t_history *history,  char **env, t_info *info)
 {
   init_editline(info, env);
-  init_history(history);
+  if (init_history(history, env) == 1)
+    return (1);
 }

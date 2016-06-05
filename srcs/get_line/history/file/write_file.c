@@ -10,17 +10,17 @@
 
 #include "history.h"
 
-int	write_file(t_commands *commands)
+int	write_file(t_history *history)
 {
   int	open_fd;
   int	close_fd;
   int	ret;
   t_cmd	*cmd_tmp;
 
-  open_fd = open_file(HISTORY_FILE, 1);
+  open_fd = open_file(history->history_file, 1);
   if (open_fd == -1)
-    return (open_error(HISTORY_FILE));
-  cmd_tmp = commands->first;
+    return (open_error(history->history_file));
+  cmd_tmp = history->commands.first;
   while (cmd_tmp)
     {
       ret = write(open_fd, cmd_tmp->command, my_strlen(cmd_tmp->command));
@@ -34,6 +34,6 @@ int	write_file(t_commands *commands)
     }
   close_fd = close_file(open_fd);
   if (close_fd == -1)
-    return (close_error(HISTORY_FILE));
+    return (close_error(history->history_file));
   return (0);
 }

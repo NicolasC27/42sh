@@ -65,7 +65,11 @@ int		prompt(char **);
 /*
 **init_fct.c
 */
+<<<<<<< HEAD
 void		init_fct(t_history *,  char **, t_info *);
+=======
+int	init_fct(t_history *,  char **, t_info *);
+>>>>>>> 8964d30fbe2db916b1a3a80e79b4640633e7034a
 
 /*
 ** get_line.c
@@ -76,6 +80,7 @@ char		*get_line(t_history *history, t_info *, char **);
 ** getterm.c
 */
 char		*my_getterm(char **);
+char		*my_gethome(char **);
 
 /*
 ** my_strncmp.c

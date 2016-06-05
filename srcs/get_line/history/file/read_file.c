@@ -37,19 +37,19 @@ int	check_line(char *buffer)
   return (0);
 }
 
-int	read_file(t_commands *commands)
+int	read_file(t_history *history)
 {
   int	open_fd;
   int	close_fd;
   char	*buffer;
 
-  open_fd = open_file(HISTORY_FILE, 0);
+  open_fd = open_file(history->history_file, 0);
   if (open_fd == -1)
-    return (open_error(HISTORY_FILE));
+    return (open_error(history->history_file));
   while ((buffer = get_next_linee(open_fd))!= NULL)
     {
       if (check_line(buffer) == 1 ||
-	  add_command_history(commands, buffer) == 1)
+	  add_command_history(&history->commands, buffer) == 1)
 	{
 	  my_putstr("Error : Read failed\n", 2);
 	  return (1);
@@ -58,6 +58,6 @@ int	read_file(t_commands *commands)
     }
   close_fd = close_file(open_fd);
   if (close_fd == -1)
-    return (close_error(HISTORY_FILE));
+    return (close_error(history->history_file));
   return (0);
 }
