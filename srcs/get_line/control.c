@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Sun Jun  5 16:26:00 2016 Nicolas Chevalier
-** Last update Sun Jun  5 21:38:57 2016 Nicolas Chevalier
+** Last update Sun Jun  5 21:42:41 2016 Nicolas Chevalier
 */
 
 #include <ncurses.h>
@@ -60,6 +60,7 @@ void		control_ctrlleft(t_edit *line, t_info *info)
   i -= 1;
   while (i >= 0 && (line->cmd[i] < 48 ||
 		    (line->cmd[i] > 57 && line->cmd[i] < 65) ||
+		    (line->cmd[i] > 90 && line->cmd[i] < 97) ||
 		    (line->cmd[i] > 122 && line->cmd[i] < 127)))
     {
       write(info->fd, info->keyleft, my_strlen(info->keyleft));
@@ -82,8 +83,9 @@ void		control_ctrlright(t_edit *line, t_info *info)
 
   i = line->len + line->pos;
   while (line->pos < 0 && (line->cmd[i] < 48 ||
-		    (line->cmd[i] > 57 && line->cmd[i] < 65) ||
-		    (line->cmd[i] > 122 && line->cmd[i] < 127)))
+			   (line->cmd[i] > 57 && line->cmd[i] < 65) ||
+			   (line->cmd[i] > 90 && line->cmd[i] < 97) ||
+			   (line->cmd[i] > 122 && line->cmd[i] < 127)))
     {
       write(info->fd, info->keyright, my_strlen(info->keyright));
       i += 1;
