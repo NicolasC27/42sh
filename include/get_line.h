@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:48:14 2016 Nicolas Chevalier
-** Last update Sun Jun  5 18:38:50 2016 Nicolas Chevalier
+** Last update Sun Jun  5 19:21:25 2016 Nicolas Chevalier
 */
 
 #ifndef GET_LINE_H_
@@ -32,7 +32,9 @@
 # define CTRLE	        5
 # define CTRLK		11
 # define CTRLL		12
+# define CTRLU		12
 # define CTRLLEFT	49
+# define HOME		72
 # define CTRLRIGHT	50
 # define BLACK		"\033[0;30m"
 # define RED		"\033[1;31m"

@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Sat Jun  4 18:43:42 2016 Nicolas Chevalier
-** Last update Sun Jun  5 16:14:48 2016 Nicolas Chevalier
+** Last update Sun Jun  5 19:41:41 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -34,10 +34,12 @@ static int	manage_string(t_edit *line, t_info *info)
   line->cmd = tmp;
   line->len -= 1;
   save = tigetstr("sc");
-  write(info->fd, save, my_strlen(save));
+  if (save != NULL)
+    write(info->fd, save, my_strlen(save));
   my_putstr(&line->cmd[i - 1]);
   save = tigetstr("rc");
-  write(info->fd, save, my_strlen(save));
+  if (save != NULL)
+    write(info->fd, save, my_strlen(save));
   return (EXIT_SUCCESS);
 }
 
@@ -52,9 +54,11 @@ int		cursors_delete(t_edit *line, t_info *info)
   i -= line->len;
   if (i == line->pos)
     return (EXIT_FAILURE);
-  write(info->fd, info->keyleft, my_strlen(info->keyleft));
+  if (info->keyleft)
+    write(info->fd, info->keyleft, my_strlen(info->keyleft));
   s = tigetstr("el");
-  write(info->fd, s, my_strlen(s));
+  if (s != NULL)
+    write(info->fd, s, my_strlen(s));
   manage_string(line, info);
   return (EXIT_SUCCESS);
 }
@@ -69,7 +73,8 @@ int		cursors_left(t_edit *line, t_info *info)
   i -= line->len;
   if (i == line->pos)
     return (EXIT_FAILURE);
-  write(info->fd, info->keyleft, my_strlen(info->keyleft));
+  if (info->keyleft != NULL)
+    write(info->fd, info->keyleft, my_strlen(info->keyleft));
   line->pos -= 1;
   return (EXIT_SUCCESS);
 }
@@ -80,7 +85,8 @@ int		cursors_right(t_edit *line, t_info *info)
     return (EXIT_FAILURE);
   if (line->cmd[line->len + (line->pos)] == '\0')
     return (EXIT_FAILURE);
-  write(info->fd, info->keyright, my_strlen(info->keyright));
+  if (info->keyright != NULL)
+    write(info->fd, info->keyright, my_strlen(info->keyright));
   line->pos += 1;
   return (EXIT_SUCCESS);
 }

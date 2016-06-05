@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Sun Jun  5 16:19:44 2016 Nicolas Chevalier
-** Last update Sun Jun  5 18:36:45 2016 Nicolas Chevalier
+** Last update Sun Jun  5 19:23:12 2016 Nicolas Chevalier
 */
 
 #include <ncurses.h>
@@ -17,7 +17,8 @@ void		clear_screen_(t_edit *line, t_info *info, char **env)
   char		*s;
 
   s = tigetstr("clear");
-  write(info->fd, s, my_strlen(s));
+  if (s != NULL)
+    write(info->fd, s, my_strlen(s));
   prompt(env);
   if (line->cmd != NULL)
     my_putstr(line->cmd);
@@ -39,7 +40,7 @@ int		check_key(char *buff)
       && buff[0] != CTRLK && buff[0] != CTRLA
       && buff[0] != CTRLD && buff[0] != CTRLE
       && buff[0] != CTRLL && buff[2] != CTRLLEFT
-      && buff[2] != CTRLRIGHT)
+      && buff[2] != CTRLRIGHT && buff[2] != HOME)
     return (0);
   return (1);
 }
