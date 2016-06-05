@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Sat Jun  4 18:43:42 2016 Nicolas Chevalier
-** Last update Sun Jun  5 16:14:48 2016 Nicolas Chevalier
+** Last update Sun Jun  5 19:50:09 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -22,7 +22,8 @@ static int	manage_string(t_edit *line, t_info *info)
   int		i;
   int		j;
 
-  buff = malloc(sizeof(char) * 1 * -(line->pos) + 1);
+  if ((buff = malloc(sizeof(char) * 1 * -(line->pos) + 1)) == NULL)
+    return (EXIT_FAILURE);
   i  = line->len + line->pos;
   j = 0;
   while (line->cmd[i])
@@ -31,6 +32,7 @@ static int	manage_string(t_edit *line, t_info *info)
   i = line->len + line->pos;
   line->cmd[i - 1] = '\0';
   tmp = strcat(line->cmd, buff);
+  free(buff);
   line->cmd = tmp;
   line->len -= 1;
   save = tigetstr("sc");
@@ -55,7 +57,8 @@ int		cursors_delete(t_edit *line, t_info *info)
   write(info->fd, info->keyleft, my_strlen(info->keyleft));
   s = tigetstr("el");
   write(info->fd, s, my_strlen(s));
-  manage_string(line, info);
+  if (manage_string(line, info) == EXIT_FAILURE)
+    return (EXIT_FAILURE);
   return (EXIT_SUCCESS);
 }
 

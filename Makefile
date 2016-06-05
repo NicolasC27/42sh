@@ -5,16 +5,16 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sat Apr  2 00:37:51 2016 Paul Wery
-## Last update Sun Jun  5 17:39:17 2016 Lucas Debouté
+## Last update Sun Jun  5 19:41:50 2016 Paul Wery
 ##
 
 NAME    =	42sh
 
 RM      =	rm -f
 
-CC	=	gcc
+CC	=	gcc -g
 
-CFLAGS	=	-W -Wall -Werror 
+CFLAGS	=	-W -Wall -Werror
 CFLAGS	+=	-Iinclude
 
 OBJS    =	$(SRCS:.c=.o)
