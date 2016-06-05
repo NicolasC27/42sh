@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:27:38 2016 Nicolas Chevalier
-** Last update Sun Jun  5 16:46:45 2016 Nicolas Chevalier
+** Last update Sun Jun  5 17:05:13 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -71,7 +71,7 @@ char		*get_line(t_history *history, t_info *info, char **env)
       if (buff[0] == CTRLD && buff[1] == '\0')
 	return (ctrld_());
       if (buff[0] == CTRLL)
-	clear_screen_(info, env);
+	clear_screen_(&line, info, env);
       if (buff[0] == '\n')
 	return (return_str(line.cmd, history));
       manage_line(&line, info, buff, history);

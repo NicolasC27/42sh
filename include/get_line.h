@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:48:14 2016 Nicolas Chevalier
-** Last update Sun Jun  5 16:46:41 2016 Nicolas Chevalier
+** Last update Sun Jun  5 17:04:54 2016 Nicolas Chevalier
 */
 
 #ifndef GET_LINE_H_
@@ -131,7 +131,7 @@ void		add_character_normal(t_edit *, char);
 */
 int		check_key(char *);
 char		*ctrld_();
-void		clear_screen_(t_info *, char **);
+void		clear_screen_(t_edit *, t_info *, char **);
 
 /*
 ** control.c

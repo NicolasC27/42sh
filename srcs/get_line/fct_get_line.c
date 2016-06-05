@@ -5,20 +5,22 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Sun Jun  5 16:19:44 2016 Nicolas Chevalier
-** Last update Sun Jun  5 16:22:03 2016 Nicolas Chevalier
+** Last update Sun Jun  5 17:09:18 2016 Nicolas Chevalier
 */
 
 #include <ncurses.h>
 #include "get_line.h"
 #include "function.h"
 
-void		clear_screen_(t_info *info, char **env)
+void		clear_screen_(t_edit *line, t_info *info, char **env)
 {
   char		*s;
 
   s = tigetstr("clear");
   write(info->fd, s, my_strlen(s));
   prompt(env);
+  if (line->cmd != NULL)
+    my_putstr(line->cmd);
 }
 
 char		*ctrld_()

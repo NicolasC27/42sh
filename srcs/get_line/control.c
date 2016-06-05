@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Sun Jun  5 16:26:00 2016 Nicolas Chevalier
-** Last update Sun Jun  5 16:26:41 2016 Nicolas Chevalier
+** Last update Sun Jun  5 17:07:47 2016 Nicolas Chevalier
 */
 
 #include <ncurses.h>
@@ -28,11 +28,14 @@ void		control_k(t_edit *line, t_info *info)
 {
   char		*s;
 
-  s = tigetstr("el");
-  write(info->fd, s, my_strlen(s));
-  line->len += line->pos;
-  line->cmd[line->len] = '\0';
-  line->pos = 0;
+  if (line->cmd != NULL)
+    {
+      s = tigetstr("el");
+      write(info->fd, s, my_strlen(s));
+      line->len += line->pos;
+      line->cmd[line->len] = '\0';
+      line->pos = 0;
+    }
 }
 
 void		control_e(t_edit *line, t_info *info)
