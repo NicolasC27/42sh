@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Sun Jun  5 16:19:44 2016 Nicolas Chevalier
-** Last update Sun Jun  5 19:23:12 2016 Nicolas Chevalier
+** Last update Sun Jun  5 21:59:39 2016 Paul Wery
 */
 
 #include <ncurses.h>
@@ -24,7 +24,7 @@ void		clear_screen_(t_edit *line, t_info *info, char **env)
     my_putstr(line->cmd);
 }
 
-char		*ctrld_()
+char		*ctrld_(void)
 {
   mode(1, 0);
   my_putstr("\n");

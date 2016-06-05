@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Sat Jun  4 18:21:53 2016 Nicolas Chevalier
-** Last update Sun Jun  5 19:20:19 2016 Lucas Debouté
+** Last update Sun Jun  5 21:58:39 2016 Paul Wery
 */
 
 #include <curses.h>
@@ -67,7 +67,7 @@ int		history_func(t_edit *line, t_history *history,
 {
   if (line->len != 0 && line->pos != 0)
       return (EXIT_FAILURE);
-  if  (buff[2] == 'A' && history->current_cmd != NULL)
+  if (buff[2] == 'A' && history->current_cmd != NULL)
     key_up_func(line, history, info);
   else if (buff[2] == 'B' && history->current_cmd != NULL)
     key_down_func(line, history, info);
