@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Fri Jun  3 21:29:38 2016 Nicolas Chevalier
-** Last update Sun Jun  5 20:40:06 2016 Nicolas Chevalier
+** Last update Sun Jun  5 20:57:23 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -25,7 +25,7 @@ static int	is_key(char *buff, int ESC, int HOOK, int KEY)
 
 static void	manage_control(t_edit *line, t_info *info, char *buff)
 {
-  if (buff[0] == CTRLA || (is_key(buff, 27, 79, HOME) == 0))
+  if (buff[0] == CTRLA || (is_key(buff, 27, 91, HOME) == 0))
     control_a(line, info);
   if (buff[0] == CTRLK)
     control_k(line, info);
