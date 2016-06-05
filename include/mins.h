@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan  5 01:26:12 2016 paul wery
-** Last update Sun Jun  5 09:49:21 2016 Paul Wery
+** Last update Sun Jun  5 18:24:46 2016 Paul Wery
 */
 
 #ifndef MINS
@@ -22,6 +22,7 @@
 # include <sys/stat.h>
 # include <dirent.h>
 # include "shrc.h"
+# include "history.h"
 
 typedef struct dirent t_dir;
 typedef struct	stat t_stat;
@@ -95,6 +96,8 @@ typedef struct	s_free
   char		**pars;
   struct s_exec	*list;
   struct s_var	*list_v;
+  t_list	alist;
+  t_history	history;
 }		t_free;
 
 typedef struct	s_env
