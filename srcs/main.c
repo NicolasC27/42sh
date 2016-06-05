@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Jan 16 20:40:01 2016 Paul Wery
-** Last update Sun Jun  5 00:43:04 2016 Nicolas Chevalier
+** Last update Sun Jun  5 03:10:58 2016 Nicolas Chevalier
 */
 
 #include <signal.h>
@@ -77,13 +77,12 @@ int	ini_env(t_env *ev)
   ev->state_p = 0;
   ev->result = 0;
   ev->oldpwd = NULL;
-  if ((ev->stdin = dup(0)) == -1
-      || (ev->stdout = dup(1)) == -1)
+  if (((ev->stdin = dup(0)) == -1) || ((ev->stdout = dup(1)) == -1))
     return (-1);
   return (0);
 }
 
-int		main(int ac UNUSED, char **av UNUSED, char **environ)
+int		main(int ac UNUSED, char **av UNUSED, char **env)
 {
   t_env		ev;
   t_history	history;
@@ -91,19 +90,16 @@ int		main(int ac UNUSED, char **av UNUSED, char **environ)
   t_info	info;
 
   buffer = NULL;
-  if (ini_env(&ev) == -1
-      || (ev.env = create_my_env(environ, 0, 0, &ev)) == NULL)
-    return (0);
-  /* init_fct(&history, &ev, environ, &info); */
+  if (ini_env(&ev) == -1 || (ev.env = create_my_env(env, 0, 0, &ev)) == NULL)
+    return (EXIT_FAILURE);
+  init_fct(&history,env, &info);
   while (1)
     {
-      if (isatty(0) == 1)
-	my_putstr("prompt$>");
       if (signal(SIGINT, SIG_IGN) == SIG_ERR)
 	return (ev.val_exit);
       if (buffer != NULL)
 	free(buffer);
-      if ((buffer = get_next_line()) == NULL)
+      if ((buffer = get_line(&history)) == NULL)
 	return (ev.val_exit);
       if (buffer[0] != '\0')
 	{

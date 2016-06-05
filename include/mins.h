@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan  5 01:26:12 2016 paul wery
-** Last update Sat Jun  4 23:45:11 2016 Nicolas Chevalier
+** Last update Sun Jun  5 02:50:45 2016 Nicolas Chevalier
 */
 
 #ifndef MINS
@@ -16,7 +16,7 @@
 
 #endif /* !READ_SIZE */
 
-# define UNUSED __attribute__((unused))
+#    define UNUSED __attribute__((unused))
 
 # include <unistd.h>
 # include <sys/stat.h>
@@ -58,14 +58,6 @@ typedef struct	s_glob_error
   int		four;
 }		t_glob_error;
 
-typedef struct	s_line
-{
-  char		*line;
-  int		val_ret;
-  int		end;
-  int		nb;
-}		t_line;
-
 typedef struct	s_exec
 {
   char		**tab;
@@ -73,6 +65,14 @@ typedef struct	s_exec
   struct s_exec	*next;
   struct s_exec	*prev;
 }		t_exec;
+
+typedef struct	s_line
+{
+  char		*line;
+  int		val_ret;
+  int		end;
+  int		nb;
+}		t_line;
 
 typedef struct	s_free
 {
@@ -102,7 +102,10 @@ char	*get_exec(char *str);
 int	find_path(char **env);
 char	*get_path(int n, int nb_t, char **env, int i);
 int	nb_path(int n, char **env);
+int	my_strlen(char *str);
 char	*final_path(char *path, char *exec);
+void	my_putstr(char *str);
+void	my_put_error(char *error);
 void	path_exec(char *exec, char **opts, char **env);
 int	where_exec(char *exec);
 void	my_exit(t_env *ev, char **opts);
@@ -138,8 +141,8 @@ int	my_env(t_env *ev, char **opts, char *exec);
 void	get_status(int status, t_env *ev);
 
 t_exec	*create_list(void);
-int	add_elem_prev(t_exec *elem, char **tab, t_glob_error *error);
-int	add_elem_pipe(t_exec *elem, char **tab);
+int	add_elem_prev(t_exec *, char **, t_glob_error *error);
+int	add_elem_pipe(t_exec *, char **);
 void	delete_list(t_exec **root);
 
 t_order	*create_order(void);

@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:27:38 2016 Nicolas Chevalier
-** Last update Sun Jun  5 00:23:04 2016 Nicolas Chevalier
+** Last update Sun Jun  5 03:09:41 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -21,7 +21,6 @@
 char		*return_str(char *str)
 {
   char		*s;
-  char		buff[4096];
   int		fd;
   char		*clear;
 
@@ -37,101 +36,53 @@ char		*return_str(char *str)
   return (str);
 }
 
-void		manage_pos()
+static int	check_key(char *buff)
 {
-  char		*s;
-  char		*cursor;
-  int		fd;
-  int		i;
-
-  s = tigetstr("cuu1");
-  cursor = tgoto(s, 20, 20);
-  fd = open("/dev/tty", O_RDWR);
-  i = -1;
-  while (cursor[++i] != '\0');
-  write(fd, cursor, i);
+  if (buff[0] != '\t' && buff[0] != '\n' && buff[0] != 127
+      && buff[2] != LEFT && buff[2] != RIGHT
+      && buff[2] != DOWN && buff[2] != UP
+      && buff[0] != CLEAR)
+    return (EXIT_SUCCESS);
+  return (EXIT_FAILURE);
 }
 
-char		*get_line(char **env, t_history *history)
+static void	manage_line(t_edit *line, t_info *info,
+			    char buff[10], t_history *history)
+{
+  keyboard(line, buff, history);
+  if (!check_key(buff))
+    {
+      if (line->pos == 0)
+	add_character_normal(line, buff[0]);
+      else
+	add_character_advanced(line, buff[0]);
+    }
+}
+
+char		*get_line(t_history *history)
 {
   t_edit	line;
   t_info	info;
-  char		buff[100];
+  char		buff[10];
   int		len;
-  char		*stock;
-  int		i;
-  char		*save;
-  char		*s;
-  int		fd;
-  int		j;
 
-  j = 0;
-  i = 0;
   len = 1;
-  return (get_next_line());
+  if (isatty(0) == 0)
+    return (get_next_line());
   init(&line);
   while (len > 0)
     {
       memset(buff, '\0', 9);
-      if ((len = read(0, buff, 100)) == -1)
+      if ((len = read(0, buff, 10)) == -1)
 	return (NULL);
       buff[len] = '\0';
-      if (buff[0] != '\t' && buff[0] != '\n' && buff[0] != 127
-	  && buff[2] != LEFT && buff[2] != RIGHT
-	  && buff[2] != DOWN && buff[2] != UP
-	  && buff[2] != DELETE && buff[0] != CLEAR)
+      if (!check_key(buff))
 	my_putstr(buff);
       if (buff[0] == 4 && buff[1] == '\0')
 	return (NULL);
       if (buff[0] == '\n')
 	return (return_str(line.cmd));
-      keyboard(&line, buff, history);
-      /* manage_pos(); */
-      if (buff[0] != '\t' && buff[0] != 127 && buff[2] != LEFT &&
-	  buff[2] != RIGHT && buff[2] != DOWN && buff[2] != UP && buff[0] != CLEAR)
-	{
-	  if (line.pos == 0)
-	    {
-	      line.cmd = realloc(line.cmd, line.len + 3);
-	      line.cmd[line.len] = buff[0];
-	      line.cmd[line.len + 1] = '\0';
-	      line.len += 1;
-	    }
-	  else
-	    {
-	      /* printf("%d", line.pos); */
-	      /* exit (0); */
-	      stock = NULL;
-	      stock = malloc(sizeof(char) * (line.len + 2));
-	      line.cmd = realloc(line.cmd, line.len + 2);
-	      j = 0;
-	      i = line.len + (line.pos); // sadlut
-	      while (i >= 0 && line.cmd[i] && i != line.len)
-		{
-		  stock[j] = line.cmd[i];
-		  j += 1;
-		  i += 1;
-		}
-	      stock[j] = '\0';
-	      i = line.len + (line.pos);
-	      line.cmd[i] = buff[0];
-	      line.cmd[i + 1] = '\0';
-	      line.cmd = strcat(line.cmd, stock);
-	      line.len += 1;
-	      /* line.pos -= 1; */
-	      fd = open("/dev/tty", O_RDWR);
-	      save = tigetstr("sc");
-	      write(fd, save, my_strlen(save));
-	      s = tigetstr("el");
-	      write(fd, s, my_strlen(s));
-	      i += 1;
-	      while (line.cmd[i])
-		write(1, &line.cmd[i++], 1);
-	      /* my_putstr(&line.cmd[i + 1]); */
-	      save = tigetstr("rc");
-	      write(fd, save, my_strlen(save));
-	    }
-	}
+      manage_line(&line, &info, buff, history);
     }
   return (line.cmd);
 }

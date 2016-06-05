@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:48:14 2016 Nicolas Chevalier
-** Last update Sat Jun  4 23:37:24 2016 Nicolas Chevalier
+** Last update Sun Jun  5 03:11:08 2016 Nicolas Chevalier
 */
 
 #ifndef GET_LINE_H_
@@ -37,9 +37,14 @@ typedef struct	s_edit
 }		t_edit;
 
 /*
+**init_fct.c
+*/
+void	init_fct(t_history *,  char **, t_info *);
+
+/*
 ** get_line.c
 */
-char		*get_line(char **, t_history *history);
+char		*get_line(t_history *history);
 
 /*
 ** getterm.c
@@ -82,5 +87,11 @@ char		*my_autocomplete(char *str);
 int		cursors_left(t_edit *);
 int		cursors_right(t_edit *);
 int		cursors_delete(t_edit *, char *);
+
+/*
+** character.c
+*/
+void		add_character_advanced(t_edit *, char);
+void		add_character_normal(t_edit *, char);
 
 #endif /* !GET_LINE_H_ */
