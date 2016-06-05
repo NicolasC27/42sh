@@ -17,8 +17,9 @@
 #include <fcntl.h>
 #include "get_line.h"
 #include "function.h"
+#include "history.h"
 
-char		*return_str(char *str)
+char		*return_str(char *str, t_history *history)
 {
   char		*s;
   int		fd;
@@ -33,6 +34,8 @@ char		*return_str(char *str)
   write(fd, s, my_strlen(s));
   s = tigetstr("cuu1");
   write(fd, s, my_strlen(s));
+  if (add_command_history(history->commands, str) == 1)
+    return (NULL);
   return (str);
 }
 
@@ -81,7 +84,7 @@ char		*get_line(t_history *history)
       if (buff[0] == 4 && buff[1] == '\0')
 	return (NULL);
       if (buff[0] == '\n')
-	return (return_str(line.cmd));
+	return (return_str(line.cmd, history));
       manage_line(&line, &info, buff, history);
     }
   return (line.cmd);
