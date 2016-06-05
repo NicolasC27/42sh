@@ -5,7 +5,7 @@
 ** Login   <gerard_v@epitech.net>
 **
 ** Started on  Tue Dec 29 21:18:49 2015 Valentin GERARD
-** Last update Sun Jun  5 16:12:19 2016 Nicolas Chevalier
+** Last update Sun Jun  5 19:20:45 2016 Lucas Debouté
 */
 
 #include "get_line.h"
@@ -38,7 +38,7 @@ int	init_commands(t_history *history, char **envp)
 
 int  	init_history(t_history *history, char **envp)
 {
-  if (init_commands(history,envp) == 1)
+  if (init_commands(history, envp) == 1)
     return (1);
   if (read_file(history) == 1)
     return (1);

@@ -5,9 +5,8 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri Jan 22 19:46:56 2016 Paul Wery
-** Last update Tue May 31 12:39:10 2016 Nicolas Chevalier
+** Last update Sun Jun  5 19:18:21 2016 Lucas Debouté
 */
-
 
 #include <stdlib.h>
 #include <unistd.h>

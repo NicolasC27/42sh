@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Sat Jun  4 18:21:53 2016 Nicolas Chevalier
-** Last update Sun Jun  5 16:31:40 2016 Nicolas Chevalier
+** Last update Sun Jun  5 19:20:19 2016 Lucas Debouté
 */
 
 #include <curses.h>
@@ -62,7 +62,8 @@ static void	key_down_func(t_edit *line, t_history *history, t_info *info)
   my_putstr(line->cmd);
 }
 
-int		history_func(t_edit *line, t_history *history, char *buff, t_info *info)
+int		history_func(t_edit *line, t_history *history,
+			     char *buff, t_info *info)
 {
   if (line->len != 0 && line->pos != 0)
       return (EXIT_FAILURE);

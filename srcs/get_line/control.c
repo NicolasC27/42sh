@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Sun Jun  5 16:26:00 2016 Nicolas Chevalier
-** Last update Sun Jun  5 18:50:18 2016 Nicolas Chevalier
+** Last update Sun Jun  5 19:19:49 2016 Lucas Debouté
 */
 
 #include <ncurses.h>
@@ -81,8 +81,6 @@ void		control_ctrlright(t_edit *line, t_info *info)
   int		i;
 
   i = line->len + line->pos;
-  /* printf("%c", line->cmd[i]); */
-  /* exit (0); */
   while (line->pos < 0 && (line->cmd[i] < 48 ||
 		    (line->cmd[i] > 57 && line->cmd[i] < 65) ||
 		    (line->cmd[i] > 122 && line->cmd[i] < 127)))

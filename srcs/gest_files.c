@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Jun  2 20:48:47 2016 Paul Wery
-** Last update Sat Jun  4 17:45:40 2016 Paul Wery
+** Last update Sun Jun  5 19:14:47 2016 Lucas Debouté
 */
 
 #include <errno.h>
@@ -65,8 +65,8 @@ int	open_files(t_exec *list, t_exec *it, int num, t_env *ev)
   while (elem != list && elem->tab[0][0] != ';')
     {
       num = elem_redirection(elem->tab[0], "<<,>>,||,&&,<,>,|,&,;");
-      if (elem->next != list
-          && elem_redirection(elem->next->tab[0], "<<,>>,||,&&,<,>,|,&,;") == 0)
+      if (elem->next != list &&
+	  elem_redirection(elem->next->tab[0], "<<,>>,||,&&,<,>,|,&,;") == 0)
 	if (open_files_next(num, elem) == -2)
 	  {
 	    files_error(elem->next->tab[0], ev, 0);
