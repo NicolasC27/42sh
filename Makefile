@@ -5,14 +5,14 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sat Apr  2 00:37:51 2016 Paul Wery
-## Last update Sun Jun  5 19:41:50 2016 Paul Wery
+## Last update Sun Jun  5 21:10:49 2016 Paul Wery
 ##
 
 NAME    =	42sh
 
 RM      =	rm -f
 
-CC	=	gcc -g
+CC	=	gcc
 
 CFLAGS	=	-W -Wall -Werror
 CFLAGS	+=	-Iinclude
