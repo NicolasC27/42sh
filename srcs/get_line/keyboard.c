@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Fri Jun  3 21:29:38 2016 Nicolas Chevalier
-** Last update Sun Jun  5 00:06:05 2016 Nicolas Chevalier
+** Last update Sun Jun  5 08:23:42 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -23,29 +23,28 @@ static int	is_key(char *buff, int ESC, int HOOK, int KEY)
 
 }
 
-static void	clear_screen_(void)
+static void	clear_screen_(t_info *info)
 {
   char		*s;
   int		fd;
 
-  fd = open("/dev/tty", O_RDWR);
   s = tigetstr("clear");
-  write(fd, s, my_strlen(s));
+  write(info->fd, s, my_strlen(s));
   my_putstr("prompt$>");
 }
 
-int		keyboard(t_edit *line, char *buff, t_history *history)
+int		keyboard(t_edit *line, char *buff, t_history *history, t_info *info)
 {
   if (is_key(buff, 27, 91, UP) == 0 || is_key(buff, 27, 91, DOWN) == 0)
-    history_func(line, history, buff);
+    history_func(line, history, buff, info);
   else if (is_key(buff, 27, 91, LEFT) == 0)
-    cursors_left(line);
+    cursors_left(line, info);
   else if (is_key(buff, 27, 91, RIGHT) == 0)
-    cursors_right(line);
+    cursors_right(line, info);
   else if (buff[0] == '\t')
     my_autocomplete(line->cmd);
   else if (buff[0] == 127)
-    cursors_delete(line, buff);
+    cursors_delete(line, buff, info);
   else if (buff[0] == 12)
-    clear_screen_();
+    clear_screen_(info);
 }

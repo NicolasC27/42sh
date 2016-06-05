@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:27:38 2016 Nicolas Chevalier
-** Last update Sun Jun  5 07:51:13 2016 Nicolas Chevalier
+** Last update Sun Jun  5 08:53:49 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -37,21 +37,17 @@ char		*return_str(char *str, t_info *info, t_history *history)
   int		fd;
   char		*clear;
 
-  /* printf("%d", info->fd); */
-  /* exit (0); */
-  /* write(info->fd, info->keydown, my_strlen(info->keydown)); */
-  /* clear = tigetstr("el"); */
-  /* write(info->fd, clear, my_strlen(clear)); */
-  /* write(info->fd, info->keydown, my_strlen(info->keydown)); */
-  /* write(info->fd, info->keyup, my_strlen(info->keyup)); */
-  /* close(info->fd); */
   if (str != NULL)
     {
       add_element_history(history, str);
       write_file(&history->commands);
     }
   my_putstr("\n");
-  /* my_putstr("\n"); */
+  if (str == NULL)
+    {
+      str = realloc(str, 1);
+      str[0] = '\0';
+    }
   return (str);
 }
 
@@ -60,7 +56,7 @@ static int	check_key(char *buff)
   if (buff[0] != '\t' && buff[0] != '\n' && buff[0] != 127
       && buff[2] != LEFT && buff[2] != RIGHT
       && buff[2] != DOWN && buff[2] != UP
-      && buff[0] != CLEAR)
+      && buff[0] != CLEAR && buff[2] != DELETE)
     return (0);
   return (1);
 }
@@ -68,20 +64,18 @@ static int	check_key(char *buff)
 static void	manage_line(t_edit *line, t_info *info,
 			    char buff[10], t_history *history)
 {
-  /* printf("(%d)", info->term); */
-  /* exit (0); */
-  /* if (info->term == 1) */
-  keyboard(line, buff, history);
+  if (info->term == 1)
+    keyboard(line, buff, history, info);
   if (check_key(buff) == 0)
     {
       if (line->pos == 0)
 	add_character_normal(line, buff[0]);
       else
-	add_character_advanced(line, buff[0]);
+	add_character_advanced(line, buff[0], info);
     }
 }
 
-char		*get_line(t_history *history, t_info *info)
+char		*get_line(t_history *history, t_info *info, char **env)
 {
   t_edit	line;
   char		buff[10];
@@ -90,7 +84,7 @@ char		*get_line(t_history *history, t_info *info)
   len = 1;
   if (isatty(0) == 0)
     return (get_next_line());
-  init(&line);
+  init(&line, env);
   while (len > 0)
     {
       memset(buff, '\0', 9);

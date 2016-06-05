@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Sat Jun  4 18:43:42 2016 Nicolas Chevalier
-** Last update Sat Jun  4 23:36:57 2016 Nicolas Chevalier
+** Last update Sun Jun  5 08:29:46 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -13,7 +13,7 @@
 #include <term.h>
 #include "get_line.h"
 
-static int	manage_string(t_edit *line)
+static int	manage_string(t_edit *line, t_info *info)
 {
   char		*save;
   char		*buff;
@@ -23,13 +23,9 @@ static int	manage_string(t_edit *line)
 
   buff = malloc(sizeof(char) * 1 * -(line->pos) + 1);
   i  = line->len + line->pos;
-  j = 0; // salut
+  j = 0;
   while (line->cmd[i])
-    {
-      buff[j] = line->cmd[i];
-      i += 1;
-      j += 1;
-    }
+    buff[j++] = line->cmd[i++];
   buff[j] = '\0';
   i = line->len + line->pos;
   line->cmd[i - 1] = '\0';
@@ -37,17 +33,16 @@ static int	manage_string(t_edit *line)
   line->cmd = tmp;
   line->len -= 1;
   save = tigetstr("sc");
-  my_putstr(save);
+  write(info->fd, save, my_strlen(save));
   my_putstr(&line->cmd[i - 1]);
   save = tigetstr("rc");
-  my_putstr(save);
+  write(info->fd, save, my_strlen(save));
 }
 
-int		cursors_delete(t_edit *line, char *buff)
+int		cursors_delete(t_edit *line, char *buff, t_info *info)
 {
   char		*str;
   char		*s;
-  int		fd;
   int		i;
 
   i = 0;
@@ -56,56 +51,39 @@ int		cursors_delete(t_edit *line, char *buff)
   i -= line->len;
   if (i == line->pos)
     return (EXIT_FAILURE);
-  if ((fd = open("/dev/tty", O_RDWR)) == -1)
-    return (EXIT_FAILURE);
-  s = tigetstr("cub1");
-  if (s != NULL)
-    write(fd, s, my_strlen(s));
+  write(info->fd, info->keyleft, my_strlen(info->keyleft));
   s = tigetstr("el");
-  if (s != NULL)
-    write(fd, s, my_strlen(s));
-  manage_string(line);
+  write(info->fd, s, my_strlen(s));
+  manage_string(line, info);
 }
 
-int		cursors_left(t_edit *line)
+int		cursors_left(t_edit *line, t_info *info)
 {
-  static int	first;
   char		*s;
-  int		fd;
   int		i;
   char		*save;
 
 
   i = 0;
-  first = 1;
-  if ((fd = open("/dev/tty", O_RDWR)) == -1)
-    return (EXIT_FAILURE);
   if (line->cmd == NULL)
     return (EXIT_FAILURE);
   i -= line->len;
   if (i == line->pos)
     return (EXIT_FAILURE);
-  s = tigetstr("cub1");
-  if (s != NULL)
-    write(fd, s, my_strlen(s));
+  write(info->fd, info->keyleft, my_strlen(info->keyleft));
   line->pos -= 1;
   return (EXIT_SUCCESS);
 }
 
-int		cursors_right(t_edit *line)
+int		cursors_right(t_edit *line, t_info *info)
 {
   char		*s;
-  int		fd;
 
-  if ((fd = open("/dev/tty", O_RDWR)) == -1)
-    return (EXIT_FAILURE);
   if (line->cmd == NULL)
     return (EXIT_FAILURE);
   if (line->cmd[line->len + (line->pos)] == '\0')
     return (EXIT_FAILURE);
-  s = tigetstr("cuf1");
-  if (s != NULL)
-    write(fd, s, my_strlen(s));
+  write(info->fd, info->keyright, my_strlen(info->keyright));
   line->pos += 1;
   return (0);
 }

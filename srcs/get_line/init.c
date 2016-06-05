@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Fri Jun  3 21:33:04 2016 Nicolas Chevalier
-** Last update Sun Jun  5 00:21:50 2016 Nicolas Chevalier
+** Last update Sun Jun  5 08:53:46 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -13,7 +13,7 @@
 #include "function.h"
 #include "get_line.h"
 
-char		*init(t_edit *line)
+char		*init(t_edit *line, char **env)
 {
   char		*s;
 
@@ -21,6 +21,6 @@ char		*init(t_edit *line)
   line->len = 0;
   line->pos = 0;
   mode(0, 0, 1);
-  write(1, "prompt$>", my_strlen("prompt$>"));
+  prompt(env);
   return (NULL);
 }

@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Jan 16 20:40:01 2016 Paul Wery
-** Last update Sun Jun  5 07:39:08 2016 Nicolas Chevalier
+** Last update Sun Jun  5 08:54:26 2016 Nicolas Chevalier
 */
 
 #include <signal.h>
@@ -101,17 +101,13 @@ int		main(int ac UNUSED, char **av UNUSED, char **env)
 	return (ev.val_exit);
       if (buffer != NULL)
 	free(buffer);
-      if ((buffer = get_line(&history, &info)) == NULL ||
+      if ((buffer = get_line(&history, &info, env)) == NULL ||
 	  (buffer = alias_check(buffer, &list)) == NULL)
-	{
-	  return (ev.val_exit);
-	}
+	return (ev.val_exit);
       if (buffer[0] != '\0')
-	{
-	  if (valid_line(buffer) == 0
-	      && (ev.env = next_step(buffer, &ev)) == NULL)
-	    return (ev.val_exit);
-	}
+	if (valid_line(buffer) == 0
+	    && (ev.env = next_step(buffer, &ev)) == NULL)
+	  return (ev.val_exit);
     }
   return (ev.val_exit);
 }

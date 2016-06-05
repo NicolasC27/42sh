@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Sat Jun  4 22:41:06 2016 Nicolas Chevalier
-** Last update Sun Jun  5 07:35:44 2016 Nicolas Chevalier
+** Last update Sun Jun  5 08:21:13 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -32,10 +32,10 @@ static int	init_editline(t_info *info, char **env)
       my_putstr("can't open /dev/tty");
       exit(EXIT_FAILURE);
     }
-  info->keyleft = tigetstr("kcub1");
-  info->keyright = tigetstr("kcuf1");
-  info->keyup = tigetstr("kcuu1");
-  info->keydown = tigetstr("kcud1");
+  info->keyleft = tigetstr("cub1");
+  info->keyright = tigetstr("cuf1");
+  info->keyup = tigetstr("cuu1");
+  info->keydown = tigetstr("cud1");
   info->pos_begin = tigetstr("sc");
   info->term = true;
   my_putstr(info->pos_begin);
