@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Fri Jun  3 21:30:17 2016 Nicolas Chevalier
-** Last update Sat Jun  4 22:15:12 2016 Nicolas Chevalier
+** Last update Sun Jun  5 13:29:49 2016 Nicolas Chevalier
 */
 
 #include <sys/ioctl.h>
@@ -20,9 +20,10 @@ int			mode(int fd, int i, int option)
 
   if (i == 0)
     {
-      ioctl(fd, TCGETS, &oldT);
-      ioctl(fd, TCGETS, &newT);
-
+      if (ioctl(0, TCGETS, &oldT) == -1)
+	exit(EXIT_FAILURE);
+      if (ioctl(0, TCGETS, &newT) == -1)
+	exit(EXIT_FAILURE);
       newT.c_lflag &= ~ECHO;
       newT.c_lflag &= ~ICANON;
       if (option == 1)
@@ -30,9 +31,10 @@ int			mode(int fd, int i, int option)
 	  newT.c_cc[VMIN] = 1;
 	  newT.c_cc[VTIME] = 0;
 	}
-      ioctl(fd, TCSETS, &newT);
+      ioctl(0, TCSETS, &newT);
     }
   if (i == 1)
-    ioctl(fd, TCSETS, &oldT);
+    if (ioctl(0, TCSETS, &oldT) == -1)
+      exit(EXIT_FAILURE);
   return (0);
 }

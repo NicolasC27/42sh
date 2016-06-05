@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:27:38 2016 Nicolas Chevalier
-** Last update Sun Jun  5 09:25:50 2016 Nicolas Chevalier
+** Last update Sun Jun  5 13:31:39 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -37,7 +37,8 @@ char		*return_str(char *str, t_info *info, t_history *history)
   int		fd;
   char		*clear;
 
-  if (str != NULL)
+  mode(info->fd, 1, 0);
+  if (str != NULL && info->term == 1)
     {
       add_element_history(history, str);
       write_file(history);
@@ -48,7 +49,6 @@ char		*return_str(char *str, t_info *info, t_history *history)
       str = realloc(str, 1);
       str[0] = '\0';
     }
-  mode(info->fd, 1, 0);
   return (str);
 }
 
