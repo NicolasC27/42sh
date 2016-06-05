@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Jan 21 18:44:21 2016 Paul Wery
-** Last update Sun Jun  5 19:04:21 2016 Paul Wery
+** Last update Sun Jun  5 23:31:25 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -50,7 +50,6 @@ int	get_val_return(char *word1, int i, int status, int sign)
 
 void	free_all(t_env *ev, int status)
 {
-  remove(ev->free.history.history_file);
   free(ev->free.history.history_file);
   free_commands(&ev->free.history.commands);
   free_list(&ev->free.alist);
