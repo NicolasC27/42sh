@@ -23,8 +23,9 @@ static void	key_up_func(t_edit *line, t_history *history, t_info *info)
       write(info->fd, info->keyleft, my_strlen(info->keyleft));
       line->len -= 1;
     }
+  if (history->current_cmd != history->commands.first)
+    history->current_cmd = history->current_cmd->prev;
   write(info->fd, el, my_strlen(el));
-  history->current_cmd = history->current_cmd->prev;
   line->cmd = strdup(history->current_cmd->command);
   line->len = history->current_cmd->length;
   my_putstr(line->cmd);
@@ -40,21 +41,20 @@ static void	key_down_func(t_edit *line, t_history *history, t_info *info)
       write(info->fd, info->keyleft, my_strlen(info->keyleft));
       line->len -= 1;
     }
+  if (history->current_cmd != history->commands.last)
+    history->current_cmd = history->current_cmd->next;
   write(info->fd, el, my_strlen(el));
-  history->current_cmd = history->current_cmd->next;
   line->cmd = strdup(history->current_cmd->command);
   line->len = history->current_cmd->length;
-  my_putstr(line->cmd);
+  my_putstr(line->cmd);    
 }
-
+   
 int		history_func(t_edit *line, t_history *history, char *buff, t_info *info)
 {
   if (line->len != 0 && line->pos != 0)
       return (EXIT_FAILURE);
-  if  (buff[2] == 'A' && history->current_cmd != NULL &&
-       history->current_cmd->prev != NULL)
+  if  (buff[2] == 'A' && history->current_cmd != NULL)
     key_up_func(line, history, info);
-  else if (buff[2] == 'B' && history->current_cmd != NULL &&
-	   history->current_cmd->next != NULL)
+  else if (buff[2] == 'B' && history->current_cmd != NULL)
     key_down_func(line, history, info);
 }
