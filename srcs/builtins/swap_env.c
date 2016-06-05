@@ -5,11 +5,16 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Mar 17 00:54:45 2016 Paul Wery
+<<<<<<< HEAD
+** Last update Tue May 31 12:41:33 2016 Nicolas Chevalier
+=======
 ** Last update Wed Jun  1 02:55:03 2016 Paul Wery
+>>>>>>> master
 */
 
 #include <stdlib.h>
 #include <unistd.h>
+#include "function.h"
 #include "mins.h"
 
 char	*ini_elem(void)

@@ -5,11 +5,16 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Jan 24 16:08:56 2016 Paul Wery
+<<<<<<< HEAD
+** Last update Tue May 31 12:39:34 2016 Nicolas Chevalier
+=======
 ** Last update Wed Jun  1 03:02:46 2016 Paul Wery
+>>>>>>> master
 */
 
 #include <stdlib.h>
 #include <unistd.h>
+#include "function.h"
 #include "mins.h"
 
 char	**realloc_env2(char **env, int size, int n, char **opts)

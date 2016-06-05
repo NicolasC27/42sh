@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan  5 01:26:12 2016 paul wery
-** Last update Sun Jun  5 09:12:27 2016 Paul Wery
+** Last update Sun Jun  5 09:49:21 2016 Paul Wery
 */
 
 #ifndef MINS
@@ -21,6 +21,7 @@
 # include <unistd.h>
 # include <sys/stat.h>
 # include <dirent.h>
+# include "shrc.h"
 
 typedef struct dirent t_dir;
 typedef struct	stat t_stat;
@@ -72,14 +73,6 @@ typedef struct	s_glob_error
   int		four;
 }		t_glob_error;
 
-typedef struct	s_line
-{
-  char		*line;
-  int		val_ret;
-  int		end;
-  int		nb;
-}		t_line;
-
 typedef struct	s_exec
 {
   char		**tab;
@@ -87,6 +80,14 @@ typedef struct	s_exec
   struct s_exec	*next;
   struct s_exec	*prev;
 }		t_exec;
+
+typedef struct	s_line
+{
+  char		*line;
+  int		val_ret;
+  int		end;
+  int		nb;
+}		t_line;
 
 typedef struct	s_free
 {
@@ -155,8 +156,8 @@ int	my_env(t_env *ev, char **opts, char *exec);
 void	get_status(int status, t_env *ev);
 
 t_exec	*create_list(void);
-int	add_elem_prev(t_exec *elem, char **tab, t_glob_error *error);
-int	add_elem_pipe(t_exec *elem, char **tab);
+int	add_elem_prev(t_exec *, char **, t_glob_error *error);
+int	add_elem_pipe(t_exec *, char **);
 void	delete_list(t_exec **root);
 
 t_order	*create_order(void);

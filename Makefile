@@ -5,7 +5,7 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sat Apr  2 00:37:51 2016 Paul Wery
-## Last update Sun Jun  5 07:36:48 2016 Paul Wery
+## Last update Sun Jun  5 09:30:45 2016 Nicolas Chevalier
 ##
 
 NAME    =	42sh
@@ -14,11 +14,13 @@ RM      =	rm -f
 
 CC	=	gcc
 
-CFLAGS	=	-W -Wall -Werror -Iinclude
+# CFLAGS	=	-W -Wall -Werror 
+CFLAGS	=	-Iinclude
 
 OBJS    =	$(SRCS:.c=.o)
 
 SRCS    =	srcs/main.c \
+		srcs/init_fct.c \
 		srcs/my_list.c \
 		srcs/pars_elems.c \
 		srcs/full_list.c \
@@ -52,6 +54,27 @@ SRCS    =	srcs/main.c \
 		srcs/builtins/if_empty_path.c \
 		srcs/builtins/final_env.c \
 		srcs/builtins/conv_fonc.c \
+		srcs/get_line/get_line.c \
+		srcs/get_line/getterm.c \
+		srcs/get_line/character.c \
+		srcs/get_line/my_strncmp.c \
+		srcs/get_line/mode.c \
+		srcs/get_line/keyboard.c \
+		srcs/get_line/prompt.c \
+		srcs/get_line/history.c \
+		srcs/get_line/init.c \
+		srcs/get_line/cursor.c \
+		srcs/get_line/autocomplete.c \
+		srcs/get_line/history/canonical_mode.c \
+		srcs/get_line/history/init_history.c \
+		srcs/get_line/history/file/file.c \
+		srcs/get_line/history/file/read_file.c \
+		srcs/get_line/history/file/write_file.c \
+		srcs/get_line/history/commands/add_command.c \
+		srcs/get_line/history/commands/free_commands.c \
+		srcs/get_line/history/lib/get_next_linee.c \
+		srcs/get_line/history/lib/my_strlen.c \
+		srcs/get_line/history/lib/my_putstr.c \
 		srcs/inhib/inhib_fonc.c \
 		srcs/global/order_list.c \
 		srcs/global/order_names.c \
@@ -70,9 +93,13 @@ SRCS    =	srcs/main.c \
 		srcs/var_env/pars_set.c \
 		srcs/var_env/var_list.c \
 		srcs/parsing_error.c \
+		srcs/alias/function_parse.c \
+		srcs/alias/get_file.c \
+		srcs/alias/list.c \
+		srcs/alias/my_cat.c \
 
 $(NAME) :	$(OBJS)
-	$(CC) $(OBJS) -o $(NAME)
+		$(CC) $(OBJS) -o $(NAME) -lncurses
 
 all     :	$(NAME)
 

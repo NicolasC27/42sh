@@ -5,6 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed May 25 20:44:03 2016 Paul Wery
+** Last update Sun Jun  5 03:17:28 2016 Nicolas Chevalier
 ** Last update Sun Jun  5 02:45:54 2016 Paul Wery
 */
 
@@ -12,6 +13,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include "function.h"
 #include "mins.h"
 
 int	change_output_next(int num, t_exec *elem, t_env *ev, t_exec *list)

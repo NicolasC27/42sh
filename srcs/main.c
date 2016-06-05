@@ -5,15 +5,17 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Jan 16 20:40:01 2016 Paul Wery
-** Last update Sun Jun  5 05:29:57 2016 Paul Wery
+** Last update Sun Jun  5 09:29:40 2016 Nicolas Chevalier
 */
 
 #include <signal.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "get_line.h"
+#include "function.h"
+#include "history.h"
 #include "mins.h"
-#include <sys/stat.h>
-#include <fcntl.h>
+
 void	free_opts(char **opts)
 {
   int	n;
@@ -82,31 +84,32 @@ int	ini_env(t_env *ev)
   return (0);
 }
 
-int	main(int ac UNUSED, char **av UNUSED, char **environ)
+int		main(int ac UNUSED, char **av UNUSED, char **env)
 {
-  t_env	ev;
-  char	*buffer;
+  t_env		ev;
+  t_history	history;
+  char		*buffer;
+  t_info	info;
+  t_list	list;
 
   buffer = NULL;
-  if (ini_env(&ev) == -1
-      || (ev.env = create_my_env(environ, 0, 0, &ev)) == NULL)
-    return (0);
+  fill_list(&list);
+  init_fct(&history, env, &info);
+  if (ini_env(&ev) == -1 || (ev.env = create_my_env(env, 0, 0, &ev)) == NULL)
+    return (EXIT_FAILURE);
   while (1)
     {
-      if (isatty(0) == 1)
-	my_putstr("prompt$>");
       if (signal(SIGINT, SIG_IGN) == SIG_ERR)
 	return (ev.val_exit);
       if (buffer != NULL)
 	free(buffer);
-      if ((buffer = get_next_line()) == NULL)
+      if ((buffer = get_line(&history, &info, ev.env)) == NULL ||
+	  (buffer = alias_check(buffer, &list)) == NULL)
 	return (ev.val_exit);
       if (buffer[0] != '\0')
-	{
-	  if (valid_line(buffer) == 0
-	      && (ev.env = next_step(buffer, &ev)) == NULL)
-	    return (ev.val_exit);
-	}
+	if (valid_line(buffer) == 0
+	    && (ev.env = next_step(buffer, &ev)) == NULL)
+	  return (ev.val_exit);
     }
   return (ev.val_exit);
 }

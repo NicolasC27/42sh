@@ -5,11 +5,12 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Jan 21 18:44:21 2016 Paul Wery
-** Last update Sun Jun  5 05:30:25 2016 Paul Wery
+** Last update Sun Jun  5 09:29:55 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
 #include <unistd.h>
+#include "function.h"
 #include "mins.h"
 
 int	valid_val(char *buffer)

@@ -5,11 +5,12 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Jan 21 19:57:50 2016 Paul Wery
-** Last update Sun Jun  5 05:45:19 2016 Paul Wery
+** Last update Sun Jun  5 09:30:18 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
 #include <unistd.h>
+#include "function.h"
 #include "mins.h"
 
 int	my_env_next(t_env *ev, char **opts, char *exec)

@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Jan 21 11:55:15 2016 Paul Wery
-** Last update Sat Jun  4 23:57:28 2016 Paul Wery
+** Last update Sun Jun  5 00:45:13 2016 Nicolas Chevalier
 */
 
 #include <errno.h>
@@ -14,6 +14,7 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "function.h"
 #include "mins.h"
 
 void		path_exec(char *exec, char **opts, char **env)
