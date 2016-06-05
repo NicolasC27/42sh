@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Jan 16 20:40:01 2016 Paul Wery
-** Last update Sun Jun  5 03:16:52 2016 Nicolas Chevalier
+** Last update Sun Jun  5 04:24:59 2016 Nicolas Chevalier
 */
 
 #include <signal.h>
@@ -88,18 +88,21 @@ int		main(int ac UNUSED, char **av UNUSED, char **env)
   t_history	history;
   char		*buffer;
   t_info	info;
+  t_list	list;
 
   buffer = NULL;
   if (ini_env(&ev) == -1 || (ev.env = create_my_env(env, 0, 0, &ev)) == NULL)
     return (EXIT_FAILURE);
-  init_fct(&history,env, &info);
+  fill_list(&list);
+  init_fct(&history, env, &info);
   while (1)
     {
       if (signal(SIGINT, SIG_IGN) == SIG_ERR)
 	return (ev.val_exit);
       if (buffer != NULL)
 	free(buffer);
-      if ((buffer = get_line(&history)) == NULL)
+      if ((buffer = get_line(&history)) == NULL ||
+	  (buffer = alias_check(buffer, &list)) == NULL)
 	return (ev.val_exit);
       if (buffer[0] != '\0')
 	{

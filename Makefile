@@ -5,7 +5,7 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sat Apr  2 00:37:51 2016 Paul Wery
-## Last update Sun Jun  5 03:11:18 2016 Nicolas Chevalier
+## Last update Sun Jun  5 04:21:40 2016 Nicolas Chevalier
 ##
 
 NAME    =	42sh
@@ -15,7 +15,7 @@ RM      =	rm -f
 CC	=	gcc -g
 
 # CFLAGS	=	-W -Wall -Werror 
-CFLAGS	+=	-Iinclude
+CFLAGS	=	-Iinclude
 
 OBJS    =	$(SRCS:.c=.o)
 
@@ -88,6 +88,10 @@ SRCS    =	srcs/main.c \
 		srcs/var_env/replace_seg_v.c \
 		srcs/var_env/get_val_ret.c \
 		srcs/parsing_error.c \
+		srcs/alias/function_parse.c \
+		srcs/alias/get_file.c \
+		srcs/alias/list.c \
+		srcs/alias/my_cat.c \
 
 $(NAME) :	$(OBJS)
 		$(CC) $(OBJS) -o $(NAME) -lncurses

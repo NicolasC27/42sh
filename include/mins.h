@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan  5 01:26:12 2016 paul wery
-** Last update Sun Jun  5 03:17:45 2016 Nicolas Chevalier
+** Last update Sun Jun  5 04:21:17 2016 Nicolas Chevalier
 */
 
 #ifndef MINS
@@ -21,6 +21,7 @@
 # include <unistd.h>
 # include <sys/stat.h>
 # include <dirent.h>
+# include "shrc.h"
 
 typedef struct dirent t_dir;
 typedef struct	stat t_stat;
