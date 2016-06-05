@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Jan 16 20:40:01 2016 Paul Wery
-** Last update Sun Jun  5 04:24:59 2016 Nicolas Chevalier
+** Last update Sun Jun  5 05:59:13 2016 Nicolas Chevalier
 */
 
 #include <signal.h>
@@ -104,11 +104,6 @@ int		main(int ac UNUSED, char **av UNUSED, char **env)
       if ((buffer = get_line(&history)) == NULL ||
 	  (buffer = alias_check(buffer, &list)) == NULL)
 	{
-	  if (write_file(&history.commands) == 1)
-	    {
-	      free_commands(&history.commands);
-	      return (ev.val_exit);
-	    }
 	  return (ev.val_exit);
 	}
       if (buffer[0] != '\0')

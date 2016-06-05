@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:27:38 2016 Nicolas Chevalier
-** Last update Sun Jun  5 03:09:41 2016 Nicolas Chevalier
+** Last update Sun Jun  5 06:03:13 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -46,7 +46,11 @@ char		*return_str(char *str, t_history *history)
   write(fd, s, my_strlen(s));
   s = tigetstr("cuu1");
   write(fd, s, my_strlen(s));
-  add_element_history(history, str);
+  if (str != NULL)
+    {
+      add_element_history(history, str);
+      write_file(&history->commands);
+    }
   return (str);
 }
 
