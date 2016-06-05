@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Fri Jun  3 21:30:17 2016 Nicolas Chevalier
-** Last update Sun Jun  5 13:29:49 2016 Nicolas Chevalier
+** Last update Sun Jun  5 16:01:51 2016 Nicolas Chevalier
 */
 
 #include <sys/ioctl.h>
@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include "get_line.h"
 
-int			mode(int fd, int i, int option)
+int			mode(int i, int option)
 {
   static struct termios	oldT;
   static struct termios	newT;

@@ -5,15 +5,18 @@
 ** Login   <gerard_v@epitech.net>
 **
 ** Started on  Tue Dec 29 21:18:49 2015 Valentin GERARD
-** Last update Sun Jun  5 14:10:05 2016 Nicolas Chevalier
+** Last update Sun Jun  5 16:12:56 2016 Nicolas Chevalier
 */
 
 #include "history.h"
 
 int	close_error(char *file_name)
 {
-  my_putstr(file_name, 2);
-  my_putstr(" : Can't close !\n", 2);
+  if (file_name)
+    {
+      my_putstr_out(file_name, 2);
+      my_putstr_out(" : Can't close !\n", 2);
+    }
   return (1);
 }
 
@@ -29,8 +32,8 @@ int	open_error(char *file_name)
 {
   if (file_name)
     {
-      my_putstr(file_name, 2);
-      my_putstr(" : Can't open !\n", 2);
+      my_putstr_out(file_name, 2);
+      my_putstr_out(" : Can't open !\n", 2);
     }
   return (1);
 }

@@ -5,7 +5,7 @@
 ** Login   <gerard_v@epitech.net>
 **
 ** Started on  Tue Dec 29 21:18:49 2015 Valentin GERARD
-** Last update Wed Dec 30 00:49:51 2015 Valentin GERARD
+** Last update Sun Jun  5 16:12:19 2016 Nicolas Chevalier
 */
 
 #include "get_line.h"
@@ -33,6 +33,7 @@ int	init_commands(t_history *history, char **envp)
   if (history->history_file == NULL)
     return (1);
   history->current_cmd = NULL;
+  return (0);
 }
 
 int  	init_history(t_history *history, char **envp)

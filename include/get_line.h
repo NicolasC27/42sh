@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:48:14 2016 Nicolas Chevalier
-** Last update Sun Jun  5 15:30:11 2016 Nicolas Chevalier
+** Last update Sun Jun  5 16:28:27 2016 Nicolas Chevalier
 */
 
 #ifndef GET_LINE_H_
@@ -70,7 +70,7 @@ int		prompt(char **);
 /*
 **init_fct.c
 */
-int		init_fct(t_history *,  char **, t_info *);
+void		init_fct(t_history *,  char **, t_info *);
 
 /*
 ** get_line.c
@@ -91,7 +91,7 @@ char		my_strncmp(char *, char *, int);
 /*
 ** mode.c
 */
-int		mode(int, int, int);
+int		mode(int, int);
 
 /*
 ** keyboard.c
@@ -101,7 +101,7 @@ int		keyboard(t_edit *, char *, t_history *, t_info *);
 /*
 ** init.c
 */
-char		*init(t_edit *, char **, t_info *);
+char		*init(t_edit *, char **);
 
 /*
 ** history.c
@@ -111,19 +111,33 @@ int		history_func(t_edit *, t_history *, char *, t_info *);
 /*
 ** autocomplete.c
 */
-char		*my_autocomplete(char *str);
+int		my_autocomplete(void);
 
 /*
 ** cursor.c
 */
 int		cursors_left(t_edit *, t_info *);
 int		cursors_right(t_edit *, t_info *);
-int		cursors_delete(t_edit *, char *, t_info *);
+int		cursors_delete(t_edit *, t_info *);
 
 /*
 ** character.c
 */
 void		add_character_advanced(t_edit *, char, t_info *);
 void		add_character_normal(t_edit *, char);
+
+/*
+** fct_get_line.c
+*/
+int		check_key(char *);
+char		*ctrld_();
+void		clear_screen_(t_info *, char **);
+
+/*
+** control.c
+*/
+void		control_a(t_edit *, t_info *);
+void		control_k(t_edit *, t_info *);
+void		control_e(t_edit *, t_info *);
 
 #endif /* !GET_LINE_H_ */

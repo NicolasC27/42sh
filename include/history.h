@@ -5,7 +5,7 @@
 ** Login   <gerard_v@epitech.net>
 **
 ** Started on  Tue Dec 29 21:18:49 2015 Valentin GERARD
-** Last update Sun Jun  5 07:58:13 2016 Nicolas Chevalier
+** Last update Sun Jun  5 16:17:59 2016 Nicolas Chevalier
 */
 
 #ifndef HISTORY_H_
@@ -50,6 +50,7 @@ typedef struct		s_history
 /*
 ** Functions
 */
+int	add_element_history(t_history *history, char *str);
 void	canonical_mode(struct termios *oldt, struct termios *newt, int mode);
 int	add_command(t_commands *commands, t_cmd *cmd);
 int	init_history(t_history *history, char **envp);
@@ -57,6 +58,7 @@ void   	free_commands(t_commands *commands);
 void	my_putchar_out(char c, int out);
 void	my_putstr_out(char *str, int out);
 int	my_strlen_out(char *str);
+int	my_strlen(char *);
 
 /*
 ** File

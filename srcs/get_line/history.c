@@ -5,13 +5,26 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Sat Jun  4 18:21:53 2016 Nicolas Chevalier
-** Last update Sun Jun  5 08:26:48 2016 Nicolas Chevalier
+** Last update Sun Jun  5 16:31:40 2016 Nicolas Chevalier
 */
 
 #include <curses.h>
 #include <term.h>
 #include "history.h"
+#include "function.h"
 #include "get_line.h"
+
+int		add_element_history(t_history *history, char *str)
+{
+  t_cmd		cmd;
+
+  cmd.command = str;
+  cmd.length = strlen(str);
+  if (add_command(&history->commands, &cmd) == 1)
+    return (1);
+  history->current_cmd = history->commands.last;
+  return (0);
+}
 
 static void	key_up_func(t_edit *line, t_history *history, t_info *info)
 {
@@ -46,9 +59,9 @@ static void	key_down_func(t_edit *line, t_history *history, t_info *info)
   write(info->fd, el, my_strlen(el));
   line->cmd = strdup(history->current_cmd->command);
   line->len = history->current_cmd->length;
-  my_putstr(line->cmd);    
+  my_putstr(line->cmd);
 }
-   
+
 int		history_func(t_edit *line, t_history *history, char *buff, t_info *info)
 {
   if (line->len != 0 && line->pos != 0)
@@ -57,4 +70,5 @@ int		history_func(t_edit *line, t_history *history, char *buff, t_info *info)
     key_up_func(line, history, info);
   else if (buff[2] == 'B' && history->current_cmd != NULL)
     key_down_func(line, history, info);
+  return (EXIT_SUCCESS);
 }

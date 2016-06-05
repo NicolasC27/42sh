@@ -5,7 +5,7 @@
 ** Login   <gerard_v@epitech.net>
 **
 ** Started on  Tue Dec 29 21:18:49 2015 Valentin GERARD
-** Last update Sun Jun  5 06:22:34 2016 Nicolas Chevalier
+** Last update Sun Jun  5 16:13:11 2016 Nicolas Chevalier
 */
 
 #include "history.h"
@@ -51,7 +51,7 @@ int	read_file(t_history *history)
       if (check_line(buffer) == 1 ||
 	  add_command_history(&history->commands, buffer) == 1)
 	{
-	  my_putstr("Error : Read failed\n", 2);
+	  my_putstr_out("Error : Read failed\n", 2);
 	  return (1);
 	}
       free(buffer);

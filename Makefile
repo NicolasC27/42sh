@@ -5,7 +5,7 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sat Apr  2 00:37:51 2016 Paul Wery
-## Last update Sun Jun  5 13:26:31 2016 Nicolas Chevalier
+## Last update Sun Jun  5 16:27:37 2016 Nicolas Chevalier
 ##
 
 NAME    =	42sh
@@ -14,8 +14,8 @@ RM      =	rm -f
 
 CC	=	gcc
 
-# CFLAGS	=	-W -Wall -Werror 
-CFLAGS	=	-Iinclude -g
+CFLAGS	=	-W -Wall -Werror 
+CFLAGS	+=	-Iinclude
 
 OBJS    =	$(SRCS:.c=.o)
 
@@ -59,8 +59,10 @@ SRCS    =	srcs/main.c \
 		srcs/get_line/character.c \
 		srcs/get_line/my_strncmp.c \
 		srcs/get_line/mode.c \
+		srcs/get_line/fct_get_line.c \
 		srcs/get_line/keyboard.c \
 		srcs/get_line/prompt.c \
+		srcs/get_line/control.c \
 		srcs/get_line/history.c \
 		srcs/get_line/init.c \
 		srcs/get_line/cursor.c \
