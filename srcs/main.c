@@ -5,11 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Jan 16 20:40:01 2016 Paul Wery
-<<<<<<< HEAD
-** Last update Sun Jun  5 03:10:58 2016 Nicolas Chevalier
-=======
-** Last update Sun Jun  5 02:43:58 2016 Paul Wery
->>>>>>> master
+** Last update Sun Jun  5 03:16:52 2016 Nicolas Chevalier
 */
 
 #include <signal.h>
@@ -19,8 +15,7 @@
 #include "function.h"
 #include "history.h"
 #include "mins.h"
-#include <sys/stat.h>
-#include <fcntl.h>
+
 void	free_opts(char **opts)
 {
   int	n;

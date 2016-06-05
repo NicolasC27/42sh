@@ -5,11 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan  5 01:26:12 2016 paul wery
-<<<<<<< HEAD
-** Last update Sun Jun  5 02:50:45 2016 Nicolas Chevalier
-=======
-** Last update Sun Jun  5 01:43:48 2016 Paul Wery
->>>>>>> master
+** Last update Sun Jun  5 03:17:45 2016 Nicolas Chevalier
 */
 
 #ifndef MINS
