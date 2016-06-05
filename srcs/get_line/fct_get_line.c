@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Sun Jun  5 16:19:44 2016 Nicolas Chevalier
-** Last update Sun Jun  5 21:59:39 2016 Paul Wery
+** Last update Sun Jun  5 20:39:13 2016 Nicolas Chevalier
 */
 
 #include <ncurses.h>
@@ -40,7 +40,8 @@ int		check_key(char *buff)
       && buff[0] != CTRLK && buff[0] != CTRLA
       && buff[0] != CTRLD && buff[0] != CTRLE
       && buff[0] != CTRLL && buff[2] != CTRLLEFT
-      && buff[2] != CTRLRIGHT && buff[2] != HOME)
+      && buff[2] != CTRLRIGHT && buff[2] != HOME &&
+      buff[0] != 8)
     return (0);
   return (1);
 }
