@@ -5,11 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Fri Jun  3 21:29:38 2016 Nicolas Chevalier
-<<<<<<< HEAD
-** Last update Sun Jun  5 09:37:30 2016 Nicolas Chevalier
-=======
-** Last update Sun Jun  5 16:26:25 2016 Nicolas Chevalier
->>>>>>> edit_line
+** Last update Sun Jun  5 16:43:52 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -27,8 +23,6 @@ static int	is_key(char *buff, int ESC, int HOOK, int KEY)
   return (1);
 }
 
-<<<<<<< HEAD
-=======
 static void	manage_control(t_edit *line, t_info *info, char *buff)
 {
   if (buff[0] == CTRLA)
@@ -39,7 +33,6 @@ static void	manage_control(t_edit *line, t_info *info, char *buff)
     control_e(line, info);
 }
 
->>>>>>> edit_line
 int		keyboard(t_edit *line, char *buff, t_history *history, t_info *info)
 {
   if (is_key(buff, 27, 91, UP) == 0 || is_key(buff, 27, 91, DOWN) == 0)
@@ -51,11 +44,7 @@ int		keyboard(t_edit *line, char *buff, t_history *history, t_info *info)
   else if (buff[0] == '\t')
     my_autocomplete();
   else if (buff[0] == 127)
-<<<<<<< HEAD
-    cursors_delete(line, buff, info);
-=======
     cursors_delete(line, info);
   manage_control(line, info, buff);
   return (0);
->>>>>>> edit_line
 }
