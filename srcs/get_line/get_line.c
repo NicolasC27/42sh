@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:27:38 2016 Nicolas Chevalier
-** Last update Sun Jun  5 11:45:41 2016 Nicolas Chevalier
+** Last update Sun Jun  5 14:08:12 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -38,7 +38,7 @@ char		*return_str(char *str, t_info *info, t_history *history)
   char		*clear;
 
   mode(info->fd, 1, 0);
-  if (str != NULL && info->term == 1)
+  if (str != NULL)
     {
       add_element_history(history, str);
       write_file(history);
@@ -97,6 +97,7 @@ char		*get_line(t_history *history, t_info *info, char **env)
 	my_putstr(buff);
       if (buff[0] == 4 && buff[1] == '\0')
 	{
+	  /* close(history) */
 	  mode(0, 1, 0);
 	  my_putstr("\n");
 	  return (NULL);
@@ -105,5 +106,5 @@ char		*get_line(t_history *history, t_info *info, char **env)
 	return (return_str(line.cmd, info, history));
       manage_line(&line, info, buff, history);
     }
-  return (line.cmd);
+  return (NULL);
 }
