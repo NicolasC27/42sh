@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:27:38 2016 Nicolas Chevalier
-** Last update Sun Jun  5 13:37:39 2016 Nicolas Chevalier
+** Last update Sun Jun  5 11:45:41 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -96,7 +96,11 @@ char		*get_line(t_history *history, t_info *info, char **env)
       if (check_key(buff) == 0)
 	my_putstr(buff);
       if (buff[0] == 4 && buff[1] == '\0')
-	return (NULL);
+	{
+	  mode(0, 1, 0);
+	  my_putstr("\n");
+	  return (NULL);
+	}
       if (buff[0] == '\n')
 	return (return_str(line.cmd, info, history));
       manage_line(&line, info, buff, history);
