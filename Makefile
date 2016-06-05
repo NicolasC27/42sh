@@ -5,7 +5,7 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sat Apr  2 00:37:51 2016 Paul Wery
-## Last update Sun Jun  5 21:10:49 2016 Paul Wery
+## Last update Sun Jun  5 21:59:35 2016 Nicolas Chevalier
 ##
 
 NAME    =	42sh
@@ -57,6 +57,7 @@ SRCS    =	srcs/main.c \
 		srcs/get_line/get_line.c \
 		srcs/get_line/getterm.c \
 		srcs/get_line/character.c \
+		srcs/get_line/control_key.c \
 		srcs/get_line/my_strncmp.c \
 		srcs/get_line/mode.c \
 		srcs/get_line/fct_get_line.c \
