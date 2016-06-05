@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:27:38 2016 Nicolas Chevalier
-** Last update Sun Jun  5 13:31:39 2016 Nicolas Chevalier
+** Last update Sun Jun  5 13:37:39 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -57,7 +57,8 @@ static int	check_key(char *buff)
   if (buff[0] != '\t' && buff[0] != '\n' && buff[0] != 127
       && buff[2] != LEFT && buff[2] != RIGHT
       && buff[2] != DOWN && buff[2] != UP
-      && buff[0] != CLEAR && buff[2] != DELETE)
+      && buff[0] != CLEAR && buff[2] != DELETE
+      && buff[0] != 4)
     return (0);
   return (1);
 }
