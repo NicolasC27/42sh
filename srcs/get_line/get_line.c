@@ -5,7 +5,11 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:27:38 2016 Nicolas Chevalier
+<<<<<<< HEAD
 ** Last update Sun Jun  5 09:37:47 2016 Nicolas Chevalier
+=======
+** Last update Sun Jun  5 16:22:38 2016 Nicolas Chevalier
+>>>>>>> edit_line
 */
 
 #include <stdlib.h>
@@ -19,24 +23,9 @@
 #include "function.h"
 #include "history.h"
 
-int	add_element_history(t_history *history, char *str)
+static char	*return_str(char *str, t_history *history)
 {
-  t_cmd	cmd;
-
-  cmd.command = str;
-  cmd.length = strlen(str);
-  if(add_command(&history->commands, &cmd) == 1)
-    return (1);
-  history->current_cmd = history->commands.last;
-  return (0);
-}
-
-char		*return_str(char *str, t_info *info, t_history *history)
-{
-  char		*s;
-  int		fd;
-  char		*clear;
-
+  mode(1, 0);
   if (str != NULL)
     {
       add_element_history(history, str);
@@ -48,18 +37,7 @@ char		*return_str(char *str, t_info *info, t_history *history)
       str = realloc(str, 1);
       str[0] = '\0';
     }
-  mode(info->fd, 1, 0);
   return (str);
-}
-
-static int	check_key(char *buff)
-{
-  if (buff[0] != '\t' && buff[0] != '\n' && buff[0] != 127
-      && buff[2] != LEFT && buff[2] != RIGHT
-      && buff[2] != DOWN && buff[2] != UP
-      && buff[0] != CLEAR && buff[2] != DELETE)
-    return (0);
-  return (1);
 }
 
 static void	manage_line(t_edit *line, t_info *info,
@@ -95,7 +73,7 @@ char		*get_line(t_history *history, t_info *info, char **env)
   len = 1;
   if (isatty(0) == 0)
     return (get_next_line());
-  init(&line, env, info);
+  init(&line, env);
   while (len > 0)
     {
       memset(buff, '\0', 9);
@@ -104,13 +82,19 @@ char		*get_line(t_history *history, t_info *info, char **env)
       buff[len] = '\0';
       if (check_key(buff) == 0)
 	my_putstr(buff);
+<<<<<<< HEAD
       if (buff[0] == 4 && buff[1] == '\0')
 	return (NULL);
       if (buff[0] == 12)
+=======
+      if (buff[0] == CTRLD && buff[1] == '\0')
+	return (ctrld_());
+      if (buff[0] == CTRLL)
+>>>>>>> edit_line
 	clear_screen_(info, env);
       if (buff[0] == '\n')
-	return (return_str(line.cmd, info, history));
+	return (return_str(line.cmd, history));
       manage_line(&line, info, buff, history);
     }
-  return (line.cmd);
+  return (NULL);
 }

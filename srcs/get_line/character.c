@@ -5,11 +5,12 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Sun Jun  5 02:04:38 2016 Nicolas Chevalier
-** Last update Sun Jun  5 08:31:09 2016 Nicolas Chevalier
+** Last update Sun Jun  5 16:01:39 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
 #include <ncurses.h>
+#include "function.h"
 #include "get_line.h"
 
 void		add_character_normal(t_edit *line, char c)

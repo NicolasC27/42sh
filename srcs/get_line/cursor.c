@@ -5,12 +5,13 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Sat Jun  4 18:43:42 2016 Nicolas Chevalier
-** Last update Sun Jun  5 08:29:46 2016 Nicolas Chevalier
+** Last update Sun Jun  5 16:14:48 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
 #include <curses.h>
 #include <term.h>
+#include "function.h"
 #include "get_line.h"
 
 static int	manage_string(t_edit *line, t_info *info)
@@ -37,11 +38,11 @@ static int	manage_string(t_edit *line, t_info *info)
   my_putstr(&line->cmd[i - 1]);
   save = tigetstr("rc");
   write(info->fd, save, my_strlen(save));
+  return (EXIT_SUCCESS);
 }
 
-int		cursors_delete(t_edit *line, char *buff, t_info *info)
+int		cursors_delete(t_edit *line, t_info *info)
 {
-  char		*str;
   char		*s;
   int		i;
 
@@ -55,14 +56,12 @@ int		cursors_delete(t_edit *line, char *buff, t_info *info)
   s = tigetstr("el");
   write(info->fd, s, my_strlen(s));
   manage_string(line, info);
+  return (EXIT_SUCCESS);
 }
 
 int		cursors_left(t_edit *line, t_info *info)
 {
-  char		*s;
   int		i;
-  char		*save;
-
 
   i = 0;
   if (line->cmd == NULL)
@@ -77,13 +76,11 @@ int		cursors_left(t_edit *line, t_info *info)
 
 int		cursors_right(t_edit *line, t_info *info)
 {
-  char		*s;
-
   if (line->cmd == NULL)
     return (EXIT_FAILURE);
   if (line->cmd[line->len + (line->pos)] == '\0')
     return (EXIT_FAILURE);
   write(info->fd, info->keyright, my_strlen(info->keyright));
   line->pos += 1;
-  return (0);
+  return (EXIT_SUCCESS);
 }

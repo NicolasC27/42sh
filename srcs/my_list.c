@@ -5,15 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Apr  2 01:20:11 2016 Paul Wery
-<<<<<<< HEAD
-<<<<<<< HEAD
-** Last update Tue May 31 12:36:09 2016 Nicolas Chevalier
-=======
-** Last update Fri Jun  3 04:28:42 2016 Paul Wery
->>>>>>> master
-=======
-** Last update Fri Jun  3 20:06:53 2016 Paul Wery
->>>>>>> master
+** Last update Sun Jun  5 16:33:33 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>

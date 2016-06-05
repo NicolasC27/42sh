@@ -5,13 +5,14 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Sun Jun  5 08:44:47 2016 Nicolas Chevalier
-** Last update Sun Jun  5 09:27:02 2016 Nicolas Chevalier
+** Last update Sun Jun  5 16:29:36 2016 Nicolas Chevalier
 */
 
 #include <curses.h>
+#include "function.h"
 #include "get_line.h"
 
-char		*my_getpwd(char **env)
+static char	*my_getpwd(char **env)
 {
   int		i;
   int		j;
@@ -28,7 +29,7 @@ char		*my_getpwd(char **env)
   return (NULL);
 }
 
-char		*my_getuser(char **env)
+static char	*my_getuser(char **env)
 {
   int		i;
   int		j;
@@ -50,8 +51,6 @@ int		prompt(char **env)
 {
   char		*user;
   char		*pwd;
-  char		*s;
-  int		i;
 
   user = my_getuser(env);
   pwd = my_getpwd(env);
@@ -68,4 +67,5 @@ int		prompt(char **env)
       my_putstr(RED")");
     }
   my_putstr(RED"->"DEFAULT);
+  return (EXIT_SUCCESS);
 }

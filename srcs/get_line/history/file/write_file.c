@@ -5,7 +5,7 @@
 ** Login   <gerard_v@epitech.net>
 **
 ** Started on  Tue Dec 29 21:18:49 2015 Valentin GERARD
-** Last update Wed Dec 30 00:49:51 2015 Valentin GERARD
+** Last update Sun Jun  5 16:13:44 2016 Nicolas Chevalier
 */
 
 #include "history.h"
@@ -27,7 +27,7 @@ int	write_file(t_history *history)
       ret = write(open_fd, "\n", 1);
       if (ret == 0 || ret == -1)
 	{
-	  my_putstr("Error : Write failed\n", 2);
+	  my_putstr_out("Error : Write failed\n", 2);
 	  return (1);
 	}
       cmd_tmp = cmd_tmp->next;

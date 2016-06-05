@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Sat Jun  4 22:41:06 2016 Nicolas Chevalier
-** Last update Sun Jun  5 09:06:54 2016 Nicolas Chevalier
+** Last update Sun Jun  5 15:59:53 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -42,7 +42,7 @@ static int	init_editline(t_info *info, char **env)
   return (EXIT_SUCCESS);
 }
 
-int    	init_fct(t_history *history,  char **env, t_info *info)
+void    	init_fct(t_history *history,  char **env, t_info *info)
 {
   init_editline(info, env);
   init_history(history, env);
