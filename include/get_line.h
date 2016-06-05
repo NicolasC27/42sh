@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:48:14 2016 Nicolas Chevalier
-** Last update Sun Jun  5 17:04:54 2016 Nicolas Chevalier
+** Last update Sun Jun  5 18:38:50 2016 Nicolas Chevalier
 */
 
 #ifndef GET_LINE_H_
@@ -32,6 +32,8 @@
 # define CTRLE	        5
 # define CTRLK		11
 # define CTRLL		12
+# define CTRLLEFT	49
+# define CTRLRIGHT	50
 # define BLACK		"\033[0;30m"
 # define RED		"\033[1;31m"
 # define GREEN		"\033[0;32m"
@@ -139,5 +141,7 @@ void		clear_screen_(t_edit *, t_info *, char **);
 void		control_a(t_edit *, t_info *);
 void		control_k(t_edit *, t_info *);
 void		control_e(t_edit *, t_info *);
+void		control_ctrlleft(t_edit *, t_info *);
+void		control_ctrlright(t_edit *, t_info *);
 
 #endif /* !GET_LINE_H_ */

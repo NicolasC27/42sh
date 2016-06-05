@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Fri Jun  3 21:29:38 2016 Nicolas Chevalier
-** Last update Sun Jun  5 16:43:52 2016 Nicolas Chevalier
+** Last update Sun Jun  5 18:43:34 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -41,6 +41,10 @@ int		keyboard(t_edit *line, char *buff, t_history *history, t_info *info)
     cursors_left(line, info);
   else if (is_key(buff, 27, 91, RIGHT) == 0)
     cursors_right(line, info);
+  else if (is_key(&buff[3], 59, 53, LEFT) == 0)
+    control_ctrlleft(line, info);
+  else if (is_key(&buff[3], 59, 53, RIGHT) == 0)
+    control_ctrlright(line, info);
   else if (buff[0] == '\t')
     my_autocomplete();
   else if (buff[0] == 127)
