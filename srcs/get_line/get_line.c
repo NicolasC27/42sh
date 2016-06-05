@@ -48,7 +48,7 @@ char		*return_str(char *str, t_info *info, t_history *history)
   if (str != NULL)
     {
       add_element_history(history, str);
-      write_file(&history->commands);
+      write_file(history);
     }
   my_putstr("\n");
   /* my_putstr("\n"); */

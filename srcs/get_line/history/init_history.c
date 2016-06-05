@@ -8,21 +8,38 @@
 ** Last update Wed Dec 30 00:49:51 2015 Valentin GERARD
 */
 
-#include "history.h"
+#include "get_line.h"
 
-void	init_commands(t_history *history)
+char	*get_history_file(char *home)
+{
+  char	*path;
+
+  if (home == NULL)
+    return (NULL);
+  path = malloc(strlen(home) + strlen("/.42sh_history") + 1);
+  if (path == NULL)
+    return (NULL);
+  strcpy(path, home);
+  strcat(path, "/.42sh_history");
+  return (path);
+}
+
+int	init_commands(t_history *history, char **envp)
 {
   history->commands.first = NULL;
   history->commands.last = NULL;
   history->commands.size = 0;
-  history->press = 0;
+  history->history_file = get_history_file(my_gethome(envp));
+  if (history->history_file == NULL)
+    return (1);
   history->current_cmd = NULL;
 }
 
-int  	init_history(t_history *history)
+int  	init_history(t_history *history, char **envp)
 {
-  init_commands(history);
-  if (read_file(&history->commands) == 1)
+  if (init_commands(history,envp) == 1)
+    return (1);
+  if (read_file(history) == 1)
     return (1);
   history->current_cmd = history->commands.last;
   return (0);

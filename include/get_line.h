@@ -42,7 +42,7 @@ typedef struct	s_edit
 /*
 **init_fct.c
 */
-void	init_fct(t_history *,  char **, t_info *);
+int	init_fct(t_history *,  char **, t_info *);
 
 /*
 ** get_line.c
@@ -53,6 +53,7 @@ char		*get_line(t_history *history, t_info *);
 ** getterm.c
 */
 char		*my_getterm(char **);
+char		*my_gethome(char **);
 
 /*
 ** my_strncmp.c
