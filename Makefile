@@ -5,11 +5,7 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sat Apr  2 00:37:51 2016 Paul Wery
-<<<<<<< HEAD
-## Last update Sun Jun  5 08:52:43 2016 Nicolas Chevalier
-=======
-## Last update Sun Jun  5 07:36:48 2016 Paul Wery
->>>>>>> master
+## Last update Sun Jun  5 09:30:45 2016 Nicolas Chevalier
 ##
 
 NAME    =	42sh
