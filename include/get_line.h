@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:48:14 2016 Nicolas Chevalier
-** Last update Sun Jun  5 03:11:08 2016 Nicolas Chevalier
+** Last update Sun Jun  5 03:29:48 2016 Nicolas Chevalier
 */
 
 #ifndef GET_LINE_H_
@@ -27,6 +27,7 @@ typedef struct	s_info
   char		*keyright;
   char		*keydown;
   char		*pos_begin;
+  int		term;
 }		t_info;
 
 typedef struct	s_edit
