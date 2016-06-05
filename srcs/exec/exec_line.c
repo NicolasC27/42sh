@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan 19 00:28:24 2016 Paul Wery
-** Last update Sat Jun  4 03:27:00 2016 Paul Wery
+** Last update Sun Jun  5 05:44:18 2016 Paul Wery
 */
 
 #include <sys/wait.h>
@@ -94,7 +94,8 @@ char	**exec_line(char **opts, t_env *ev, pid_t my_pid, int status)
   my_exit(ev, opts);
   if ((ev->env = set_env(opts[0], opts, ev)) == NULL ||
       (ev->env = unset_env(opts[0], opts, ev->env, 1)) == NULL ||
-      (ev->env = swap_env(opts[0], opts, ev)) == NULL)
+      (ev->env = swap_env(opts[0], opts, ev)) == NULL
+      || set_unset_var(ev->free.list_v, opts, ev) == -1)
     return (NULL);
   if ((my_pid = fork()) == 0)
     {

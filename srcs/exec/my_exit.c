@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Jan 21 18:44:21 2016 Paul Wery
-** Last update Fri Jun  3 00:02:34 2016 Paul Wery
+** Last update Sun Jun  5 05:30:25 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -52,6 +52,7 @@ void	free_all(t_env *ev, int status)
   free(ev->free.buffer);
   free_opts(ev->free.pars);
   delete_list(&ev->free.list);
+  delete_var(&ev->free.list_v);
   free_opts(ev->env);
   free(ev->oldpwd);
   exit(status);
