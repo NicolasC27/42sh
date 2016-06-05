@@ -5,9 +5,13 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed May 25 19:22:23 2016 Paul Wery
+<<<<<<< HEAD
 ** Last update Sat Jun  4 23:44:53 2016 Nicolas Chevalier
 ** Last update Sat Jun  4 03:27:24 2016 Paul Wery
 ** Last update Sat Jun  4 18:48:10 2016 Paul Wery
+=======
+** Last update Sun Jun  5 01:44:00 2016 Paul Wery
+>>>>>>> master
 */
 
 #include <stdio.h>
@@ -124,7 +128,7 @@ char		**exec_list(t_exec *list, t_env *ev, int in, int out)
 	  || (op == 0 && (out = change_output(list, it->next, ev->stdout, ev)) == -1))
 	return (NULL);
       if (op == -2 || in == -2 || out == -2
-	  || and_or(ev, it) == 1 || notm(it, ev, 0, 0) == 1)
+	  || and_or(ev, it) == 1 || notm(it, ev) == 1)
 	  it = next_command(list, it);
       else if (elem_redirection(it->tab[0], "<<,>>,||,&&,<,>,|,&,;") == 0)
 	{

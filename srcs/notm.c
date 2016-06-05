@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri Jun  3 20:52:35 2016 Paul Wery
-** Last update Sat Jun  4 19:12:12 2016 Paul Wery
+** Last update Sun Jun  5 01:42:53 2016 Paul Wery
 */
 
 #include <unistd.h>
@@ -34,7 +34,34 @@ int	notm_next(t_exec *it, t_env *ev, int n)
   return (1);
 }
 
-int	notm(t_exec *it, t_env *ev, int n, int i)
+int	notm_sec(t_exec *it, t_env *ev)
+{
+  int	state;
+  int	n;
+  int	i;
+
+  n = 0;
+  i = 0;
+  state = 0;
+  if (it->error == -2)
+    {
+      while (it->tab[n] != NULL && state == 0)
+        {
+          i = 0;
+          while (it->tab[n][i] != '\0' && it->tab[n][i] != '$')
+            i += 1;
+	  if (it->tab[n][i] == '$')
+	    state = 1;
+          if (it->tab[n][i] == '\0')
+            n += 1;
+        }
+      if (notm_next(it, ev, n) == 1)
+        return (1);
+    }
+  return (0);
+}
+
+int	notm(t_exec *it, t_env *ev)
 {
   if (it->error < 0 && it->error != -2)
     {
@@ -46,19 +73,7 @@ int	notm(t_exec *it, t_env *ev, int n, int i)
       ev->val_exit = 1;
       return (1);
     }
-  else if (it->error == -2)
-    {
-      while (it->tab[n] != NULL && it->tab[n][i] != '\0'
-	     && it->tab[n][i] != '$')
-        {
-          i = 0;
-          while (it->tab[n][i] != '\0' && it->tab[n][i] != '$')
-            i += 1;
-          if (it->tab[n][i] == '\0')
-            n += 1;
-        }
-      if (notm_next(it, ev, n) == 1)
-        return (1);
-    }
+  else if (notm_sec(it, ev) == 1)
+    return (1);
   return (0);
 }

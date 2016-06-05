@@ -7,12 +7,16 @@
 ** Started on  Wed May 25 20:44:03 2016 Paul Wery
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ** Last update Tue May 31 12:36:23 2016 Nicolas Chevalier
 =======
 ** Last update Fri Jun  3 00:17:21 2016 Paul Wery
 >>>>>>> master
 =======
 ** Last update Sat Jun  4 02:55:53 2016 Paul Wery
+>>>>>>> master
+=======
+** Last update Sun Jun  5 02:45:54 2016 Paul Wery
 >>>>>>> master
 */
 
