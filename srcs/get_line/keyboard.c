@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Fri Jun  3 21:29:38 2016 Nicolas Chevalier
-** Last update Sun Jun  5 08:23:42 2016 Nicolas Chevalier
+** Last update Sun Jun  5 09:37:30 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -23,16 +23,6 @@ static int	is_key(char *buff, int ESC, int HOOK, int KEY)
 
 }
 
-static void	clear_screen_(t_info *info)
-{
-  char		*s;
-  int		fd;
-
-  s = tigetstr("clear");
-  write(info->fd, s, my_strlen(s));
-  my_putstr("prompt$>");
-}
-
 int		keyboard(t_edit *line, char *buff, t_history *history, t_info *info)
 {
   if (is_key(buff, 27, 91, UP) == 0 || is_key(buff, 27, 91, DOWN) == 0)
@@ -45,6 +35,4 @@ int		keyboard(t_edit *line, char *buff, t_history *history, t_info *info)
     my_autocomplete(line->cmd);
   else if (buff[0] == 127)
     cursors_delete(line, buff, info);
-  else if (buff[0] == 12)
-    clear_screen_(info);
 }

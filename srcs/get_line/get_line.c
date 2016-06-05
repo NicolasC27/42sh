@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:27:38 2016 Nicolas Chevalier
-** Last update Sun Jun  5 09:25:50 2016 Nicolas Chevalier
+** Last update Sun Jun  5 09:37:47 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -76,6 +76,16 @@ static void	manage_line(t_edit *line, t_info *info,
     }
 }
 
+static void	clear_screen_(t_info *info, char **env)
+{
+  char		*s;
+  int		fd;
+
+  s = tigetstr("clear");
+  write(info->fd, s, my_strlen(s));
+  prompt(env);
+}
+
 char		*get_line(t_history *history, t_info *info, char **env)
 {
   t_edit	line;
@@ -96,6 +106,8 @@ char		*get_line(t_history *history, t_info *info, char **env)
 	my_putstr(buff);
       if (buff[0] == 4 && buff[1] == '\0')
 	return (NULL);
+      if (buff[0] == 12)
+	clear_screen_(info, env);
       if (buff[0] == '\n')
 	return (return_str(line.cmd, info, history));
       manage_line(&line, info, buff, history);
