@@ -1,0 +1,3 @@
+alias ne='emacs -nw"
+alias emacs='emacs -nw'
+alias ll='ls -la'
