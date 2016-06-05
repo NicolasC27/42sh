@@ -5,7 +5,7 @@
 ** Login   <gerard_v@epitech.net>
 **
 ** Started on  Tue Dec 29 21:18:49 2015 Valentin GERARD
-** Last update Wed Dec 30 00:49:51 2015 Valentin GERARD
+** Last update Sun Jun  5 06:22:34 2016 Nicolas Chevalier
 */
 
 #include "history.h"

@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Sat Jun  4 22:41:06 2016 Nicolas Chevalier
-** Last update Sun Jun  5 03:29:57 2016 Nicolas Chevalier
+** Last update Sun Jun  5 07:35:44 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -17,7 +17,7 @@
 
 static int	init_failure(t_info *info)
 {
-  info->term = 0;
+  info->term = false;
   return (EXIT_FAILURE);
 }
 
@@ -27,12 +27,17 @@ static int	init_editline(t_info *info, char **env)
 
   if (tgetent(bp, my_getterm(env)) <= 0)
     return (init_failure(info));
+  if ((info->fd = open("/dev/tty", O_RDWR)) == -1)
+    {
+      my_putstr("can't open /dev/tty");
+      exit(EXIT_FAILURE);
+    }
   info->keyleft = tigetstr("kcub1");
   info->keyright = tigetstr("kcuf1");
   info->keyup = tigetstr("kcuu1");
   info->keydown = tigetstr("kcud1");
   info->pos_begin = tigetstr("sc");
-  info->term = 1;
+  info->term = true;
   my_putstr(info->pos_begin);
   return (EXIT_SUCCESS);
 }

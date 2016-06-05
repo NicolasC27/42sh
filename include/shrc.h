@@ -5,7 +5,7 @@
 ** Login   <carbon_b@epitech.net>
 **
 ** Started on  Tue May 31 13:50:09 2016 carbon_b
-** Last update Sun Jun  5 04:21:59 2016 Nicolas Chevalier
+** Last update Sun Jun  5 07:30:25 2016 Nicolas Chevalier
 */
 
 #ifndef SHRC_H_
@@ -42,7 +42,7 @@ typedef	struct	s_alias
 /*
 ** my_cat.c
 */
-int	last_char(char *s1, int a, int bool);
+int	last_char(char *s1, int a, int);
 char	*my_cat(char *buff, char *cmd, char *alias);
 
 /*

@@ -5,13 +5,13 @@
 ** Login   <gerard_v@epitech.net>
 **
 ** Started on  Tue Dec 29 21:18:49 2015 Valentin GERARD
-** Last update Wed Dec 30 00:49:51 2015 Valentin GERARD
+** Last update Sun Jun  5 07:58:13 2016 Nicolas Chevalier
 */
 
 #ifndef HISTORY_H_
 # define HISTORY_H_
 
-# define HISTORY_FILE ".42sh_history"
+# define HISTORY_FILE "/home/cheval_8/.42sh_history"
 
 # include <sys/ioctl.h>
 # include <string.h>

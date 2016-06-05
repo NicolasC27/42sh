@@ -5,7 +5,7 @@
 ** Login   <gerard_v@epitech.net>
 **
 ** Started on  Tue Dec 29 21:18:49 2015 Valentin GERARD
-** Last update Wed Dec 30 00:49:51 2015 Valentin GERARD
+** Last update Sun Jun  5 06:24:54 2016 Nicolas Chevalier
 */
 
 #include "history.h"
@@ -37,7 +37,8 @@ int	open_file(char *file_name, int mode)
   int	fd;
 
   if (mode == 0)
-    fd = open(file_name, O_CREAT | O_RDONLY,  S_IWUSR | S_IRUSR);
+    fd = open(file_name, O_CREAT | O_RDONLY | O_TRUNC,
+	      S_IWUSR | S_IRUSR | S_IRGRP);
   if (mode == 1)
     fd = open(file_name, O_CREAT | O_WRONLY , S_IRUSR | S_IWUSR);
   return (fd);

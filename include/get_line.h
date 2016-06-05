@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:48:14 2016 Nicolas Chevalier
-** Last update Sun Jun  5 03:29:48 2016 Nicolas Chevalier
+** Last update Sun Jun  5 07:39:31 2016 Nicolas Chevalier
 */
 
 #ifndef GET_LINE_H_
@@ -18,6 +18,7 @@
 #define DELETE	51
 #define POS_CUR	"\033[6n"
 #define CLEAR	12
+# include <stdbool.h>
 # include "history.h"
 
 typedef struct	s_info
@@ -27,7 +28,8 @@ typedef struct	s_info
   char		*keyright;
   char		*keydown;
   char		*pos_begin;
-  int		term;
+  bool		term;
+  int		fd;
 }		t_info;
 
 typedef struct	s_edit
@@ -45,7 +47,7 @@ void	init_fct(t_history *,  char **, t_info *);
 /*
 ** get_line.c
 */
-char		*get_line(t_history *history);
+char		*get_line(t_history *history, t_info *);
 
 /*
 ** getterm.c
