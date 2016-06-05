@@ -5,9 +5,10 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Sun Jun  5 08:44:47 2016 Nicolas Chevalier
-** Last update Sun Jun  5 08:56:24 2016 Nicolas Chevalier
+** Last update Sun Jun  5 09:27:02 2016 Nicolas Chevalier
 */
 
+#include <curses.h>
 #include "get_line.h"
 
 char		*my_getpwd(char **env)
@@ -49,6 +50,8 @@ int		prompt(char **env)
 {
   char		*user;
   char		*pwd;
+  char		*s;
+  int		i;
 
   user = my_getuser(env);
   pwd = my_getpwd(env);

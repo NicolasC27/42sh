@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:27:38 2016 Nicolas Chevalier
-** Last update Sun Jun  5 08:53:49 2016 Nicolas Chevalier
+** Last update Sun Jun  5 09:25:50 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -48,6 +48,7 @@ char		*return_str(char *str, t_info *info, t_history *history)
       str = realloc(str, 1);
       str[0] = '\0';
     }
+  mode(info->fd, 1, 0);
   return (str);
 }
 
@@ -84,7 +85,7 @@ char		*get_line(t_history *history, t_info *info, char **env)
   len = 1;
   if (isatty(0) == 0)
     return (get_next_line());
-  init(&line, env);
+  init(&line, env, info);
   while (len > 0)
     {
       memset(buff, '\0', 9);

@@ -5,16 +5,21 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:48:14 2016 Nicolas Chevalier
-** Last update Sun Jun  5 08:55:17 2016 Nicolas Chevalier
+** Last update Sun Jun  5 09:26:46 2016 Nicolas Chevalier
 */
 
 #ifndef GET_LINE_H_
 # define GET_LINE_H_
 
 /*
+** Includes
+*/
+# include <stdbool.h>
+# include "history.h"
+
+/*
 ** Defines
 */
-
 # define UP		65
 # define DOWN		66
 # define LEFT		68
@@ -32,11 +37,6 @@
 # define GREY		"\033[0;37m"
 # define DEFAULT	"\033[0;m"
 
-/*
-** Includes
-*/
-# include <stdbool.h>
-# include "history.h"
 
 typedef struct	s_info
 {
@@ -65,16 +65,12 @@ int		prompt(char **);
 /*
 **init_fct.c
 */
-<<<<<<< HEAD
-void		init_fct(t_history *,  char **, t_info *);
-=======
-int	init_fct(t_history *,  char **, t_info *);
->>>>>>> 8964d30fbe2db916b1a3a80e79b4640633e7034a
+int		init_fct(t_history *,  char **, t_info *);
 
 /*
 ** get_line.c
 */
-char		*get_line(t_history *history, t_info *, char **);
+char		*get_line(t_history *, t_info *, char **);
 
 /*
 ** getterm.c
@@ -100,7 +96,7 @@ int		keyboard(t_edit *, char *, t_history *, t_info *);
 /*
 ** init.c
 */
-char		*init(t_edit *, char **);
+char		*init(t_edit *, char **, t_info *);
 
 /*
 ** history.c
