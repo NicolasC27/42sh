@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Sat Jun  4 18:43:42 2016 Nicolas Chevalier
-** Last update Sun Jun  5 20:07:36 2016 Paul Wery
+** Last update Sun Jun  5 21:38:03 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -14,18 +14,15 @@
 #include "function.h"
 #include "get_line.h"
 
-static int	manage_string(t_edit *line, t_info *info)
+static int	manage_string(t_edit *line, t_info *info, int j, int i)
 {
   char		*save;
   char		*buff;
   char		*tmp;
-  int		i;
-  int		j;
 
   if ((buff = malloc(sizeof(char) * 1 * -(line->pos) + 1)) == NULL)
     return (EXIT_FAILURE);
   i  = line->len + line->pos;
-  j = 0;
   while (line->cmd[i])
     buff[j++] = line->cmd[i++];
   buff[j] = '\0';
@@ -60,7 +57,7 @@ int		cursors_delete(t_edit *line, t_info *info)
     write(info->fd, info->keyleft, my_strlen(info->keyleft));
   if ((s = tigetstr("el")) != NULL)
     write(info->fd, s, my_strlen(s));
-  if (manage_string(line, info) == EXIT_FAILURE)
+  if (manage_string(line, info, 0, 0) == EXIT_FAILURE)
     return (EXIT_FAILURE);
   return (EXIT_SUCCESS);
 }
