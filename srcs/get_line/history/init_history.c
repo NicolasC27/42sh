@@ -10,32 +10,6 @@
 
 #include "history.h"
 
-/*void	search_command(t_history *history)
-{
-  char	key[1];
-
-  history->current_cmd = history->commands.last;
-  canonical_mode(&history->oldt, &history->newt, 0);
-  read(0, key, 1);
-  while (key[0] != 10)
-    {
-      read(0, key, 1);
-      if (key[0] == 65 && history->current_cmd != NULL &&
-	  history->current_cmd->prev != NULL)
-	{
-	  history->current_cmd = history->current_cmd->prev;
-	  my_putstr(history->current_cmd->command, 1);
-	}
-      else if (key[0] == 66 && history->current_cmd != NULL &&
-	       history->current_cmd->next != NULL)
-	{
-	  history->current_cmd = history->current_cmd->next;
-	  my_putstr(history->current_cmd->command, 1);
-	}
-    }
-  canonical_mode(&history->oldt, &history->newt, 1);
-  }*/
-
 void	init_commands(t_history *history)
 {
   history->commands.first = NULL;
@@ -51,11 +25,5 @@ int  	init_history(t_history *history)
   if (read_file(&history->commands) == 1)
     return (1);
   history->current_cmd = history->commands.last;
-  /*if (write_file(&history->commands) == 1)
-    {
-      free_commands(&history->commands);
-      return (1);
-    }
-    free_commands(&history->commands);*/
   return (0);
 }

@@ -103,7 +103,14 @@ int		main(int ac UNUSED, char **av UNUSED, char **env)
 	free(buffer);
       if ((buffer = get_line(&history)) == NULL ||
 	  (buffer = alias_check(buffer, &list)) == NULL)
-	return (ev.val_exit);
+	{
+	  if (write_file(&history.commands) == 1)
+	    {
+	      free_commands(&history.commands);
+	      return (ev.val_exit);
+	    }
+	  return (ev.val_exit);
+	}
       if (buffer[0] != '\0')
 	{
 	  if (valid_line(buffer) == 0

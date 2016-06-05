@@ -19,6 +19,18 @@
 #include "function.h"
 #include "history.h"
 
+int	add_element_history(t_history *history, char *str)
+{
+  t_cmd	cmd;
+
+  cmd.command = str;
+  cmd.length = strlen(str);
+  if(add_command(&history->commands, &cmd) == 1)
+    return (1);
+  history->current_cmd = history->commands.last;
+  return (0);
+}
+
 char		*return_str(char *str, t_history *history)
 {
   char		*s;
@@ -34,8 +46,7 @@ char		*return_str(char *str, t_history *history)
   write(fd, s, my_strlen(s));
   s = tigetstr("cuu1");
   write(fd, s, my_strlen(s));
-  if (add_command_history(history->commands, str) == 1)
-    return (NULL);
+  add_element_history(history, str);
   return (str);
 }
 
