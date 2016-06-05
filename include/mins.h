@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan  5 01:26:12 2016 paul wery
-** Last update Sat Jun  4 23:18:32 2016 Paul Wery
+** Last update Sun Jun  5 01:43:48 2016 Paul Wery
 */
 
 #ifndef MINS
@@ -177,7 +177,7 @@ char	*replace_seg(char *buffer, char *replace, int *error);
 char	*replace_seg_q(char *buffer, char *replace, int *error, int start);
 char	*replace_seg_b(char *buffer, char *replace, int *error, int start);
 int	valid_star(char *buffer);
-int	notm(t_exec *it, t_env *ev, int n, int i);
+int	notm(t_exec *it, t_env *ev);
 void	files_error(char *file, t_env *ev, int state);
 t_exec	*next_command(t_exec *list, t_exec *it);
 int	elem_redirection(char *elem, char *ref);
