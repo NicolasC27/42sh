@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:48:14 2016 Nicolas Chevalier
-** Last update Sun Jun  5 19:21:25 2016 Nicolas Chevalier
+** Last update Sun Jun  5 19:43:28 2016 Nicolas Chevalier
 */
 
 #ifndef GET_LINE_H_
@@ -46,7 +46,6 @@
 # define GREY		"\033[0;37m"
 # define DEFAULT	"\033[0;m"
 
-
 typedef struct	s_info
 {
   char		*keyleft;
@@ -64,7 +63,6 @@ typedef struct	s_edit
   int		len;
   int		pos;
 }		t_edit;
-
 
 /*
 **prompt.c
