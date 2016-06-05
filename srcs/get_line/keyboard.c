@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Fri Jun  3 21:29:38 2016 Nicolas Chevalier
-** Last update Sun Jun  5 18:43:34 2016 Nicolas Chevalier
+** Last update Sun Jun  5 19:42:25 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -25,12 +25,16 @@ static int	is_key(char *buff, int ESC, int HOOK, int KEY)
 
 static void	manage_control(t_edit *line, t_info *info, char *buff)
 {
-  if (buff[0] == CTRLA)
+  if (buff[0] == CTRLA || (is_key(buff, 27, 79, HOME) == 0))
     control_a(line, info);
   if (buff[0] == CTRLK)
     control_k(line, info);
   if (buff[0] == CTRLE)
     control_e(line, info);
+  if (is_key(&buff[3], 59, 53, LEFT) == 0)
+    control_ctrlleft(line, info);
+  if (is_key(&buff[3], 59, 53, RIGHT) == 0)
+    control_ctrlright(line, info);
 }
 
 int		keyboard(t_edit *line, char *buff, t_history *history, t_info *info)
@@ -41,10 +45,6 @@ int		keyboard(t_edit *line, char *buff, t_history *history, t_info *info)
     cursors_left(line, info);
   else if (is_key(buff, 27, 91, RIGHT) == 0)
     cursors_right(line, info);
-  else if (is_key(&buff[3], 59, 53, LEFT) == 0)
-    control_ctrlleft(line, info);
-  else if (is_key(&buff[3], 59, 53, RIGHT) == 0)
-    control_ctrlright(line, info);
   else if (buff[0] == '\t')
     my_autocomplete();
   else if (buff[0] == 127)

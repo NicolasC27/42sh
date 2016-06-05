@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Sun Jun  5 02:04:38 2016 Nicolas Chevalier
-** Last update Sun Jun  5 16:01:39 2016 Nicolas Chevalier
+** Last update Sun Jun  5 19:12:13 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -27,13 +27,16 @@ static int	reset_terminal(t_edit *line, int i, t_info *info)
   char		*el;
 
   save = tigetstr("sc");
-  write(info->fd, save, my_strlen(save));
+  if (save != NULL)
+    write(info->fd, save, my_strlen(save));
   el = tigetstr("el");
-  write(info->fd, el, my_strlen(el));
+  if (el != NULL)
+    write(info->fd, el, my_strlen(el));
   i += 1;
   my_putstr(&line->cmd[i]);
   save = tigetstr("rc");
-  write(info->fd, save, my_strlen(save));
+  if (save != NULL)
+    write(info->fd, save, my_strlen(save));
   return (EXIT_SUCCESS);
 }
 
