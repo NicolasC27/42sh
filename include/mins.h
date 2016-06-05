@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan  5 01:26:12 2016 paul wery
-** Last update Sun Jun  5 07:19:29 2016 Paul Wery
+** Last update Sun Jun  5 09:12:27 2016 Paul Wery
 */
 
 #ifndef MINS
@@ -213,8 +213,8 @@ int	create_replace_q_next(char *path, char *name, int n, char *replace);
 char	*get_elem_path(char *buffer, int start, int end);
 char	*replace_seg_q_next(char *buffer, char *replace, int start);
 char	*echo_bracket(char *buffer, int *error);
-char	*get_val_ret(int val, char *buffer);
-int	check_loc(char *buffer);
+char	*get_val_ret(int val, char *buffer, t_env *ev, char *ext);
+int	check_loc(char *buffer, t_env *ev, char *ref);
 int	parsing_error(t_exec *list);
 t_order	*order_names(DIR *directory);
 char	*added_elem(char *str);
@@ -224,5 +224,8 @@ int	unsetable(char *name, char *str, t_var *elem);
 int	set_unset_var(t_var *list_v, char **opts, t_env *ev);
 void	aff_set(t_var *list_v);
 void	unset(t_var *list_v, char **opts);
+int	check_var_list(t_var *list_v, char *ref);
+int	set_same(t_env *ev, t_set *s, char **opts);
+int	add_set(t_var *list_v, char *elem, char *var, int ret);
 
 #endif /* !MINS */

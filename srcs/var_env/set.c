@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Jun  5 04:19:23 2016 Paul Wery
-** Last update Sun Jun  5 07:33:53 2016 Paul Wery
+** Last update Sun Jun  5 09:45:16 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -38,37 +38,25 @@ int	add_set(t_var *list_v, char *elem, char *var, int ret)
   return (ret);
 }
 
-int	set_next_next(t_var *list_v, char *str, t_env *ev, char *elem)
-{
-  char	*var;
-
-  if ((str[0] > 64 && str[0] < 91)
-      || (str[0] > 96 && str[0] < 123))
-    {
-      if ((var = added_value(str)) == NULL
-	  || add_set(list_v, elem, var, 0) == -1)
-	return (-1);
-    }
-  else
-    {
-      my_put_error("set: Variable name must begin with a letter.\n");
-      ev->val_exit = 1;
-    }
-  return (0);
-}
-
 int	set_next(t_set *s, t_env *ev, char **opts)
 {
-  if (opts[s->n + 1] != NULL && opts[s->n + 1][0] == '='
-      && opts[s->n + 1][1] == '\0' && opts[s->n + 2] != NULL)
+  if (opts[s->n + 1] != NULL && opts[s->n + 2] != NULL)
     {
-      if (set_next_next(ev->free.list_v, opts[s->n + 2], ev, s->elem) == -1)
+      if ((s->var = added_value(opts[s->n + 2])) == NULL
+	  || add_set(ev->free.list_v, s->elem, s->var, 0) == -1)
 	return (-1);
       s->n += 2;
     }
   else if (add_set(ev->free.list_v, s->elem, NULL, 0) == -1)
     return (-1);
   return (0);
+}
+
+void	varerror(t_env *ev, char *elem)
+{
+  free(elem);
+  my_put_error("set: Variable name must begin with a letter.\n");
+  ev->val_exit = 1;
 }
 
 int	set(t_env *ev, char **opts)
@@ -78,18 +66,21 @@ int	set(t_env *ev, char **opts)
   s.n = 1;
   while (opts[s.n] != NULL)
     {
-      s.elem = NULL;
-      s.var = NULL;
       if ((s.elem = added_elem(opts[s.n])) == NULL)
 	return (-1);
-      if (my_strlen(s.elem) == my_strlen(opts[s.n]))
+      if ((s.elem[0] > 64 && s.elem[0] < 91)
+	  || (s.elem[0] > 96 && s.elem[0] < 123))
 	{
-	  if (set_next(&s, ev, opts) == -1)
+	  if (my_strlen(s.elem) == my_strlen(opts[s.n]))
+	    {
+	      if (set_next(&s, ev, opts) == -1)
+		return (-1);
+	    }
+	  else if (set_same(ev, &s, opts) == -1)
 	    return (-1);
 	}
-      else if ((opts[s.n] != NULL && (s.var = added_same(opts[s.n])) == NULL)
-	       || add_set(ev->free.list_v, s.elem, s.var, 0) == -1)
-	return (-1);
+      else
+	varerror(ev, s.elem);
       if (opts[s.n] != NULL)
 	s.n += 1;
     }

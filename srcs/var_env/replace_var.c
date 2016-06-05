@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Jun  1 04:06:44 2016 Paul Wery
-** Last update Sat Jun  4 05:17:07 2016 Paul Wery
+** Last update Sun Jun  5 08:39:05 2016 Paul Wery
 */
 
 #include <sys/types.h>
@@ -72,7 +72,7 @@ int	valid_var(char *buffer)
   return (0);
 }
 
-int	check_loc(char *buffer)
+int	check_loc(char *buffer, t_env *ev, char *ref)
 {
   int	n;
 
@@ -85,6 +85,8 @@ int	check_loc(char *buffer)
   if (buffer[n + 1] != '\0' && buffer[n + 1] == '$'
       && buffer[n + 2] == '\0')
     return (2);
+  if (check_var_list(ev->free.list_v, ref) == 1)
+    return (3);
   return (0);
 }
 
@@ -99,16 +101,16 @@ char		*echo_var(char *buffer, int *error, t_env *ev)
       if ((ext = get_ext_v(buffer, 0, 0)) == NULL
 	  || (num = find_set_unset(ev->env, ext)) == -1)
 	return (NULL);
-      if (ev->env[num] == NULL && check_loc(buffer) == 0)
+      if (ev->env[num] == NULL && check_loc(buffer, ev, ext) == 0)
 	{
 	  *error = -2;
 	  free(ext);
 	  return (buffer);
 	}
-      if ((check_loc(buffer) == 0
+      if ((check_loc(buffer, ev, ext) == 0
 	   && (replace = create_replace_v(ext, 1, ev, num)) == NULL)
-	  || (check_loc(buffer) != 0
-	      && (replace = get_val_ret(ev->val_exit, buffer)) == NULL)
+	  || (check_loc(buffer, ev, ext) != 0
+	      && (replace = get_val_ret(ev->val_exit, buffer, ev, ext)) == NULL)
 	  || (buffer = replace_seg_v(buffer, replace)) == NULL)
 	return (NULL);
       free(ext);

@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Jun  5 04:32:12 2016 Paul Wery
-** Last update Sun Jun  5 06:23:51 2016 Paul Wery
+** Last update Sun Jun  5 09:43:11 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -84,4 +84,12 @@ char	*added_elem(char *str)
   while (n <= my_strlen(str))
     add[n++] = '\0';
   return (add);
+}
+
+int	set_same(t_env *ev, t_set *s, char **opts)
+{
+  if ((opts[s->n] != NULL && (s->var = added_same(opts[s->n])) == NULL)
+      || add_set(ev->free.list_v, s->elem, s->var, 0) == -1)
+    return (-1);
+  return (0);
 }
