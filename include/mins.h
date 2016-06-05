@@ -5,7 +5,11 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Jan  5 01:26:12 2016 paul wery
+<<<<<<< HEAD
 ** Last update Sun Jun  5 04:21:17 2016 Nicolas Chevalier
+=======
+** Last update Sun Jun  5 07:19:29 2016 Paul Wery
+>>>>>>> master
 */
 
 #ifndef MINS
@@ -28,16 +32,30 @@ typedef struct	stat t_stat;
 
 char	*get_next_line(void);
 
+typedef struct	s_set
+{
+  char		*var;
+  char		*elem;
+  int		n;
+}		t_set;
+
 typedef struct	s_limit
 {
   int		start;
   int		end;
 }		t_limit;
 
+typedef struct	s_var
+{
+  char		*name;
+  char		*value;
+  struct s_var	*next;
+  struct s_var	*prev;
+}		t_var;
+
 typedef struct		s_order
 {
   char			*name;
-  time_t		time;
   struct s_order	*next;
   struct s_order	*prev;
 }			t_order;
@@ -80,6 +98,7 @@ typedef struct	s_free
   char		*buffer;
   char		**pars;
   struct s_exec	*list;
+  struct s_var	*list_v;
 }		t_free;
 
 typedef struct	s_env
@@ -87,7 +106,6 @@ typedef struct	s_env
   char		**env;
   char		*oldpwd;
   int		pipe_t[2];
-  int		red[2];
   int		state_p;
   int		result;
   int		stdin;
@@ -150,6 +168,11 @@ t_order	*create_order(void);
 int	add_order_prev(t_order *elem, char *name);
 void	delete_order(t_order **root);
 
+t_var	*create_var(void);
+int	add_var_prev(t_var *var, char *name, char *value);
+void	delete_var(t_var **root);
+void	delete_var_elem(t_var *elem);
+
 char	**pars_elems(char *buffer);
 int	full_list(t_exec *list, char **pars, t_env *ev);
 char	**get_opts(char *str, int n, int z);
@@ -199,5 +222,12 @@ char	*get_val_ret(int val, char *buffer);
 int	check_loc(char *buffer);
 int	parsing_error(t_exec *list);
 t_order	*order_names(DIR *directory);
+char	*added_elem(char *str);
+char	*added_same(char *str);
+char	*added_value(char *str);
+int	unsetable(char *name, char *str, t_var *elem);
+int	set_unset_var(t_var *list_v, char **opts, t_env *ev);
+void	aff_set(t_var *list_v);
+void	unset(t_var *list_v, char **opts);
 
 #endif /* !MINS */

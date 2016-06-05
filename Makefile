@@ -5,14 +5,18 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sat Apr  2 00:37:51 2016 Paul Wery
+<<<<<<< HEAD
 ## Last update Sun Jun  5 08:52:43 2016 Nicolas Chevalier
+=======
+## Last update Sun Jun  5 07:36:48 2016 Paul Wery
+>>>>>>> master
 ##
 
 NAME    =	42sh
 
 RM      =	rm -f
 
-CC	=	gcc -g
+CC	=	gcc
 
 # CFLAGS	=	-W -Wall -Werror 
 CFLAGS	=	-Iinclude
@@ -88,6 +92,10 @@ SRCS    =	srcs/main.c \
 		srcs/var_env/replace_var.c \
 		srcs/var_env/replace_seg_v.c \
 		srcs/var_env/get_val_ret.c \
+		srcs/var_env/set.c \
+		srcs/var_env/unset.c \
+		srcs/var_env/pars_set.c \
+		srcs/var_env/var_list.c \
 		srcs/parsing_error.c \
 		srcs/alias/function_parse.c \
 		srcs/alias/get_file.c \

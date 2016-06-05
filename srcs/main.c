@@ -5,7 +5,11 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Jan 16 20:40:01 2016 Paul Wery
+<<<<<<< HEAD
 ** Last update Sun Jun  5 09:25:37 2016 Nicolas Chevalier
+=======
+** Last update Sun Jun  5 05:29:57 2016 Paul Wery
+>>>>>>> master
 */
 
 #include <signal.h>
@@ -77,7 +81,13 @@ int	ini_env(t_env *ev)
   ev->state_p = 0;
   ev->result = 0;
   ev->oldpwd = NULL;
+<<<<<<< HEAD
   if (((ev->stdin = dup(0)) == -1) || ((ev->stdout = dup(1)) == -1))
+=======
+  if ((ev->stdin = dup(0)) == -1
+      || (ev->stdout = dup(1)) == -1
+      || (ev->free.list_v = create_var()) == NULL)
+>>>>>>> master
     return (-1);
   return (0);
 }
