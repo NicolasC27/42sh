@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:48:14 2016 Nicolas Chevalier
-** Last update Sun Jun  5 09:26:46 2016 Nicolas Chevalier
+** Last update Sun Jun  5 15:30:11 2016 Nicolas Chevalier
 */
 
 #ifndef GET_LINE_H_
@@ -27,6 +27,11 @@
 # define DELETE		51
 # define POS_CUR	"\033[6n"
 # define CLEAR		12
+# define CTRLA		1
+# define CTRLD		4
+# define CTRLE	        5
+# define CTRLK		11
+# define CTRLL		12
 # define BLACK		"\033[0;30m"
 # define RED		"\033[1;31m"
 # define GREEN		"\033[0;32m"

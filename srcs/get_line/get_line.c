@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Tue May 31 10:27:38 2016 Nicolas Chevalier
-** Last update Sun Jun  5 14:08:12 2016 Nicolas Chevalier
+** Last update Sun Jun  5 15:08:27 2016 Nicolas Chevalier
 */
 
 #include <stdlib.h>
@@ -58,7 +58,8 @@ static int	check_key(char *buff)
       && buff[2] != LEFT && buff[2] != RIGHT
       && buff[2] != DOWN && buff[2] != UP
       && buff[0] != CLEAR && buff[2] != DELETE
-      && buff[0] != 4)
+      && buff[0] != CTRLK && buff[0] != CTRLA
+      && buff[0] != CTRLD && buff[0] != CTRLE)
     return (0);
   return (1);
 }
@@ -75,6 +76,15 @@ static void	manage_line(t_edit *line, t_info *info,
       else
 	add_character_advanced(line, buff[0], info);
     }
+}
+
+static void	clear_screen_(t_info *info, char **env)
+{
+  char		*s;
+
+  s = tigetstr("clear");
+  write(info->fd, s, my_strlen(s));
+  prompt(env);
 }
 
 char		*get_line(t_history *history, t_info *info, char **env)
@@ -102,6 +112,8 @@ char		*get_line(t_history *history, t_info *info, char **env)
 	  my_putstr("\n");
 	  return (NULL);
 	}
+      if (buff[0] == 12)
+	clear_screen_(info, env);
       if (buff[0] == '\n')
 	return (return_str(line.cmd, info, history));
       manage_line(&line, info, buff, history);
