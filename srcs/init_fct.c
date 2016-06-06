@@ -5,7 +5,7 @@
 ** Login   <cheval_8@epitech.net>
 **
 ** Started on  Sat Jun  4 22:41:06 2016 Nicolas Chevalier
-** Last update Sun Jun  5 15:59:53 2016 Nicolas Chevalier
+** Last update Mon Jun  6 05:48:38 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -27,7 +27,7 @@ static int	init_editline(t_info *info, char **env)
 
   if (tgetent(bp, my_getterm(env)) <= 0)
     return (init_failure(info));
-  if ((info->fd = open("/dev/tty", O_RDWR)) == -1)
+  if (isatty(0) == 1 && (info->fd = open("/dev/tty", O_RDWR)) == -1)
     {
       my_putstr("can't open /dev/tty");
       exit(EXIT_FAILURE);
